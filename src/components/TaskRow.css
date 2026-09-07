@@ -1,0 +1,64 @@
+.pf-task-row {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: var(--space-3);
+  height: 44px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  transition: background-color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.pf-task-row:hover {
+  background: var(--surface-raised);
+}
+
+.pf-task-row__title {
+  /* min-width:0 is load-bearing: a flex item's default min-width is `auto`,
+     which refuses to shrink below its content. Without it the ellipsis below
+     never fires and a long title pushes the whole row past its container
+     (caught in TaskRow/AllStates, where the frame is 420px). */
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+  color: var(--text-primary);
+  transition: color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.pf-task-row.is-completed .pf-task-row__title {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.pf-task-row.is-dragging {
+  background: var(--surface-raised);
+  box-shadow: var(--raised);
+  transform: rotate(2deg);
+  cursor: grabbing;
+}
+
+.pf-task-row__spacer {
+  flex: 1;
+  min-width: var(--space-2);
+}
+
+.pf-task-row__drag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  color: var(--text-muted);
+  opacity: 0;
+  cursor: grab;
+  transition: opacity var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.pf-task-row:hover .pf-task-row__drag {
+  opacity: 1;
+}

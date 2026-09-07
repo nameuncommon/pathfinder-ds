@@ -1,0 +1,89 @@
+.pf-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border-radius: var(--button-radius);
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-duration-fast) var(--motion-ease-standard),
+    filter var(--motion-duration-fast) var(--motion-ease-standard),
+    border-color var(--motion-duration-fast) var(--motion-ease-standard);
+}
+
+.pf-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pf-button:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Sizes */
+.pf-button--sm {
+  height: 28px;
+  padding: 0 var(--space-3);
+  font-size: var(--type-13-size);
+  line-height: var(--type-13-line);
+}
+
+.pf-button--md {
+  height: 36px;
+  padding: 0 var(--space-4);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+}
+
+.pf-button--lg {
+  height: 44px;
+  padding: 0 var(--space-5);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+}
+
+/* Primary: colored fill, ink label (accessibility pattern, reviewed 5.03-5.31:1) */
+.pf-button--primary {
+  background: var(--accent-default);
+  color: var(--button-accent-label);
+}
+
+.pf-button--primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+/* Danger: colored fill, ink label, same accessibility pattern as primary */
+.pf-button--danger {
+  background: var(--danger);
+  color: var(--button-accent-label);
+}
+
+.pf-button--danger:hover:not(:disabled) {
+  filter: brightness(0.9);
+}
+
+/* Secondary: raised surface fill, subtle border, primary text */
+.pf-button--secondary {
+  background: var(--surface-raised);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.pf-button--secondary:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+/* Ghost: transparent, primary text, surface-raised tint on hover */
+.pf-button--ghost {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.pf-button--ghost:hover:not(:disabled) {
+  background: var(--surface-raised);
+}
