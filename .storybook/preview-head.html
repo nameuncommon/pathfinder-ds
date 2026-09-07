@@ -1,0 +1,109 @@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+  rel="stylesheet"
+/>
+
+<!--
+  Theme the autodocs chrome.
+
+  Storybook's generated docs pages (.sbdocs) ship their own fixed light-mode
+  typography, backgrounds and borders, independent of this system's
+  `data-theme` toggle. The hand-written Foundations MDX pages already opt out
+  via <Unstyled>, but the per-component autodocs pages had no equivalent, so
+  half the documentation surface ignored the theme entirely: dark canvas,
+  white docs page, and story previews inside rendering light.
+
+  Rather than opt those pages out too (which would lose the props tables and
+  the story blocks), this repaints Storybook's docs chrome from the same
+  tokens everything else uses. Scoped to [data-theme='dark'] so light mode
+  keeps Storybook's defaults, which already read correctly.
+-->
+<style>
+  :root[data-theme='dark'] .sbdocs-wrapper,
+  :root[data-theme='dark'] .sbdocs.sbdocs-preview,
+  :root[data-theme='dark'] .docs-story {
+    background: var(--surface-base);
+  }
+  :root[data-theme='dark'] .sbdocs-content {
+    background: transparent;
+  }
+  :root[data-theme='dark'] .sbdocs h1,
+  :root[data-theme='dark'] .sbdocs h2,
+  :root[data-theme='dark'] .sbdocs h3,
+  :root[data-theme='dark'] .sbdocs h4,
+  :root[data-theme='dark'] .sbdocs-title {
+    color: var(--text-primary);
+    border-bottom-color: var(--border-subtle);
+  }
+  :root[data-theme='dark'] .sbdocs p,
+  :root[data-theme='dark'] .sbdocs li,
+  :root[data-theme='dark'] .sbdocs td,
+  :root[data-theme='dark'] .sbdocs .docblock-argstable td {
+    color: var(--text-muted);
+  }
+  :root[data-theme='dark'] .sbdocs th,
+  :root[data-theme='dark'] .sbdocs .docblock-argstable th {
+    color: var(--text-primary);
+    border-bottom-color: var(--border-subtle);
+  }
+  :root[data-theme='dark'] .sbdocs .docblock-argstable-body,
+  :root[data-theme='dark'] .sbdocs .docblock-argstable-body tr,
+  :root[data-theme='dark'] .sbdocs .docblock-argstable-body td {
+    background: var(--surface-raised);
+    border-color: var(--border-subtle);
+    box-shadow: none;
+  }
+  :root[data-theme='dark'] .sbdocs code,
+  :root[data-theme='dark'] .sbdocs .docblock-code-toggle {
+    background: var(--surface-raised);
+    border-color: var(--border-subtle);
+    color: var(--text-primary);
+  }
+  :root[data-theme='dark'] .sbdocs .docblock-preview,
+  :root[data-theme='dark'] .sbdocs .sbdocs-preview,
+  :root[data-theme='dark'] .os-content > .docs-story {
+    border-color: var(--border-subtle);
+    box-shadow: none;
+  }
+  :root[data-theme='dark'] .sbdocs hr,
+  :root[data-theme='dark'] .sbdocs .sbdocs-hr {
+    border-color: var(--border-subtle);
+  }
+  :root[data-theme='dark'] .sbdocs a {
+    color: var(--accent-text);
+  }
+
+  /* The zoom/reset strip above each story preview. Storybook gives it only a
+     generated emotion class, and those hashes change between builds, so it is
+     targeted structurally: every direct child of the preview except the story
+     itself, which paints its own surface. */
+  :root[data-theme='dark'] .sbdocs-preview > *:not(.docs-story) {
+    background: var(--surface-raised) !important;
+    border-color: var(--border-subtle) !important;
+  }
+
+  /* Args-table form controls ship white backgrounds from Storybook's own
+     light theme regardless of ours. */
+  :root[data-theme='dark'] .sbdocs select,
+  :root[data-theme='dark'] .sbdocs textarea,
+  :root[data-theme='dark'] .sbdocs input[type='text'],
+  :root[data-theme='dark'] .sbdocs input:not([type='checkbox']):not([type='radio']) {
+    background: var(--surface-raised) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-strong) !important;
+  }
+
+  /* Type summaries ("union", "ReactNode") in the args table rendered as
+     near-invisible dark-on-dark once the table surface flipped. */
+  :root[data-theme='dark'] .sbdocs .docblock-argstable td span,
+  :root[data-theme='dark'] .sbdocs .docblock-argstable td code,
+  :root[data-theme='dark'] .sbdocs .docblock-argstable td div {
+    color: var(--text-muted);
+  }
+  :root[data-theme='dark'] .sbdocs .docblock-argstable td code {
+    background: var(--surface-base);
+    border: 1px solid var(--border-subtle);
+  }
+</style>

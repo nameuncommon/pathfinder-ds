@@ -1,0 +1,50 @@
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<title>Pathfinder Design System</title>
+<script>
+  // Storybook's default manager template ships its own <title>storybook - Storybook</title>
+  // ahead of this injected head content. Per the HTML spec, document.title reads the FIRST
+  // <title> element in tree order, so that default wins even though this block renders later
+  // in source order - the <title> tag above alone never shows in the tab. Storybook's own
+  // manager UI (react-helmet-style) also re-asserts a title on mount/route change, so a
+  // one-shot overwrite isn't enough either. Force it now and pin it with a MutationObserver
+  // so any later write gets immediately replaced back to the brand title.
+  (function () {
+    var desired = 'Pathfinder Design System';
+    function pin() {
+      if (document.title !== desired) document.title = desired;
+    }
+    pin();
+    document.addEventListener('DOMContentLoaded', pin);
+    window.addEventListener('load', pin);
+    var titleEl = document.querySelector('title');
+    if (titleEl && window.MutationObserver) {
+      new MutationObserver(pin).observe(titleEl, { childList: true, characterData: true, subtree: true });
+    }
+  })();
+</script>
+<meta name="description" content="A concept design system built end to end: brand, tokens, Figma library, and code." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://pathfinder-ds.vercel.app" />
+<meta property="og:title" content="Pathfinder Design System" />
+<meta property="og:description" content="A concept design system built end to end: brand, tokens, Figma library, and code." />
+<meta property="og:image" content="https://pathfinder-ds.vercel.app/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Pathfinder Design System" />
+<meta name="twitter:description" content="A concept design system built end to end: brand, tokens, Figma library, and code." />
+<meta name="twitter:image" content="https://pathfinder-ds.vercel.app/og.png" />
+
+<!--
+  The brand image is now a filled app-icon tile rather than the old flat
+  swoosh, so it carries far more optical weight at the same pixel size and
+  was dominating the sidebar header. Storybook has no config for brandImage
+  dimensions, so it is constrained here.
+-->
+<style>
+  .sidebar-header img,
+  .sidebar-header a img {
+    width: 34px !important;
+    height: 34px !important;
+  }
+</style>
