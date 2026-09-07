@@ -1,0 +1,16 @@
+# pathfinder-ds - Local Claude config (gitignored)
+
+<!-- This is the EXAMPLE. On first setup: `cp CLAUDE.local.md.example CLAUDE.local.md`.
+     The real CLAUDE.local.md is gitignored (see .gitignore) and never syncs.
+     Put anything machine-specific or sensitive HERE, never inline in CLAUDE.md:
+       - machine-specific paths, ports, local dev URLs
+       - non-secret tokens' *locations* (the secrets themselves stay in a keychain or an untracked local directory)
+       - local-only workflow notes
+     If CLAUDE.local.md does not exist, the @import in CLAUDE.md resolves to nothing, that's fine. -->
+
+## Local environment
+- Dev server: <command + local URL>
+- Local paths / ports: <...>
+
+## Local-only notes
+- <anything that should never leave this machine>
