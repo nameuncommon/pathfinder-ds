@@ -1,0 +1,108 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { useState } from 'react'
+import { Checkbox } from '../../components/Checkbox'
+import { ThemeSync } from './ThemeSync'
+import tokens from '../../../tokens/tokens.json'
+
+<Meta title="Foundations/Motion" />
+
+<ThemeSync />
+
+export const motionEntries = Object.entries(tokens.primitives.motion)
+
+export const page = {
+  background: 'var(--surface-base)',
+  color: 'var(--text-primary)',
+  fontFamily: 'var(--font-sans)',
+  minHeight: '100vh',
+  padding: 'var(--space-8)',
+  boxSizing: 'border-box',
+}
+
+export const h1Style = {
+  fontWeight: 600,
+  fontSize: 'var(--type-32-size)',
+  lineHeight: 'var(--type-32-line)',
+  color: 'var(--text-primary)',
+  margin: '0 0 var(--space-3) 0',
+}
+
+export const h2Style = {
+  fontWeight: 600,
+  fontSize: 'var(--type-20-size)',
+  lineHeight: 'var(--type-20-line)',
+  color: 'var(--text-primary)',
+  margin: 'var(--space-8) 0 var(--space-4) 0',
+  paddingBottom: 'var(--space-2)',
+  borderBottom: '1px solid var(--border-subtle)',
+}
+
+export const pStyle = {
+  fontSize: 'var(--type-14-size)',
+  lineHeight: 'var(--type-14-line)',
+  color: 'var(--text-muted)',
+  maxWidth: 640,
+  margin: '0 0 var(--space-3) 0',
+}
+
+export const labelStyle = {
+  fontFamily: 'var(--font-mono)',
+  fontSize: 'var(--type-12-size)',
+  lineHeight: 'var(--type-12-line)',
+  color: 'var(--text-muted)',
+}
+
+export const valueStyle = {
+  fontFamily: 'var(--font-mono)',
+  fontSize: 'var(--type-13-size)',
+  lineHeight: 'var(--type-13-line)',
+  color: 'var(--text-primary)',
+}
+
+export function MotionDemo() {
+  const [checked, setChecked] = useState(false)
+  const fast = tokens.primitives.motion['duration/fast']
+  const ease = tokens.primitives.motion['ease/standard']
+  return (
+    <div style={{ display: 'grid', gap: 'var(--space-3)' }}>
+      <Checkbox checked={checked} onChange={setChecked} label="plan the next waypoint" />
+      <p style={{ ...labelStyle, margin: 0 }}>
+        {`toggling animates the check glyph over duration/fast (${fast}ms) with ease/standard (${ease}) - a scale from 0.8 to 1 plus a stroke draw-on, both using the same two tokens shown above.`}
+      </p>
+    </div>
+  )
+}
+
+<Unstyled>
+  <div style={page}>
+    <h1 style={h1Style}>motion</h1>
+    <p style={pStyle}>
+      {'motion is short and consistent everywhere - three durations and one easing curve, all sourced from tokens/tokens.json. the fast duration (120ms) is what drives the check glyph draw-on below - toggle it to see the token in motion, not just in a table.'}
+    </p>
+    <h2 style={h2Style}>durations & easing</h2>
+    <div style={{ overflowX: 'auto' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <thead>
+          <tr>
+            <th style={{ ...labelStyle, textAlign: 'left', padding: 'var(--space-2) var(--space-3)', borderBottom: '1px solid var(--border-subtle)' }}>token</th>
+            <th style={{ ...labelStyle, textAlign: 'left', padding: 'var(--space-2) var(--space-3)', borderBottom: '1px solid var(--border-subtle)' }}>value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {motionEntries.map(([name, value]) => (
+            <tr key={name}>
+              <td style={{ ...valueStyle, padding: 'var(--space-2) var(--space-3)', borderBottom: '1px solid var(--border-subtle)' }}>
+                motion/{name}
+              </td>
+              <td style={{ ...valueStyle, padding: 'var(--space-2) var(--space-3)', borderBottom: '1px solid var(--border-subtle)' }}>
+                {typeof value === 'number' ? `${value}ms` : value}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <h2 style={h2Style}>live demo</h2>
+    <MotionDemo />
+  </div>
+</Unstyled>
