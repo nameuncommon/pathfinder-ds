@@ -1,28 +1,25 @@
-# Local Claude config - machine-specific / sensitive, never synced
-CLAUDE.local.md
 
+!.vscode/extensions.json
+# Build output
+# Editor
+# Local Claude config - machine-specific / sensitive, never synced
+# Logs
 # Standard noise
+*.key
+*.local
+*.log
+*.pem
+*storybook.log
 .DS_Store
-node_modules/
 .env
 .env.*
-*.key
-*.pem
-
-# Build output
-dist/
-dist-ssr/
-storybook-static/
-*.local
-
-# Editor
-.vscode/*
-!.vscode/extensions.json
 .idea
-
-# Logs
+.vercel
+.vscode/*
+CLAUDE.local.md
+dist-ssr/
+dist/
 logs
-*.log
+node_modules/
 npm-debug.log*
-
-*storybook.log
+storybook-static/
