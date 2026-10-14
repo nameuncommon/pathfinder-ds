@@ -92,4 +92,13 @@ test('tokens.json → CSS pipeline', async (t) => {
       'resolveRef should throw on unresolvable refs'
     );
   });
+
+  await t.test('brand/mark is gold in dark theme and navy in light theme', () => {
+    const darkBlock = css.match(/:root\[data-theme="dark"\]\s*\{([\s\S]*?)\n\}/)[1];
+    const lightBlock = css.match(/:root\[data-theme="light"\]\s*\{([\s\S]*?)\n\}/)[1];
+    assert.match(css, /--gold-500:\s*#C9A35A/);
+    assert.match(css, /--navy-900:\s*#16213B/);
+    assert.match(darkBlock, /--brand-mark:\s*var\(--gold-500\)/);
+    assert.match(lightBlock, /--brand-mark:\s*var\(--navy-900\)/);
+  });
 });

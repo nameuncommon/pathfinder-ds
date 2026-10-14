@@ -3,7 +3,7 @@
 <!-- @imported by CLAUDE.md. Keep it to the commands Claude actually needs to run this project. -->
 
 ## Stack
-Vite + React + Storybook. Deliberately basic: this project is proof of a one-direction tokens.json → CSS → code pipeline (with tokens.json also hand-mirrored into Figma variables), not a production app. 8 of 15 Pathfinder components get built in code; the rest live in Figma only.
+Vite + React + Storybook. Deliberately basic: this project is proof of a one-direction tokens.json → CSS → code pipeline (with tokens.json also hand-mirrored into Figma variables), not a production app. 9 of 16 Pathfinder components get built in code; the rest live in Figma only.
 
 ## Commands
 | Action | Command |

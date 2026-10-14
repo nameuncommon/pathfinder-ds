@@ -21,6 +21,7 @@ colors:
   success: "#4F8168"       # success, dark theme (green/500)
   warning: "#E8A33D"        # warning, dark theme (literal)
   danger: "#E5484D"         # danger, dark theme (literal)
+  brand: "#C9A35A"          # brand/mark, dark theme (gold/500); mark and brand surfaces only, never UI
 typography:
   fontFamily: "'Geist', -apple-system, 'Segoe UI', sans-serif"
   monoFamily: "'Geist Mono', ui-monospace, 'SF Mono', monospace"
@@ -60,7 +61,7 @@ components:               # 9 of 16 Pathfinder components are built in code; the
 # Overview
 
 Pathfinder is a concept design system for a fictional planner/to-do/notes app: precision-productivity
-in personality, keyboard-first, with the wayfinding motif (constellation mark, trail lines) kept as a
+in personality, keyboard-first, with the wayfinding motif (the compass rose mark, trail lines) kept as a
 subtle hint rather than costume theming. Dark theme is first-class, not an inverted afterthought - the
 system is built dark-first and light is a mirror at the semantic tier only. The governing principle:
 every visual decision routes through `tokens/tokens.json`, never invented ad hoc.
@@ -90,6 +91,9 @@ every visual decision routes through `tokens/tokens.json`, never invented ad hoc
 | green/600 | #3F6B5B |
 | green/500 | #4F8168 |
 | green/400 | #6FA184 |
+| navy/900 | #16213B |
+| gold/500 | #C9A35A |
+| cream/100 | #F3EEE3 |
 
 ## Semantic (theme-swapped)
 | Token | Dark | Light |
@@ -110,6 +114,7 @@ every visual decision routes through `tokens/tokens.json`, never invented ad hoc
 | tag-text/neutral | {slate/300} `#9AA1B4` | {slate/500} `#4D5468` |
 | tag-text/danger | `#E5484D` (literal) | `#BE2F36` (literal) |
 | tag-text/warning | `#E8A33D` (literal) | `#815718` (literal) |
+| brand/mark | {gold/500} `#C9A35A` | {navy/900} `#16213B` |
 
 `tag-text/*` exists because Tag and DateChip render text on top of a translucent tint (the hue
 token at 18% opacity over `surface/base` or `surface/raised`, 13% for danger), not on a solid
@@ -120,10 +125,11 @@ both surface steps, in both themes (see `decisions.md`). One documented exceptio
 danger tint over `surface/raised` still falls short of 4.5:1 (dark 3.83:1, light 4.39:1), so
 danger only ships on `surface/base`.
 
-Usage rules: `accent/default` stays under ~10% of any view (buttons, active states, the
-constellation north star). Body text is always `text/primary` on `surface/base`; `surface/raised`
+Usage rules: `accent/default` stays under ~10% of any view (buttons, active states).
+Body text is always `text/primary` on `surface/base`; `surface/raised`
 is for cards, panels, and floating chrome (modal, command bar, toast). `border/subtle` is the only
-hairline color in the system - no ad hoc grays.
+hairline color in the system - no ad hoc grays. The brand colors (navy, gold, cream) belong to the
+mark and brand surfaces only, through `brand/mark`; they never replace `accent/*` in the UI.
 
 # Typography
 

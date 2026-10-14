@@ -21,6 +21,9 @@
   --green-600: #3F6B5B;
   --green-500: #4F8168;
   --green-400: #6FA184;
+  --navy-900: #16213B;
+  --gold-500: #C9A35A;
+  --cream-100: #F3EEE3;
   --type-11-size: 11px;
   --type-11-line: 16px;
   --type-12-size: 12px;
@@ -79,6 +82,7 @@
   --tag-text-warning: #E8A33D;
   --accent-text: var(--blue-400);
   --button-accent-label: var(--ink-950);
+  --brand-mark: var(--gold-500);
 }
 
 :root[data-theme="light"] {
@@ -101,6 +105,7 @@
   --tag-text-warning: #815718;
   --accent-text: var(--blue-700);
   --button-accent-label: var(--paper-0);
+  --brand-mark: var(--navy-900);
 }
 
 /* Component tokens */

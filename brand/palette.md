@@ -42,6 +42,28 @@ same technique used for the light-theme danger/warning nudge.
 | green-500 | #4F8168 |
 | green-400 | #6FA184 |
 
+### Brand (mark and brand surfaces only)
+The mark, lockup, favicon and brand art use navy, gold and cream. They are not UI colors: the
+interface keeps ink surfaces and the blue accent. `brand/mark` resolves to gold in dark theme and
+navy in light theme.
+
+| Token | Hex |
+|---|---|
+| navy-900 | #16213B |
+| gold-500 | #C9A35A |
+| cream-100 | #F3EEE3 |
+
+Measured (WCAG 2.x ratio; the mark is a graphic, so 3:1 is the floor, all clear 4.5:1 anyway):
+
+| Pair | Ratio |
+|---|---|
+| gold-500 on ink-950 | 8.32 |
+| gold-500 on ink-800 | 7.20 |
+| navy-900 on paper-0 | 15.45 |
+| navy-900 on paper-50 | 14.65 |
+| gold-500 on navy-900 | 6.75 |
+| cream-100 on navy-900 | 13.80 |
+
 ### Status
 Status colors are theme-aware like text/accent: the dark-theme hex is the base brand value; the
 light-theme hex is a lightness-only nudge (same hue and saturation) so text/UI use clears 4.5:1 on
