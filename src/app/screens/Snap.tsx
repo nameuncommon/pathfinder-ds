@@ -1,0 +1,52 @@
+import { Button } from '../../components/Button'
+import { Mark } from '../../components/Mark'
+import { snapImage } from '../assets'
+import { reads } from '../data'
+import { Screen } from '../Screen'
+import type { ScreenActions } from './Open'
+
+const lines = [
+  ...reads.map((r) => ({ mark: r.mark, text: r.text })),
+  { mark: 'task' as const, text: 'book flights' },
+]
+
+export function Snap({ focusTitle, onNext, onBack, onSkip }: ScreenActions) {
+  return (
+    <Screen
+      eyebrow="Morning · 2 of 4"
+      title="Snap the spread"
+      support="Same spread every morning; it reads what's new"
+      step={2}
+      onBack={onBack}
+      focusTitle={focusTitle}
+      action={
+        <Button variant="quiet" onClick={onSkip}>
+          Skip today
+        </Button>
+      }
+    >
+      <button type="button" className="pf-viewfinder" aria-label="Take the photo" onClick={onNext}>
+        <span className="pf-viewfinder__corner pf-viewfinder__corner--tl" aria-hidden="true" />
+        <span className="pf-viewfinder__corner pf-viewfinder__corner--tr" aria-hidden="true" />
+        <span className="pf-viewfinder__corner pf-viewfinder__corner--bl" aria-hidden="true" />
+        <span className="pf-viewfinder__corner pf-viewfinder__corner--br" aria-hidden="true" />
+        {snapImage ? (
+          <img className="pf-viewfinder__page" src={snapImage} alt="" />
+        ) : (
+          <span className="pf-paper pf-viewfinder__page" aria-hidden="true">
+            {lines.map((l) => (
+              <span key={l.text} className="pf-viewfinder__line">
+                <Mark type={l.mark} tone="navy" size={18} decorative />
+                {l.text}
+              </span>
+            ))}
+          </span>
+        )}
+        <span className="pf-viewfinder__pill" aria-hidden="true">
+          <span className="pf-viewfinder__dot" />
+          Found W42 · 4 corners
+        </span>
+      </button>
+    </Screen>
+  )
+}

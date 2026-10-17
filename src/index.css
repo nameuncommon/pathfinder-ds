@@ -12,9 +12,3 @@ body {
   background: var(--surface-base);
   color: var(--text-primary);
 }
-
-main {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 48px 24px;
-}
