@@ -3,18 +3,19 @@ import { GlassCard } from '../../components/GlassCard'
 import { ReadRow } from '../../components/ReadRow'
 import { Tally } from '../../components/Tally'
 import { snippet } from '../assets'
-import { topThree, yesterday } from '../data'
+import { yesterday } from '../data'
 import type { ReadItem } from '../ritual'
 import { Screen } from '../Screen'
 import type { ScreenActions } from './Open'
 
 export interface CheckProps extends ScreenActions {
   reads: ReadItem[]
-  topEdits: Record<string, string>
   onFix: (id: string) => void
 }
 
-export function Check({ focusTitle, onNext, onBack, reads, topEdits, onFix }: CheckProps) {
+export function Check({ focusTitle, onNext, onBack, reads: all, onFix }: CheckProps) {
+  const reads = all.filter((r) => r.id.startsWith('read-'))
+  const topThree = all.filter((r) => r.id.startsWith('top-'))
   return (
     <Screen
       eyebrow="Morning · 3 of 4"
@@ -57,7 +58,7 @@ export function Check({ focusTitle, onNext, onBack, reads, topEdits, onFix }: Ch
             <ReadRow
               key={t.id}
               mark={t.mark}
-              text={topEdits[t.id] ?? t.text}
+              text={t.text}
               snippetSrc={snippet(t.id)}
               onFix={() => onFix(t.id)}
             />
