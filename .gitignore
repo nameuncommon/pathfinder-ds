@@ -23,3 +23,6 @@ logs
 node_modules/
 npm-debug.log*
 storybook-static/
+
+# brainstorm companion mockups and SDD workspaces
+.superpowers/

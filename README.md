@@ -4,6 +4,11 @@ Pathfinder is a planner, to-do, and notes app for people who think in routes: it
 
 Lives in `pathfinder-ds` (syncs via GitHub private `nameuncommon/pathfinder-ds`).
 
+## Versions
+| Version | What | Where |
+|---|---|---|
+| v1 (frozen) | Desktop, keyboard-first design system, tag `v1.0.0` | https://pathfinder-ds-v1.vercel.app (own Vercel project `pathfinder-ds-v1`) |
+
 ## Layout
 | Path | What |
 |---|---|
