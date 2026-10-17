@@ -10,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Date chips answer when, and their state is derived from the date rather than set by hand. Today is the accent state, scheduled is neutral, overdue is danger. Overdue is the one place danger deliberately appears on a raised surface: inside a task row on a card the red is the signal, and the documented contrast exception is accepted there rather than losing the warning. Do not use the overdue state decoratively; it should always mean the date has passed.',
+          'Date chips answer when, and their state is derived from the date rather than set by hand. Today is the accent state, scheduled is neutral, overdue is danger. Overdue is the one place danger deliberately appears on a raised surface: inside a list row on a card the red is the signal, and the documented contrast exception is accepted there rather than losing the warning. Do not use the overdue state decoratively; it should always mean the date has passed.',
       },
     },
   },

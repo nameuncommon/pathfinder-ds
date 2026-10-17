@@ -39,9 +39,8 @@ const preview: Preview = {
 
   parameters: {
     // P0 fix: every story used to float tiny in the unstyled dark canvas
-    // with no framing. `centered` gives every story a sane default; the
-    // composed Today View story overrides to `padded` + its own max-width
-    // wrapper, and the "AllVariants"/"AllStates" grid stories wrap
+    // with no framing. `centered` gives every story a sane default; stories
+    // that need a wider canvas override this to `padded`, and the "AllVariants"/"AllStates" grid stories wrap
     // themselves in `StoryGrid` (src/stories/storyGrid.tsx) so they read as
     // intentional framed sheets instead.
     layout: 'centered',

@@ -1,4 +1,4 @@
-/* Background and border come from .pf-glass. The checked edge uses a more
+/* Background and border come from .pf-glass. The selected edge uses a more
    specific selector so it wins over the glass edge. */
 .pf-compass {
   display: flex;
