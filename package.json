@@ -10,7 +10,8 @@
     "test": "node --test \"tokens/*.test.mjs\" && vitest run",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "build:app": "vite build --base /app/ --outDir storybook-static/app --emptyOutDir"
   },
   "dependencies": {
     "@fontsource/cormorant-garamond": "^5.3.0",
