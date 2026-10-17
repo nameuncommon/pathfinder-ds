@@ -1,0 +1,28 @@
+/* Geist 400/500/600, Geist Mono 500, Cormorant Garamond 600 only.
+   Caveat is never a web font (handwriting ships as images).
+   Fontsource names the sans family 'Geist Sans'; the token stack says
+   'Geist', so Geist is declared here from the Fontsource files. */
+@import '@fontsource/geist-mono/500.css';
+@import '@fontsource/cormorant-garamond/600.css';
+
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('@fontsource/geist-sans/files/geist-sans-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('@fontsource/geist-sans/files/geist-sans-latin-500-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url('@fontsource/geist-sans/files/geist-sans-latin-600-normal.woff2') format('woff2');
+}

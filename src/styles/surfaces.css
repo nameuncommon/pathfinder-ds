@@ -1,0 +1,78 @@
+/* Glass, paper and ambient surfaces. Reads tokens.css variables only. */
+
+.pf-glass {
+  background: var(--surface-glass);
+  border: 1px solid var(--surface-glass-edge);
+  -webkit-backdrop-filter: blur(var(--effect-blur-glass));
+  backdrop-filter: blur(var(--effect-blur-glass));
+}
+
+.pf-glass--strong {
+  background: var(--surface-glass-strong);
+  border-color: var(--surface-glass-strong-edge);
+}
+
+/* nudge: gold edge at 60% alpha (#C9A35A99) */
+.pf-glass--nudge {
+  border-color: color-mix(in srgb, var(--gold-500) 60%, transparent);
+}
+
+.pf-paper {
+  background: var(--surface-paper);
+  color: var(--text-on-paper);
+}
+
+/* Ambient background: navy/950, two corner glows, and a dot field that fades
+   out over the top 240px. Glow peak alpha comes from --effect-glow-peak
+   (a 0 to 1 number) via color-mix, so the token stays the single source. */
+.pf-ambient {
+  --pf-glow-pct: calc(var(--effect-glow-peak) * 100%);
+  position: relative;
+  isolation: isolate;
+  background-color: var(--navy-950);
+  background-image:
+    radial-gradient(
+      60% 50% at 100% 0%,
+      color-mix(in srgb, var(--gold-500) var(--pf-glow-pct), transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      60% 50% at 0% 100%,
+      color-mix(in srgb, var(--bearing-home) var(--pf-glow-pct), transparent),
+      transparent 70%
+    );
+}
+
+.pf-ambient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(
+    circle at 0.5px 0.5px,
+    color-mix(in srgb, var(--cream-100) 12%, transparent) 0.5px,
+    transparent 1px
+  );
+  background-size: 16px 16px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 240px);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 240px);
+}
+
+/* Fallbacks: opaque fill, no blur. */
+@media (prefers-reduced-transparency: reduce) {
+  .pf-glass,
+  .pf-glass--strong {
+    background: var(--surface-glass-fallback);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .pf-glass,
+  .pf-glass--strong {
+    background: var(--surface-glass-fallback);
+    backdrop-filter: none;
+  }
+}
