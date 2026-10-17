@@ -14,7 +14,7 @@ Pathfinder is a fictional brand (a planner/to-do/notes app) invented so this stu
 range across the full design-system pipeline - brand, tokens, component library, and a real code
 layer. "Done" means: a brand identity, a `tokens/tokens.json` authored in this repo as the single
 source of truth, a Figma library whose variables mirror it by hand, and a small Vite + React +
-Storybook codebase (9 of 16 components) that consumes it via generated CSS. The code layer is proof
+Storybook codebase (v2 components are built in code and Figma; v1 is frozen at tag v1.0.0) that consumes it via generated CSS. The code layer is proof
 of a real one-direction token pipeline, not a production app.
 
 ## Token flow

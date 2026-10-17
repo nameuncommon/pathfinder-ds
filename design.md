@@ -46,7 +46,7 @@ rounded:                  # border-radius scale, from primitives.radius
 spacing:                  # base unit + scale, from primitives.space
   unit: "4px"
   scale: ["4px", "8px", "12px", "16px", "20px", "24px", "32px", "40px", "48px", "64px"]
-components:               # 9 of 16 Pathfinder components are built in code; the rest live in Figma only
+components:               # v2 components are built in code and Figma; v1 is frozen at tag v1.0.0
   - button
   - checkbox
   - input
@@ -153,7 +153,7 @@ label gap and stroke weight (neither is a multiple of 4).
 
 One shadow token exists: `shadow/raised` = `0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.24)`,
 a two-layer shadow (tight contact shadow + soft ambient falloff). It marks anything that visually
-lifts off `surface/base`: dragging TaskRow, Toast, CommandBar, Modal. Static raised surfaces (cards,
+lifts off `surface/base`: dragging rows, Toast, Modal. Static raised surfaces (cards,
 panels) use `surface/raised` fill + `border/subtle` hairline instead of a shadow - depth in this
 system comes from either a fill-and-border step *or* a shadow, never both at once on the same
 element, keeping elevation legible as a discrete state rather than a blurred gradient of depths.
@@ -162,14 +162,13 @@ element, keeping elevation legible as a discrete state rather than a blurred gra
 
 Corner radii come from `{rounded}`: `sm` (6px) for tight controls like Input and Checkbox, `md`
 (10px) for Button and most component-tier shells (`button/radius`, `input/radius`), `lg` (14px)
-for elevated surfaces (Card, Modal, CommandBar, Toast). `full` (999px, literal) is reserved for
+for elevated surfaces (Card, Modal, Toast). `full` (999px, literal) is reserved for
 pill shapes only - Tag, DateChip, and any fully-rounded control. Nothing in the system uses a
 sharp (0px) corner; the softest shape language still reads as "precise," not "soft app."
 
 # Components
 
-9 of 16 Pathfinder components are built in code (Vite + React + Storybook); the remaining 7 live
-in the Figma library only. Every coded component consumes `tokens/tokens.json` values via
+v2 components are built in code and Figma; v1 is frozen at tag v1.0.0. Code is Vite + React + Storybook. Every coded component consumes `tokens/tokens.json` values via
 generated CSS custom properties - never a hardcoded color, type size, or spacing value in
 `src/components/`.
 

@@ -10,9 +10,8 @@ import type { CSSProperties, ReactNode } from 'react'
  *   already painted `--surface-base` by the preview decorator, so a
  *   base-colored fill alone would blend into it with no visible edge.
  * - `base` - for stories whose content's own hover/lifted states are *drawn
- *   in* `--surface-raised` (TaskRow's hover/dragging rows); a raised wrapper
- *   would erase that contrast, so those opt into `base` and rely on the
- *   border alone for framing.
+ *   in* `--surface-raised`; a raised wrapper would erase that contrast, so
+ *   those opt into `base` and rely on the border alone for framing.
  * This is the fix the P0 canvas-void critique asked for, applied once here
  * instead of re-styling each grid story by hand.
  */

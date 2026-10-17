@@ -107,8 +107,6 @@ export const linkStyle = {
     <Row>
       <Stat value={String(Object.keys(tokens.primitives.color).length)} label="colour primitives" />
       <Stat value={String(Object.keys(tokens.semantic.dark).length)} label="semantic tokens, per theme" />
-      <Stat value="16" label="figma components" />
-      <Stat value="9" label="built in code" />
     </Row>
 
     <h2 style={h2Style}>How it fits together</h2>
@@ -121,10 +119,10 @@ export const linkStyle = {
 
     <h2 style={h2Style}>What is deliberately not here</h2>
     <p style={pStyle}>
-      {'Nine of the sixteen Figma components are built in code, not all sixteen. That is a scoping decision, not an unfinished one. The code layer exists to prove the token pipeline survives contact with a real browser; building the remaining seven would have repeated a solved problem instead of surfacing new ones.'}
+      {'The v2 components are built in code and Figma. Version 1 is frozen at tag v1.0.0 with its own deployment. The code layer exists to prove the token pipeline survives contact with a real browser.'}
     </p>
     <p style={pStyle}>
-      {'This is also why there is no application here. Pathfinder has components and two composed screens, not a product.'}
+      {'This is also why there is no application here. Pathfinder has components, not a product.'}
     </p>
 
     <div style={noteStyle}>
@@ -135,7 +133,7 @@ export const linkStyle = {
 
     <h2 style={h2Style}>Where to start</h2>
     <p style={pStyle}>
-      {'Foundations → Color shows the token architecture and the contrast work. Composed → Today View shows the components assembled into a real screen, and Composed → Search View shows the same components handling a changing state, including the empty state. Those two together are the fastest way to see whether the system actually holds up.'}
+      {'Foundations → Color shows the token architecture and the contrast work. The component stories show each piece in its states, and together with the color page they are the fastest way to see whether the system actually holds up.'}
     </p>
 
     <h2 style={h2Style}>Elsewhere</h2>
