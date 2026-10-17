@@ -63,6 +63,14 @@
   color: var(--text-primary);
 }
 
+/* .pf-button sets a transparent border at equal specificity and loads after
+   surfaces.css, so restore the glass edge explicitly. Skips the nudge
+   modifier, which owns its own gold edge. The reduced-transparency and
+   no-backdrop-filter fallbacks only touch background, so they still apply. */
+.pf-button--quiet:not(.pf-glass--nudge) {
+  border-color: var(--surface-glass-strong-edge);
+}
+
 .pf-button--quiet:hover:not(:disabled) {
   filter: brightness(1.12);
 }
