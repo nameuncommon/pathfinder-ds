@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { Button } from '../../components/Button'
 import { CompassChoice, type Direction } from '../../components/CompassChoice'
 import { GlassCard } from '../../components/GlassCard'
@@ -24,6 +25,14 @@ function Rose() {
 
 export function Sort({ focusTitle, onBack, index, onChoose, onLeave }: SortProps) {
   const item = inbox[index] ?? inbox[0]
+  const itemRef = useRef<HTMLParagraphElement>(null)
+  const prevIndex = useRef(index)
+  // Announce a new item by moving focus to its title. Skipped on first render
+  // so entering Sort keeps focus on the h1.
+  useEffect(() => {
+    if (prevIndex.current !== index) itemRef.current?.focus({ preventScroll: true })
+    prevIndex.current = index
+  }, [index])
   return (
     <Screen
       eyebrow="Morning · 4 of 4"
@@ -39,7 +48,7 @@ export function Sort({ focusTitle, onBack, index, onChoose, onLeave }: SortProps
       }
     >
       <GlassCard>
-        <p className="pf-app__item-title">{item.title}</p>
+        <p ref={itemRef} tabIndex={-1} className="pf-app__item-title">{item.title}</p>
         <p className="pf-app__secondary">{item.source}</p>
       </GlassCard>
       <div className="pf-app__question">

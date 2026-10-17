@@ -68,7 +68,9 @@ export function CorrectionSheet({ text, snippetSrc, onSave, onCancel }: Correcti
           onChange={(e) => setValue(e.target.value)}
         />
         <div className="pf-sheet__actions">
-          <Button onClick={() => onSave(value)}>Save</Button>
+          <Button disabled={!value.trim()} onClick={() => onSave(value.trim())}>
+            Save
+          </Button>
           <Button variant="quiet" onClick={onCancel}>
             Cancel
           </Button>

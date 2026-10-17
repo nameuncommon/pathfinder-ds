@@ -25,7 +25,7 @@ export function Snap({ focusTitle, onNext, onBack, onSkip }: ScreenActions) {
         </Button>
       }
     >
-      <button type="button" className="pf-viewfinder" aria-label="Take the photo" onClick={onNext}>
+      <button type="button" className="pf-viewfinder" aria-label="Take the photo" aria-describedby="pf-snap-found" onClick={onNext}>
         <span className="pf-viewfinder__corner pf-viewfinder__corner--tl" aria-hidden="true" />
         <span className="pf-viewfinder__corner pf-viewfinder__corner--tr" aria-hidden="true" />
         <span className="pf-viewfinder__corner pf-viewfinder__corner--bl" aria-hidden="true" />
@@ -42,7 +42,7 @@ export function Snap({ focusTitle, onNext, onBack, onSkip }: ScreenActions) {
             ))}
           </span>
         )}
-        <span className="pf-viewfinder__pill" aria-hidden="true">
+        <span id="pf-snap-found" className="pf-viewfinder__pill">
           <span className="pf-viewfinder__dot" />
           Found W42 · 4 corners
         </span>

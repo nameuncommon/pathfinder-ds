@@ -13,7 +13,7 @@ export function ReadRow({ mark, text, snippetSrc, onFix }: ReadRowProps) {
     <button
       type="button"
       className="pf-glass pf-read-row"
-      aria-label={`Fix: ${text}`}
+      aria-label={`Fix: ${text}, ${mark}`}
       onClick={onFix}
     >
       <Mark type={mark} decorative />

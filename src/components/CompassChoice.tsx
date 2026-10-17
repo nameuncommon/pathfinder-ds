@@ -15,7 +15,7 @@ export function CompassChoice({
   direction,
   title,
   detail,
-  selected = false,
+  selected,
   onSelect,
 }: CompassChoiceProps) {
   return (

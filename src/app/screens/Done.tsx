@@ -11,11 +11,14 @@ export interface DoneProps {
 
 export function Done({ focusTitle, decisions, onRestart }: DoneProps) {
   const decided = inbox.filter((i) => decisions[i.id])
+  const all = decided.length === inbox.length
   return (
     <Screen
       eyebrow="Morning · done"
-      title="All sorted"
-      support="See you tomorrow morning."
+      title={all ? 'All sorted' : `Sorted ${decided.length} of ${inbox.length}`}
+      support={
+        all ? 'See you tomorrow morning.' : `${inbox.length - decided.length} left for Sunday.`
+      }
       focusTitle={focusTitle}
       action={
         <Button variant="quiet" onClick={onRestart}>
