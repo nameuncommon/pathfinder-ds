@@ -52,8 +52,6 @@ components:               # v2 components are built in code and Figma; v1 is fro
   - input
   - tag
   - date-chip
-  - task-row
-  - command-bar
   - toast
   - empty-state
 ---
@@ -127,7 +125,7 @@ danger only ships on `surface/base`.
 
 Usage rules: `accent/default` stays under ~10% of any view (buttons, active states).
 Body text is always `text/primary` on `surface/base`; `surface/raised`
-is for cards, panels, and floating chrome (modal, command bar, toast). `border/subtle` is the only
+is for cards, panels, and floating chrome (modal, toast). `border/subtle` is the only
 hairline color in the system - no ad hoc grays. The brand colors (navy, gold, cream) belong to the
 mark and brand surfaces only, through `brand/mark`; they never replace `accent/*` in the UI.
 
@@ -200,16 +198,6 @@ section) and never ships on `surface/raised`.
 Same tint recipe and `tag-text/*` text tokens as Tag. States: today (accent) / scheduled (neutral) /
 overdue (danger, row-level source of truth - `overdue` always forces the `overdue` visual state
 regardless of the `dateState` prop passed in).
-
-## task-row
-Composes Checkbox + Tag + DateChip in a horizontal flex row with a drag handle. States: default /
-hover (`surface/raised` fill) / completed (struck-through, dimmed) / overdue (red DateChip) /
-dragging (`surface/raised` fill + `shadow/raised` + slight rotation).
-
-## command-bar
-Tokens: `radius/lg`, `surface/raised`, `shadow/raised`, `accent/default` at 18% for the selected
-result row's background tint plus a 2px accent rail. Built from a reusable `result row` atom
-instanced N times.
 
 ## toast
 Tokens: `radius/lg`, `surface/raised`, `shadow/raised`, status icon color bound to
