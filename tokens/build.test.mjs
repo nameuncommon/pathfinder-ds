@@ -46,16 +46,16 @@ test('tokens.json → CSS pipeline', async (t) => {
     const darkMatch = css.match(/:root\[data-theme="dark"\]\s*\{([\s\S]*?)\n\}/);
     assert(darkMatch, 'dark theme block should exist');
     const darkBlock = darkMatch[1];
-    assert.match(darkBlock, /--accent-default:\s*var\(--blue-500\)/,
-      'dark block should have --accent-default: var(--blue-500)');
+    assert.match(darkBlock, /--accent-default:\s*var\(--gold-500\)/,
+      'dark block should have --accent-default: var(--gold-500)');
   });
 
   await t.test('dark theme block contains tag-text/accent ref (C2 contrast fix)', () => {
     const darkMatch = css.match(/:root\[data-theme="dark"\]\s*\{([\s\S]*?)\n\}/);
     assert(darkMatch, 'dark theme block should exist');
     const darkBlock = darkMatch[1];
-    assert.match(darkBlock, /--tag-text-accent:\s*var\(--blue-400\)/,
-      'dark block should have --tag-text-accent: var(--blue-400)');
+    assert.match(darkBlock, /--tag-text-accent:\s*var\(--gold-400\)/,
+      'dark block should have --tag-text-accent: var(--gold-400)');
   });
 
   await t.test('light theme block contains accent-default ref', () => {
@@ -73,6 +73,39 @@ test('tokens.json → CSS pipeline', async (t) => {
     const lightBlock = lightMatch[1];
     assert.match(lightBlock, /--tag-text-accent:\s*var\(--blue-700\)/,
       'light block should have --tag-text-accent: var(--blue-700)');
+  });
+
+  await t.test('v2 primitives', () => {
+    const expected = {
+      '--navy-950': '#0E1628', '--navy-800': '#1D2A4A', '--gold-400': '#D8B76F',
+      '--bearing-health': '#9BC2A5', '--bearing-people': '#E3A48C', '--bearing-home': '#9DB6DB',
+      '--bearing-work': '#D9C38A', '--bearing-craft': '#C3A9DB',
+      '--effect-blur-glass': '24px', '--effect-glow-peak': '0.1',
+      '--type-56-size': '56px', '--type-56-line': '56px',
+    };
+    for (const [name, val] of Object.entries(expected)) {
+      assert.match(css, new RegExp(`${name}:\\s*${val}\\s*;`), `${name} should be ${val}`);
+    }
+    assert.match(css, /--font-display:\s*'Cormorant Garamond', Georgia, serif;/);
+  });
+
+  await t.test('v2 dark semantic tokens', () => {
+    const darkBlock = css.match(/:root\[data-theme="dark"\]\s*\{([\s\S]*?)\n\}/)[1];
+    const expected = {
+      '--surface-base': 'var\\(--navy-950\\)', '--surface-raised': 'var\\(--navy-800\\)',
+      '--surface-glass': '#F3EEE30F', '--surface-glass-edge': '#F3EEE329',
+      '--surface-glass-strong': '#F3EEE31A', '--surface-glass-strong-edge': '#F3EEE347',
+      '--surface-glass-fallback': 'var\\(--navy-800\\)', '--surface-paper': 'var\\(--cream-100\\)',
+      '--text-on-paper': 'var\\(--navy-900\\)', '--text-primary': 'var\\(--cream-100\\)',
+      '--text-secondary': '#F3EEE3B3', '--text-muted': '#F3EEE399',
+      '--accent-default': 'var\\(--gold-500\\)', '--accent-hover': 'var\\(--gold-400\\)',
+      '--accent-text': 'var\\(--gold-500\\)', '--focus-ring': 'var\\(--gold-400\\)',
+      '--border-subtle': '#2C3A5C', '--button-accent-label': 'var\\(--ink-950\\)',
+      '--brand-mark': 'var\\(--gold-500\\)',
+    };
+    for (const [name, val] of Object.entries(expected)) {
+      assert.match(darkBlock, new RegExp(`${name}:\\s*${val}\\s*;`), `${name} should be ${val}`);
+    }
   });
 
   await t.test('no unresolved braces in CSS', () => {

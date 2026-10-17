@@ -14,6 +14,7 @@ const toVarName = (key, category = null) => {
   if (category === 'space') return `--space-${name}`;
   if (category === 'radius') return `--radius-${name}`;
   if (category === 'motion') return `--motion-${name}`;
+  if (category === 'effect') return `--effect-${name}`;
   if (category === 'font') return `--font-${name}`;
   return `--${name}`;
 };
@@ -63,6 +64,7 @@ const formatValue = (key, value, category) => {
     if (key.startsWith('duration/')) return `${value}ms`;
     return value; // ease is a string
   }
+  if (category === 'effect') return key.startsWith('glow') ? value : `${value}px`;
   return `${value}px`;
 };
 
