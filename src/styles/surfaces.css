@@ -73,6 +73,7 @@
   .pf-glass,
   .pf-glass--strong {
     background: var(--surface-glass-fallback);
+    -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
 }

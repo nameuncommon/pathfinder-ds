@@ -28,6 +28,11 @@ for (const marker of [
   })
 }
 
+test('@supports fallback also clears the prefixed backdrop-filter', () => {
+  const body = blockAfter('@supports not (backdrop-filter: blur(1px))')
+  assert.match(body, /-webkit-backdrop-filter:\s*none/)
+})
+
 test('glow peak reads the token', () => {
   assert.match(css, /var\(--effect-glow-peak\)/)
 })
