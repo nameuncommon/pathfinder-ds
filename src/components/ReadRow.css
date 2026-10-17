@@ -1,0 +1,35 @@
+/* Background and border come from .pf-glass. */
+.pf-read-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--type-16-size);
+  line-height: var(--type-16-line);
+  text-align: left;
+  cursor: pointer;
+}
+
+.pf-read-row:focus-visible {
+  outline: 2px solid var(--gold-400);
+  outline-offset: 2px;
+}
+
+.pf-read-row__text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.pf-read-row__snippet {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

@@ -1,0 +1,40 @@
+.pf-appbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 44px;
+}
+
+.pf-appbar__back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+}
+
+.pf-appbar__back:focus-visible {
+  outline: 2px solid var(--gold-400);
+  outline-offset: 2px;
+}
+
+.pf-appbar__disc {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--navy-800);
+  border: 1px solid color-mix(in srgb, var(--gold-500) 45%, transparent);
+}
