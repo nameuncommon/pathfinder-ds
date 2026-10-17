@@ -2,7 +2,7 @@ import { Button } from '../../components/Button'
 import { GlassCard } from '../../components/GlassCard'
 import { ReadRow } from '../../components/ReadRow'
 import { Tally } from '../../components/Tally'
-import { snippet } from '../assets'
+import { snippetFor } from '../assets'
 import { yesterday } from '../data'
 import type { ReadItem } from '../ritual'
 import { Screen } from '../Screen'
@@ -45,7 +45,7 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix }: CheckPr
               key={r.id}
               mark={r.mark}
               text={r.text}
-              snippetSrc={snippet(r.id)}
+              snippetSrc={snippetFor(r)}
               onFix={() => onFix(r.id)}
             />
           ))}
@@ -59,7 +59,7 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix }: CheckPr
               key={t.id}
               mark={t.mark}
               text={t.text}
-              snippetSrc={snippet(t.id)}
+              snippetSrc={snippetFor(t)}
               onFix={() => onFix(t.id)}
             />
           ))}

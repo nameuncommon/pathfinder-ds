@@ -107,6 +107,24 @@ describe('MorningRitual', () => {
     expect(screen.getByRole('button', { name: 'Fix: run 10k' })).toHaveFocus()
   })
 
+  it('after a correction the row drops the handwriting image and shows the new text', async () => {
+    const user = userEvent.setup()
+    render(<MorningRitual />)
+    await user.click(screen.getByRole('button', { name: "Snap this week's spread" }))
+    await user.click(screen.getByRole('button', { name: 'Take the photo' }))
+    const before = screen.getByRole('button', { name: 'Fix: draft the brief' })
+    expect(within(before).getByRole('img', { name: 'draft the brief' })).toBeInTheDocument()
+    await user.click(before)
+    const dialog = screen.getByRole('dialog', { name: 'Fix what I read' })
+    const input = within(dialog).getByLabelText('What it says')
+    await user.clear(input)
+    await user.type(input, 'draft the plan')
+    await user.click(within(dialog).getByRole('button', { name: 'Save' }))
+    const after = screen.getByRole('button', { name: 'Fix: draft the plan' })
+    expect(within(after).queryByRole('img')).not.toBeInTheDocument()
+    expect(within(after).getByText('draft the plan')).toBeInTheDocument()
+  })
+
   it('Escape closes the dialog and returns focus to the row', async () => {
     const user = userEvent.setup()
     render(<MorningRitual />)

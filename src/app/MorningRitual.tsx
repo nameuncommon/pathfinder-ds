@@ -1,6 +1,6 @@
 import { useReducer, useState } from 'react'
 import { CorrectionSheet } from './CorrectionSheet'
-import { snippet } from './assets'
+import { snippetFor } from './assets'
 import { inbox, reads, topThree } from './data'
 
 const seed = [...reads, ...topThree]
@@ -62,7 +62,7 @@ export function MorningRitual() {
       {fixing && (
         <CorrectionSheet
           text={fixing.text}
-          snippetSrc={snippet(fixing.id)}
+          snippetSrc={snippetFor(fixing)}
           onCancel={() => setFixingId(null)}
           onSave={(text) => {
             dispatch({ type: 'fixRead', id: fixing.id, text })
