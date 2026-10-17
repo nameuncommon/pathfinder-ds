@@ -33,6 +33,7 @@
 .pf-app__eyebrow {
   margin: 0;
   color: var(--accent-text);
+  font-weight: 500;
   font-size: var(--type-12-size);
   line-height: var(--type-12-line);
   letter-spacing: 0.06em;
@@ -42,7 +43,7 @@
 .pf-app__title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 600;
   font-size: var(--type-32-size);
   line-height: var(--type-32-line);
   overflow-wrap: anywhere;
@@ -101,7 +102,7 @@
   position: sticky;
   bottom: 0;
   padding: var(--space-4) 0 max(var(--space-4), env(safe-area-inset-bottom));
-  background: linear-gradient(to bottom, transparent, var(--navy-950) 28%);
+  background: linear-gradient(to bottom, transparent, var(--surface-base) 28%);
 }
 
 .pf-app__action > .pf-button,
@@ -278,7 +279,7 @@ img.pf-viewfinder__page {
 .pf-sheet__title {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 600;
   font-size: var(--type-24-size);
   line-height: var(--type-24-line);
 }

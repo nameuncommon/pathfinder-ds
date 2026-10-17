@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import { BearingTag, type Bearing } from './BearingTag'
@@ -20,5 +21,11 @@ describe('BearingTag', () => {
   it('hides the dot from assistive tech', () => {
     const { container } = render(<BearingTag bearing="work" />)
     expect(container.querySelector('[aria-hidden="true"]')).toBeTruthy()
+  })
+
+  it('colours the label with the bearing hue at full strength', () => {
+    const css = readFileSync('src/components/BearingTag.css', 'utf-8')
+    const rule = css.match(/\.pf-bearing-tag\s*\{([^}]*)\}/)![1]
+    expect(rule).toMatch(/(^|\s)color:\s*var\(--pf-bearing\)/)
   })
 })

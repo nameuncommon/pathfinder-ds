@@ -3,7 +3,6 @@ import { CorrectionSheet } from './CorrectionSheet'
 import { snippetFor } from './assets'
 import { inbox, reads, topThree } from './data'
 
-const seed = [...reads, ...topThree]
 import { initialRitual, ritualReducer, type Action, type RitualState } from './ritual'
 import { Check } from './screens/Check'
 import { Done } from './screens/Done'
@@ -11,6 +10,8 @@ import { Open } from './screens/Open'
 import { Snap } from './screens/Snap'
 import { Sort } from './screens/Sort'
 import './app.css'
+
+const seed = [...reads, ...topThree]
 
 type AppAction = Action | { type: 'reset' }
 

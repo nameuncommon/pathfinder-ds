@@ -6,7 +6,7 @@
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--pf-bearing) 40%, transparent);
   background: color-mix(in srgb, var(--pf-bearing) 16%, transparent);
-  color: var(--text-primary);
+  color: var(--pf-bearing);
   font-family: var(--font-sans);
   font-size: var(--type-12-size);
   line-height: var(--type-12-line);
