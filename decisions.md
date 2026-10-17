@@ -233,3 +233,4 @@ file in `specs/decisions/`.
 | Check screen tally is a layout frame of eight mark instances (six done, two moved), not the tally component | the tally component is fixed at three done and two moved; the screen copy says six and two |
 | The Figma snapped page lists the three reads plus book flights (the pay electric line is hidden on the instance) | matches the coded fallback and what the check screen says it read |
 | Desktop loose-end compass chips are 44px tall instead of 36 | the 44px tap-target floor applies to the desktop panel too |
+| v2 docs: design.md rewritten to mirror the v2 tokens, counts set to 17 components, compass documented as a button group | the v1-era mirror still described blue, ink and keyboard-first; a spec that contradicts tokens.json is the drift the pipeline exists to prevent |
