@@ -27,9 +27,11 @@
 }
 
 .pf-read-row__snippet {
-  flex: 1;
+  flex: 0 1 auto;
   min-width: 0;
   max-width: 100%;
   height: auto;
   display: block;
+  /* handwriting is exported at 2x */
+  zoom: 0.5;
 }

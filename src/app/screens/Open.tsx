@@ -1,5 +1,6 @@
 import { Button } from '../../components/Button'
 import { ScheduleRow } from '../../components/ScheduleRow'
+import { snippet } from '../assets'
 import { inbox, oneThing, schedule, today } from '../data'
 import { Screen } from '../Screen'
 
@@ -23,7 +24,13 @@ export function Open({ focusTitle, onNext, onSkip }: ScreenActions) {
       }
     >
       <h2 className="pf-app__label">The one thing this week</h2>
-      <div className="pf-paper pf-app__paper">{oneThing}</div>
+      <div className="pf-paper pf-app__paper">
+        {snippet('one-thing') ? (
+          <img className="pf-app__paper-hand" src={snippet('one-thing')} alt={oneThing} />
+        ) : (
+          oneThing
+        )}
+      </div>
       <Button onClick={onNext}>Snap this week&apos;s spread</Button>
       <h2 className="pf-app__label">Today</h2>
       <div>

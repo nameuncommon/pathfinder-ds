@@ -89,6 +89,14 @@
   line-height: var(--type-16-line);
 }
 
+.pf-app__paper-hand {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  /* handwriting is exported at 2x */
+  zoom: 0.5;
+}
+
 .pf-app__action {
   position: sticky;
   bottom: 0;
@@ -197,6 +205,8 @@
 img.pf-viewfinder__page {
   padding: 0;
   height: auto;
+  /* the exported page is already tilted */
+  transform: none;
 }
 
 .pf-viewfinder__line {
@@ -279,6 +289,11 @@ img.pf-viewfinder__page {
   max-width: 100%;
   color: var(--text-secondary);
   overflow-wrap: anywhere;
+}
+
+img.pf-sheet__snippet {
+  /* handwriting is exported at 2x */
+  zoom: 0.5;
 }
 
 .pf-sheet__label {
