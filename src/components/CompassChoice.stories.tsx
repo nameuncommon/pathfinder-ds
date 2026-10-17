@@ -15,7 +15,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'One of up to four big choices, each tied to a compass point. Put them inside an element with `role="radiogroup"` and an accessible name. Each choice is at least 64px tall and the detail text wraps.',
+          'One of up to four big choices, each tied to a compass point. Put them inside an element with `role="group"` and an accessible name. Each is a plain button: one tap decides. Each choice is at least 64px tall and the detail text wraps.',
       },
     },
   },
@@ -36,11 +36,10 @@ export const Default: Story = {
     direction: 'N',
     title: 'Keep going',
     detail: 'Carry it to tomorrow as it is.',
-    checked: false,
   },
 }
 
-export const Checked: Story = { args: { ...Default.args, checked: true } }
+export const Selected: Story = { args: { ...Default.args, selected: true } }
 
 const options: { direction: Direction; title: string; detail: string }[] = [
   { direction: 'N', title: 'Keep going', detail: 'Carry it to tomorrow as it is.' },
@@ -54,9 +53,9 @@ export const Group: Story = {
   render: function Render() {
     const [value, setValue] = useState<Direction>('N')
     return (
-      <div role="radiogroup" aria-label="What next for this task" style={{ display: 'grid', gap: '12px' }}>
+      <div role="group" aria-label="Which way does it go?" style={{ display: 'grid', gap: '12px' }}>
         {options.map((o) => (
-          <CompassChoice key={o.direction} {...o} checked={value === o.direction} onSelect={() => setValue(o.direction)} />
+          <CompassChoice key={o.direction} {...o} selected={value === o.direction} onSelect={() => setValue(o.direction)} />
         ))}
       </div>
     )

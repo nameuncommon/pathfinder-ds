@@ -6,17 +6,23 @@ export interface CompassChoiceProps {
   direction: Direction
   title: string
   detail: string
-  checked: boolean
+  selected?: boolean
   onSelect: () => void
 }
 
-/** Use inside a role="radiogroup" that has an accessible name. */
-export function CompassChoice({ direction, title, detail, checked, onSelect }: CompassChoiceProps) {
+/** A plain button: one tap decides. Wrap a set in role="group" with an accessible name. */
+export function CompassChoice({
+  direction,
+  title,
+  detail,
+  selected = false,
+  onSelect,
+}: CompassChoiceProps) {
   return (
     <button
       type="button"
-      role="radio"
-      aria-checked={checked}
+      aria-label={`${direction}, ${title}. ${detail}`}
+      aria-pressed={selected}
       className="pf-glass pf-compass"
       onClick={onSelect}
     >
@@ -24,7 +30,9 @@ export function CompassChoice({ direction, title, detail, checked, onSelect }: C
         {direction}
       </span>
       <span className="pf-compass__body">
-        <span className="pf-compass__title">{title}</span>
+        <span className="pf-compass__title">
+          {title}
+        </span>
         <span className="pf-compass__detail">{detail}</span>
       </span>
     </button>
