@@ -10,7 +10,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'ghost', 'danger'],
+      options: ['primary', 'quiet', 'secondary', 'ghost', 'danger'],
     },
     size: {
       control: 'select',
@@ -34,6 +34,17 @@ export const Primary: Story = {
   args: { variant: 'primary', size: 'md', children: 'add task' },
 }
 
+export const Quiet: Story = {
+  args: { variant: 'quiet', size: 'md', children: 'not today' },
+  decorators: [
+    (Story) => (
+      <div className="pf-ambient" style={{ padding: '32px' }}>
+        <Story />
+      </div>
+    ),
+  ],
+}
+
 export const Secondary: Story = {
   args: { variant: 'secondary', size: 'md', children: 'schedule' },
 }
@@ -50,10 +61,11 @@ export const Disabled: Story = {
   args: { variant: 'primary', size: 'md', children: 'add task', disabled: true },
 }
 
-const variants: ButtonVariant[] = ['primary', 'secondary', 'ghost', 'danger']
+const variants: ButtonVariant[] = ['primary', 'quiet', 'secondary', 'ghost', 'danger']
 const sizes: ButtonSize[] = ['sm', 'md', 'lg']
 const labels: Record<ButtonVariant, string> = {
   primary: 'add task',
+  quiet: 'not today',
   secondary: 'schedule',
   ghost: 'snooze',
   danger: 'delete list',

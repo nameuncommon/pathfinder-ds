@@ -34,8 +34,9 @@
 }
 
 .pf-button--md {
-  height: 36px;
-  padding: 0 var(--space-4);
+  height: 52px;
+  padding: 0 var(--space-5);
+  border-radius: 14px;
   font-size: var(--type-14-size);
   line-height: var(--type-14-line);
 }
@@ -55,6 +56,15 @@
 
 .pf-button--primary:hover:not(:disabled) {
   background: var(--accent-hover);
+}
+
+/* Quiet: glass strong surface (pf-glass classes from surfaces.css), primary text */
+.pf-button--quiet {
+  color: var(--text-primary);
+}
+
+.pf-button--quiet:hover:not(:disabled) {
+  filter: brightness(1.12);
 }
 
 /* Danger: colored fill, ink label, same accessibility pattern as primary */
