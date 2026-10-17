@@ -36,7 +36,6 @@
 .pf-button--md {
   height: 52px;
   padding: 0 var(--space-5);
-  border-radius: 14px;
   font-size: var(--type-14-size);
   line-height: var(--type-14-line);
 }

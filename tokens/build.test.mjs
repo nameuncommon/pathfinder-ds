@@ -37,6 +37,10 @@ test('tokens.json → CSS pipeline', async (t) => {
     assert.match(css, /--font-mono:\s*'Geist Mono'/);
   });
 
+  await t.test('button radius is one token pointing at radius-lg', () => {
+    assert.match(css, /--button-radius:\s*var\(--radius-lg\)/);
+  });
+
   await t.test('component tier with button-accent-label', () => {
     assert.match(css, /--button-accent-label:\s*var\(--ink-950\)/);
   });

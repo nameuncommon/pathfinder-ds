@@ -44,7 +44,7 @@ rounded:                  # border-radius scale, from primitives.radius
   sm: "6px"
   md: "10px"
   lg: "14px"
-  full: "9999px"           # pill shape (Tag, DateChip, BearingTag) - literal, no radius/full primitive
+  full: "999px"           # pill shape (Tag, DateChip, BearingTag) - literal, no radius/full primitive
 spacing:                  # base unit + scale, from primitives.space
   unit: "4px"
   scale: ["4px", "8px", "12px", "16px", "20px", "24px", "32px", "40px", "48px", "64px"]
@@ -209,8 +209,7 @@ shadow token, `shadow/raised`, still exists for floating chrome (toast, sheet).
 # Shapes
 
 Corner radii come from `{rounded}`: `sm` (6px) for tight controls like Input and Checkbox, `md`
-(10px) for component shells, `lg` (14px) for elevated surfaces. Buttons use a 14px radius at the 52px
-phone height. `full` (999px, literal) is reserved for pill shapes only: Tag, DateChip, BearingTag.
+(10px) for component shells, `lg` (14px) for elevated surfaces. Buttons take their corner from the single `button/radius` token (`{rounded.lg}`, 14px) at every size. `full` (999px, literal) is reserved for pill shapes only: Tag, DateChip, BearingTag.
 Nothing in the system uses a sharp (0px) corner.
 
 # Components

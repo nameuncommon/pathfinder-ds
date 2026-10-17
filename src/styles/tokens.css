@@ -131,6 +131,6 @@
 
 /* Component tokens */
 :root {
-  --button-radius: var(--radius-md);
+  --button-radius: var(--radius-lg);
   --input-radius: var(--radius-sm);
 }
