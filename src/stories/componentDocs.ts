@@ -220,7 +220,7 @@ const docs: Record<string, Doc> = {
     ],
     a11y: 'A modal dialog labelled by its title. It focuses the first field, keeps Tab inside, closes on Escape and returns focus to the control that opened it.',
     tokens: ['surface/glass-strong', 'surface/glass-fallback', 'navy/950', 'radius/lg'],
-    node: '517:554',
+    node: '554:1314',
   },
   ScheduleRow: {
     what: 'One line of the day: a time, what it is and its bearing.',
