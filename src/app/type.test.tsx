@@ -53,4 +53,8 @@ describe('app type', () => {
     expect(r).toMatch(/font-size:\s*var\(--type-20-size\)/)
     expect(r).toMatch(/font-weight:\s*600/)
   })
+
+  it('action bar labels may wrap to a second line instead of overflowing at large text', () => {
+    expect(rule('.pf-app__action > .pf-button')).toMatch(/white-space:\s*normal/)
+  })
 })

@@ -40,7 +40,7 @@ export const actions = { focusTitle: false, onNext: noop, onBack: noop, onSkip: 
         <Done focusTitle={false} decisions={{ [inbox[0].id]: 'E', [inbox[1].id]: 'N', [inbox[2].id]: 'S' }} onRestart={noop} onRevisit={noop} notice={<Toast message={`${inbox[2].title} · Share`} action={{ label: 'Undo', onClick: noop }} />} />
       </Phone>
       <Phone label="check after a fix" story="screens-morning-ritual--state-check-fixed">
-        <Check {...actions} reads={[...reads, ...topThree]} onFix={noop} notice={<Toast message="Fixed: run 10k" />} />
+        <Check {...actions} reads={[...reads, ...topThree].map((r) => (r.id === 'read-2' ? { ...r, text: 'run 10k', unsure: false } : r))} onFix={noop} notice={<Toast message="Fixed: run 10k" />} />
       </Phone>
     </Phones>
 

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Button } from '../components/Button'
 import { Input } from '../components/Input'
 import { Sheet } from '../components/Sheet'
@@ -18,10 +18,15 @@ export function CorrectionSheet({ text, snippetSrc, snippetSize, returnFocusTo, 
   const [error, setError] = useState<string | undefined>()
   const inputRef = useRef<HTMLInputElement>(null)
 
+  // Focus after the error has rendered, so the field is announced with its description.
+  useEffect(() => {
+    if (error) inputRef.current?.focus()
+  }, [error])
+
   function save() {
     if (!value.trim()) {
+      if (error) inputRef.current?.focus()
       setError('Write what the line says')
-      inputRef.current?.focus()
       return
     }
     onSave(value.trim())

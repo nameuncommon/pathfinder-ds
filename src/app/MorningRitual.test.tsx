@@ -103,7 +103,7 @@ describe('MorningRitual', () => {
     await user.type(input, 'run 10k')
     await user.click(within(dialog).getByRole('button', { name: 'Save' }))
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Fix: run 10k, done, not sure' })).toHaveFocus()
+    expect(screen.getByRole('button', { name: 'Fix: run 10k, done' })).toHaveFocus()
   })
 
   it('after a correction the row drops the handwriting image and shows the new text', async () => {
@@ -234,7 +234,7 @@ describe('MorningRitual', () => {
     await user.type(input, ' run 8k ')
     expect(input).not.toHaveAttribute('aria-invalid')
     await user.click(save)
-    expect(screen.getByRole('button', { name: 'Fix: run 8k, done, not sure' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Fix: run 8k, done' })).toBeInTheDocument()
   })
 
   it('the correction sheet shows the navy-ink handwriting on paper', async () => {

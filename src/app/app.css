@@ -138,6 +138,13 @@
   width: 100%;
 }
 
+/* At large text a label wraps inside its button rather than spilling past the column. */
+.pf-app__action > .pf-button {
+  white-space: normal;
+  text-wrap: balance;
+  padding-block: var(--space-2);
+}
+
 /* check */
 .pf-app__placeholder {
   display: block;

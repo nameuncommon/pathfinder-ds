@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { goldAtMost } from '../storyChecks'
 import { DesktopThisWeek } from './DesktopThisWeek'
 import '../../app/app.css'
 
@@ -21,4 +22,5 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+// Gold stays rare: the logo, the active page, today and the one action.
+export const Default: Story = { play: goldAtMost(5) }

@@ -114,5 +114,25 @@ describe('ritualReducer', () => {
       expect(s.revisiting).toBe(true)
       expect(run(s, { type: 'choose', direction: 'E' }).step).toBe('done')
     })
+    it('back during a revisit puts the decision back and returns to done', () => {
+      const done = run(toSort(start()), ...(['N', 'E', 'S'] as const).map((d) => ({ type: 'choose', direction: d }) as Action))
+      const id = Object.keys(done.decisions)[2]
+      const s = run(done, { type: 'revisit', itemId: id }, { type: 'back' })
+      expect(s.step).toBe('done')
+      expect(s.revisiting).toBe(false)
+      expect(s.decisions).toEqual(done.decisions)
+    })
+    it('leaving for Sunday during a revisit puts the decision back', () => {
+      const done = run(toSort(start()), ...(['N', 'E', 'S'] as const).map((d) => ({ type: 'choose', direction: d }) as Action))
+      const id = Object.keys(done.decisions)[0]
+      const s = run(done, { type: 'revisit', itemId: id }, { type: 'leaveForSunday' })
+      expect(s.step).toBe('done')
+      expect(s.revisiting).toBe(false)
+      expect(s.decisions).toEqual(done.decisions)
+    })
+  })
+  it('fixing a line clears its not-sure flag', () => {
+    const s = run(start(), { type: 'fixRead', id: 'read-2', text: 'run 10k' })
+    expect(s.reads.find((r) => r.id === 'read-2')).toMatchObject({ text: 'run 10k', unsure: false })
   })
 })

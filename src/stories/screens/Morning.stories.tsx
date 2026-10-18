@@ -12,6 +12,7 @@ import { Sort } from '../../app/screens/Sort'
 import { Toast } from '../../components/Toast'
 import '../../app/app.css'
 import tokens from '../../../tokens/tokens.json'
+import { goldAtMost } from '../storyChecks'
 
 // These stories render the real screens from src/app/screens with the sample
 // data, so the app and Storybook can never drift apart.
@@ -74,7 +75,7 @@ export const Step4Sort1: Story = {
   name: '04 sort / 1 of 3',
   parameters: doc('One inbox item at a time; one tap on a direction decides it.', '516-315'),
   render: () => <Sort {...actions} index={0} onChoose={fn()} onLeave={fn()} />,
-  play: oneSerif,
+  play: async (ctx) => { await oneSerif(ctx); await goldAtMost(3)(ctx) },
 }
 
 export const Step4Sort2: Story = {
@@ -159,7 +160,16 @@ const barDoesNotOverlap = async ({ canvasElement }: { canvasElement: HTMLElement
   const [escape, primary] = [...bar.querySelectorAll('button')].map((b) => b.getBoundingClientRect())
   await expect(escape.bottom).toBeLessThanOrEqual(primary.top)
   await expect(primary.height).toBeGreaterThanOrEqual(44)
+  await labelsFit({ canvasElement })
 }
+
+// Every action-bar label wraps inside its button instead of spilling out of it.
+const labelsFit = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+  for (const b of canvasElement.querySelectorAll<HTMLButtonElement>('.pf-app__action button')) {
+    await expect(b.scrollWidth, b.textContent ?? '').toBeLessThanOrEqual(b.clientWidth)
+  }
+}
+
 
 export const ActionBar2xOpen: Story = {
   name: 'action bar at 2x text / open',
@@ -199,7 +209,7 @@ export const StateCheckFixed: Story = {
   name: 'state / check after a fix',
   parameters: desc('A saved correction is confirmed in plain words.'),
   render: () => (
-    <Check {...actions} reads={allReads.map((r) => (r.id === 'read-2' ? { ...r, text: 'run 10k' } : r))} onFix={fn()}
+    <Check {...actions} reads={allReads.map((r) => (r.id === 'read-2' ? { ...r, text: 'run 10k', unsure: false } : r))} onFix={fn()}
       notice={<Toast message="Fixed: run 10k" />} />
   ),
 }
@@ -235,4 +245,11 @@ export const StateFixEmpty: Story = {
     await userEvent.click(c.getByRole('button', { name: 'Save' }))
     await expect(field).toHaveAccessibleDescription('Write what the line says')
   },
+}
+
+export const ActionBar2xSort: Story = {
+  name: 'action bar at 2x text / sort',
+  parameters: { docs: { description: { story: 'Sort at doubled type: the escape wraps inside its own row.' } } },
+  render: () => <div style={doubled}><Sort {...actions} index={0} onChoose={fn()} onLeave={fn()} /></div>,
+  play: labelsFit,
 }
