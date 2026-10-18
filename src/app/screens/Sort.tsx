@@ -1,12 +1,15 @@
 import { useEffect, useRef } from 'react'
 import { Button } from '../../components/Button'
 import { CompassChoice, type Direction } from '../../components/CompassChoice'
+import { EmptyState } from '../../components/EmptyState'
 import { GlassCard } from '../../components/GlassCard'
 import { choices, inbox } from '../data'
 import { Screen } from '../Screen'
 import type { ScreenActions } from './Open'
 
 export interface SortProps extends ScreenActions {
+  /** The inbox to sort; defaults to the sample inbox. */
+  items?: typeof inbox
   index: number
   onChoose: (d: Direction) => void
   onLeave: () => void
@@ -23,8 +26,8 @@ function Rose() {
   )
 }
 
-export function Sort({ focusTitle, onBack, index, onChoose, onLeave }: SortProps) {
-  const item = inbox[index] ?? inbox[0]
+export function Sort({ focusTitle, onBack, items = inbox, index, onChoose, onLeave }: SortProps) {
+  const item = items[index] ?? items[0]
   const itemRef = useRef<HTMLParagraphElement>(null)
   const prevIndex = useRef(index)
   // Announce a new item by moving focus to its title. Skipped on first render
@@ -33,11 +36,30 @@ export function Sort({ focusTitle, onBack, index, onChoose, onLeave }: SortProps
     if (prevIndex.current !== index) itemRef.current?.focus({ preventScroll: true })
     prevIndex.current = index
   }, [index])
+  if (!item) {
+    return (
+      <Screen
+        eyebrow="Morning · 4 of 4"
+        title="Sort the inbox"
+        support="Nothing waiting"
+        step={4}
+        onBack={onBack}
+        focusTitle={focusTitle}
+        action={
+          <Button variant="ghost" onClick={onLeave}>
+            Back to today
+          </Button>
+        }
+      >
+        <EmptyState surface="dots" title="All sorted" line="Nothing is waiting. New captures land here." />
+      </Screen>
+    )
+  }
   return (
     <Screen
       eyebrow="Morning · 4 of 4"
       title="Sort the inbox"
-      support={`${index + 1} of ${inbox.length}`}
+      support={`${index + 1} of ${items.length}`}
       step={4}
       onBack={onBack}
       focusTitle={focusTitle}

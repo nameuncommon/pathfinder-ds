@@ -1,5 +1,6 @@
 import { Button } from '../../components/Button'
 import { ScheduleRow } from '../../components/ScheduleRow'
+import { Toast } from '../../components/Toast'
 import { snippet, snippetSize } from '../assets'
 import { inbox, oneThing, schedule, today } from '../data'
 import { Screen } from '../Screen'
@@ -11,12 +12,20 @@ export interface ScreenActions {
   onSkip: () => void
 }
 
-export function Open({ focusTitle, onNext, onSkip }: ScreenActions) {
+export interface OpenProps extends ScreenActions {
+  /** The snap was skipped today: show what the app already knows, never a nag. */
+  snapSkipped?: boolean
+  lastSync?: string
+  offline?: boolean
+}
+
+export function Open({ focusTitle, onNext, onSkip, snapSkipped = false, lastSync, offline = false }: OpenProps) {
   return (
     <Screen
       eyebrow={`${today.weekday} ${today.date} ${today.month} · week ${today.week}`}
       title="Good morning, Jake"
       focusTitle={focusTitle}
+      notice={offline ? <Toast message="Saved on this phone. It will sync when you are back online." /> : undefined}
       action={
         <Button variant="quiet" onClick={onSkip}>
           {`Inbox · ${inbox.length} to sort`}
@@ -37,7 +46,16 @@ export function Open({ focusTitle, onNext, onSkip }: ScreenActions) {
           oneThing
         )}
       </div>
-      <Button onClick={onNext}>Snap this week&apos;s spread</Button>
+      {snapSkipped ? (
+        <>
+          <Button variant="quiet" onClick={onNext}>
+            Snap the spread
+          </Button>
+          {lastSync && <p className="pf-app__secondary pf-app__muted">{`Last synced ${lastSync}`}</p>}
+        </>
+      ) : (
+        <Button onClick={onNext}>Snap this week&apos;s spread</Button>
+      )}
       <h2 className="pf-app__label">Today</h2>
       <div>
         {schedule.map((s) => (

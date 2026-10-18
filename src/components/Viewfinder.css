@@ -89,3 +89,7 @@ img.pf-viewfinder__page {
 }
 
 
+
+.pf-viewfinder__corner--dim {
+  opacity: 0.35;
+}

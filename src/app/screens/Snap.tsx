@@ -11,12 +11,22 @@ const lines = [
   { mark: 'task' as const, text: 'book flights' },
 ]
 
-export function Snap({ focusTitle, onNext, onBack, onSkip }: ScreenActions) {
+export interface SnapProps extends ScreenActions {
+  photo?: 'ok' | 'blurry'
+  onRetry?: () => void
+}
+
+export function Snap({ focusTitle, onNext, onBack, onSkip, photo = 'ok', onRetry }: SnapProps) {
+  const blurry = photo === 'blurry'
   return (
     <Screen
       eyebrow="Morning · 2 of 4"
       title="Snap the spread"
-      support="Same spread every morning; it reads what's new"
+      support={
+        blurry
+          ? 'It came out blurry. Hold the phone steady over the spread and tap to try again.'
+          : "Same spread every morning; it reads what's new"
+      }
       step={2}
       onBack={onBack}
       focusTitle={focusTitle}
@@ -26,7 +36,7 @@ export function Snap({ focusTitle, onNext, onBack, onSkip }: ScreenActions) {
         </Button>
       }
     >
-      <Viewfinder found weekCode="W42" corners={4} onTake={onNext}>
+      <Viewfinder found={!blurry} blurry={blurry} weekCode="W42" corners={4} onTake={blurry ? (onRetry ?? (() => {})) : onNext}>
         {snapImage ? (
           <img
             className="pf-viewfinder__page"

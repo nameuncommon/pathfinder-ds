@@ -1,4 +1,5 @@
 import { Button } from '../../components/Button'
+import { EmptyState } from '../../components/EmptyState'
 import { GlassCard } from '../../components/GlassCard'
 import { ReadRow } from '../../components/ReadRow'
 import { Tally } from '../../components/Tally'
@@ -17,6 +18,20 @@ export interface CheckProps extends ScreenActions {
 export function Check({ focusTitle, onNext, onBack, reads: all, onFix }: CheckProps) {
   const reads = all.filter((r) => r.id.startsWith('read-'))
   const topThree = all.filter((r) => r.id.startsWith('top-'))
+  if (all.length === 0) {
+    return (
+      <Screen
+        eyebrow="Morning · 3 of 4"
+        title="Check the read"
+        step={3}
+        onBack={onBack}
+        focusTitle={focusTitle}
+        action={<Button onClick={onNext}>Continue</Button>}
+      >
+        <EmptyState title="Nothing new" line="This spread reads the same as your last snap, so there is nothing to check." />
+      </Screen>
+    )
+  }
   return (
     <Screen
       eyebrow="Morning · 3 of 4"

@@ -1,0 +1,57 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { ThemeSync } from './ThemeSync'
+import { cell, h1Style, h2Style, headCell, page, pStyle } from './docStyles'
+
+<Meta title="Foundations/Voice and content" />
+
+<ThemeSync />
+
+export const rules = [
+  ['Plain language', 'Say it the way you would say it out loud.', 'Snap the spread', 'Initiate spread capture'],
+  ['It cheers you on', 'Count what got done. Never count what did not.', '6 done yesterday', '3 tasks overdue'],
+  ['It never scolds', 'No streaks, no red, no guilt for skipping.', 'Snap skipped today. Last synced Thu 21 Oct · 7:40 pm', 'You missed your morning snap!'],
+  ['It asks before it decides', 'Offer the choice; never move, drop or reschedule on its own.', 'Which way does it go?', 'We moved this to tomorrow'],
+  ['Use the product’s words', 'Sort, drop on purpose, carry forward, the one thing.', 'Let it go on purpose. Logged, not lost.', 'Delete item'],
+  ['Dates and weeks', 'Weekday, day, month; the week code as on paper.', 'Fri 22 Oct · week 42', '10/22/2027'],
+  ['Times', '24 hour, no leading zero, in the data face.', '9:30, 19:00', '9:30 AM'],
+  ['Numbers', 'Digits for counts; words only for one to three in prose.', '14 done since Monday', 'Fourteen items completed'],
+  ['Buttons are verbs', 'Name what happens when you tap.', 'Looks right · Back to today', 'OK · Submit'],
+  ['Errors explain and offer a way on', 'Say what happened and what to do; no blame.', 'It came out blurry. Tap to try again.', 'Error: image quality too low'],
+  ['No em dashes', 'Use a full stop, a comma or a middle dot.', 'Saved on this phone. It will sync later.', 'Two clauses joined by a long dash'],
+]
+
+<Unstyled>
+  <div style={page}>
+    <h1 style={h1Style}>Voice and content</h1>
+    <p style={pStyle}>
+      Pathfinder talks like a calm friend who keeps good notes. It cheers you on and never scolds. It asks before it decides anything. Every string in the app follows the rules below; each has an example to copy and one to avoid.
+    </p>
+    <h2 style={h2Style}>The rules</h2>
+    <div style={{ overflowX: 'auto' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <thead>
+          <tr>
+            <th style={headCell}>Rule</th>
+            <th style={headCell}>What it means</th>
+            <th style={headCell}>Do</th>
+            <th style={headCell}>Don&apos;t</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rules.map(([rule, means, yes, no]) => (
+            <tr key={rule}>
+              <td style={{ ...cell, fontWeight: 600 }}>{rule}</td>
+              <td style={{ ...cell, color: 'var(--text-secondary)' }}>{means}</td>
+              <td style={{ ...cell, color: 'var(--accent-text)' }}>{yes}</td>
+              <td style={{ ...cell, color: 'var(--text-muted)', textDecoration: 'line-through' }}>{no}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <h2 style={h2Style}>The product&apos;s words</h2>
+    <p style={pStyle}>
+      Capture, sort, plan, do, look back are the five steps. A capture lands in the inbox. Sorting sends it one of four ways: Now (write it into this week&apos;s spread), Later (give it a date), Share (hand it off) or Drop (let it go on purpose). The one thing is the week&apos;s single highlight. Carry forward is what moves to next week, at most three lines, as on paper.
+    </p>
+  </div>
+</Unstyled>

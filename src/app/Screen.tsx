@@ -11,6 +11,8 @@ export interface ScreenProps {
   onBack?: () => void
   /** Move focus to the heading on mount (set after the first navigation). */
   focusTitle?: boolean
+  /** A status shown just above the action, such as the offline toast. */
+  notice?: ReactNode
   /** Pinned to the bottom of the viewport. */
   action?: ReactNode
   children: ReactNode
@@ -23,6 +25,7 @@ export function Screen({
   step,
   onBack,
   focusTitle = false,
+  notice,
   action,
   children,
 }: ScreenProps) {
@@ -46,7 +49,12 @@ export function Screen({
           {support && <p className="pf-app__support">{support}</p>}
           {children}
         </main>
-        {action && <div className="pf-app__action">{action}</div>}
+        {(notice || action) && (
+          <div className="pf-app__action">
+            {notice}
+            {action}
+          </div>
+        )}
       </div>
     </div>
   )
