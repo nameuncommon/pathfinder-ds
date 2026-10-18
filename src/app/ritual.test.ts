@@ -74,4 +74,45 @@ describe('ritualReducer', () => {
   it('back from open stays on open', () => {
     expect(run(start(), { type: 'back' }).step).toBe('open')
   })
+
+  describe('undo and revisit', () => {
+    const toSort = (s: ReturnType<typeof start>) => run(s, { type: 'next' }, { type: 'next' }, { type: 'next' })
+    it('undo reverts only the latest choice', () => {
+      const s = run(toSort(start()), { type: 'choose', direction: 'N' }, { type: 'choose', direction: 'E' }, { type: 'undo' })
+      expect(s.step).toBe('sort')
+      expect(s.inboxIndex).toBe(1)
+      expect(Object.values(s.decisions)).toEqual(['N'])
+      expect(s.history).toHaveLength(1)
+    })
+    it('undo from done returns to the last item', () => {
+      const s = run(toSort(start()), ...(['N', 'E', 'S'] as const).map((d) => ({ type: 'choose', direction: d }) as Action), { type: 'undo' })
+      expect(s.step).toBe('sort')
+      expect(s.inboxIndex).toBe(2)
+      expect(Object.keys(s.decisions)).toHaveLength(2)
+    })
+    it('undo with no history does nothing', () => {
+      const s = toSort(start())
+      expect(run(s, { type: 'undo' })).toBe(s)
+    })
+    it('revisit clears the decision and opens that item', () => {
+      const done = run(toSort(start()), ...(['N', 'E', 'S'] as const).map((d) => ({ type: 'choose', direction: d }) as Action))
+      const id = Object.keys(done.decisions)[0]
+      const s = run(done, { type: 'revisit', itemId: id })
+      expect(s.step).toBe('sort')
+      expect(s.inboxIndex).toBe(0)
+      expect(s.decisions[id]).toBeUndefined()
+      // Choosing again goes straight back to done, not on to items already sorted.
+      const again = run(s, { type: 'choose', direction: 'W' })
+      expect(again.step).toBe('done')
+      expect(again.decisions[id]).toBe('W')
+    })
+    it('undoing a revisited choice goes back to revisiting that item', () => {
+      const done = run(toSort(start()), ...(['N', 'E', 'S'] as const).map((d) => ({ type: 'choose', direction: d }) as Action))
+      const id = Object.keys(done.decisions)[0]
+      const s = run(done, { type: 'revisit', itemId: id }, { type: 'choose', direction: 'W' }, { type: 'undo' })
+      expect(s.step).toBe('sort')
+      expect(s.revisiting).toBe(true)
+      expect(run(s, { type: 'choose', direction: 'E' }).step).toBe('done')
+    })
+  })
 })

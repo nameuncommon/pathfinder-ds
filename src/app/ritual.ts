@@ -16,6 +16,10 @@ export interface RitualState {
   inboxIndex: number
   decisions: Record<string, Direction>
   reads: ReadItem[]
+  /** Choices in the order they were made, so undo can step back one at a time. */
+  history: Array<{ index: number; itemId: string; revisit?: boolean }>
+  /** Sorting one item again from Done: the next choice returns to Done. */
+  revisiting: boolean
 }
 
 export type Action =
@@ -25,9 +29,11 @@ export type Action =
   | { type: 'fixRead'; id: string; text: string }
   | { type: 'choose'; direction: Direction }
   | { type: 'leaveForSunday' }
+  | { type: 'undo' }
+  | { type: 'revisit'; itemId: string }
 
 export function initialRitual(reads: ReadItem[]): RitualState {
-  return { step: 'open', snapped: false, inboxIndex: 0, decisions: {}, reads }
+  return { step: 'open', snapped: false, inboxIndex: 0, decisions: {}, reads, history: [], revisiting: false }
 }
 
 export function ritualReducer(state: RitualState, action: Action, inboxSize: number): RitualState {
@@ -54,11 +60,35 @@ export function ritualReducer(state: RitualState, action: Action, inboxSize: num
       }
     case 'choose': {
       const item = inbox[state.inboxIndex]
-      const decisions = item ? { ...state.decisions, [item.id]: action.direction } : state.decisions
-      if (state.inboxIndex >= inboxSize - 1) return { ...state, decisions, step: 'done' }
-      return { ...state, decisions, inboxIndex: state.inboxIndex + 1 }
+      if (!item) return state
+      const decisions = { ...state.decisions, [item.id]: action.direction }
+      const history = [...state.history, { index: state.inboxIndex, itemId: item.id, revisit: state.revisiting }]
+      if (state.revisiting || state.inboxIndex >= inboxSize - 1)
+        return { ...state, decisions, history, revisiting: false, step: 'done' }
+      return { ...state, decisions, history, inboxIndex: state.inboxIndex + 1 }
     }
     case 'leaveForSunday':
       return { ...state, step: 'done' }
+    case 'undo': {
+      const last = state.history.at(-1)
+      if (!last) return state
+      const decisions = { ...state.decisions }
+      delete decisions[last.itemId]
+      return { ...state, decisions, history: state.history.slice(0, -1), inboxIndex: last.index, step: 'sort', revisiting: last.revisit ?? false }
+    }
+    case 'revisit': {
+      const index = inbox.findIndex((i) => i.id === action.itemId)
+      if (index < 0) return state
+      const decisions = { ...state.decisions }
+      delete decisions[action.itemId]
+      return {
+        ...state,
+        decisions,
+        history: state.history.filter((h) => h.itemId !== action.itemId),
+        inboxIndex: index,
+        step: 'sort',
+        revisiting: true,
+      }
+    }
   }
 }

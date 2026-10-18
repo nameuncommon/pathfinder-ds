@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { Button } from '../../components/Button'
 import { ScheduleRow } from '../../components/ScheduleRow'
 import { Toast } from '../../components/Toast'
@@ -7,6 +8,8 @@ import { Screen } from '../Screen'
 
 export interface ScreenActions {
   focusTitle: boolean
+  /** A status above the action bar, such as the undo or fixed toast. */
+  notice?: ReactNode
   onNext: () => void
   onBack: () => void
   onSkip: () => void

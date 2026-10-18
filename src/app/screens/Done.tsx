@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { Button } from '../../components/Button'
 import { choices, inbox } from '../data'
 import type { RitualState } from '../ritual'
@@ -7,9 +8,10 @@ export interface DoneProps {
   focusTitle: boolean
   decisions: RitualState['decisions']
   onRestart: () => void
+  notice?: ReactNode
 }
 
-export function Done({ focusTitle, decisions, onRestart }: DoneProps) {
+export function Done({ focusTitle, decisions, onRestart, notice }: DoneProps) {
   const decided = inbox.filter((i) => decisions[i.id])
   const all = decided.length === inbox.length
   return (
@@ -20,6 +22,7 @@ export function Done({ focusTitle, decisions, onRestart }: DoneProps) {
         all ? 'See you tomorrow morning.' : `${inbox.length - decided.length} left for Sunday.`
       }
       focusTitle={focusTitle}
+      notice={notice}
       action={<Button onClick={onRestart}>Back to today</Button>}
     >
       {decided.length > 0 && (

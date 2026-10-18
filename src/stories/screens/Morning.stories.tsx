@@ -9,6 +9,7 @@ import { Done } from '../../app/screens/Done'
 import { Open } from '../../app/screens/Open'
 import { Snap } from '../../app/screens/Snap'
 import { Sort } from '../../app/screens/Sort'
+import { Toast } from '../../components/Toast'
 import '../../app/app.css'
 import tokens from '../../../tokens/tokens.json'
 
@@ -171,4 +172,33 @@ export const ActionBar2xSnap: Story = {
   parameters: { docs: { description: { story: 'Snap at doubled type: Skip today sits above the shutter, both still tappable.' } } },
   render: () => <div style={doubled}><Snap {...actions} /></div>,
   play: barDoesNotOverlap,
+}
+
+const desc = (story: string) => ({ docs: { description: { story } } })
+
+export const StateSortAfterChoice: Story = {
+  name: 'state / sort after a choice',
+  parameters: desc('Every choice is acknowledged in one line with Undo; the next item is already up.'),
+  render: () => (
+    <Sort {...actions} index={1} onChoose={fn()} onLeave={fn()}
+      notice={<Toast message={`${inbox[0].title} · Later`} action={{ label: 'Undo', onClick: fn() }} />} />
+  ),
+}
+
+export const StateDoneUndo: Story = {
+  name: 'state / done, undo the last choice',
+  parameters: desc('The last choice lands on Done; Undo is still one tap away.'),
+  render: () => (
+    <Done focusTitle={false} decisions={{ [inbox[0].id]: 'E', [inbox[1].id]: 'N', [inbox[2].id]: 'S' }} onRestart={fn()}
+      notice={<Toast message={`${inbox[2].title} · Share`} action={{ label: 'Undo', onClick: fn() }} />} />
+  ),
+}
+
+export const StateCheckFixed: Story = {
+  name: 'state / check after a fix',
+  parameters: desc('A saved correction is confirmed in plain words.'),
+  render: () => (
+    <Check {...actions} reads={allReads.map((r) => (r.id === 'read-2' ? { ...r, text: 'run 10k' } : r))} onFix={fn()}
+      notice={<Toast message="Fixed: run 10k" />} />
+  ),
 }

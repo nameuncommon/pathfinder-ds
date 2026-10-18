@@ -15,7 +15,7 @@ export interface CheckProps extends ScreenActions {
   onFix: (id: string, opener: HTMLElement) => void
 }
 
-export function Check({ focusTitle, onNext, onBack, reads: all, onFix }: CheckProps) {
+export function Check({ focusTitle, onNext, onBack, reads: all, onFix, notice }: CheckProps) {
   const reads = all.filter((r) => r.id.startsWith('read-'))
   const topThree = all.filter((r) => r.id.startsWith('top-'))
   if (all.length === 0) {
@@ -24,7 +24,7 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix }: CheckPr
         eyebrow="Morning · 3 of 4"
         title="Check the read"
         titleSize="step"
-      step={3}
+        step={3}
         onBack={onBack}
         focusTitle={focusTitle}
         action={<Button onClick={onNext}>Continue</Button>}
@@ -41,6 +41,7 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix }: CheckPr
       step={3}
       onBack={onBack}
       focusTitle={focusTitle}
+      notice={notice}
       action={<Button onClick={onNext}>Looks right</Button>}
     >
       <GlassCard>
