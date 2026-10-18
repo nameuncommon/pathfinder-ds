@@ -163,12 +163,15 @@ const docs: Record<string, Doc> = {
     node: '540:62',
   },
   Input: {
-    what: 'A text field with its label above.',
+    what: 'A text field with its label above, and a calm error line when something is missing.',
     use: 'someone types, such as fixing what the app read.',
     avoid: 'the answer is one of a few choices.',
-    dos: [['Keep the label visible above the field.', 'Use the placeholder as the label.']],
-    a11y: 'The label is wired to the field. The edge is border/strong (3:1); focus is a 2px gold edge.',
-    tokens: ['border/strong', 'surface/glass', 'focus/ring', 'text/muted', 'radius/lg'],
+    dos: [
+      ['Keep the label visible above the field, in sentence case.', 'Use the placeholder as the label.'],
+      ['Say what to write: "Write what the line says".', 'Use red, an alarm icon or blame ("Invalid input").'],
+    ],
+    a11y: 'The label is wired to the field. The edge is border/strong (3:1); focus is a 2px gold edge. An error sets aria-invalid and describes the field with its line; the gold 2px edge plus the note mark carry it without colour alone.',
+    tokens: ['border/strong', 'surface/glass', 'focus/ring', 'accent/default', 'text/primary', 'text/secondary', 'radius/lg'],
     node: '536:82',
   },
   MapBox: {
@@ -206,6 +209,18 @@ const docs: Record<string, Doc> = {
     a11y: 'Named "Fix: text, mark" so the mark it read is announced. Passes itself to onFix so focus returns to it.',
     tokens: ['surface/glass', 'gold/500', 'text/primary', 'focus/ring'],
     node: '486:14',
+  },
+  Sheet: {
+    what: 'A bottom sheet dialog on strong glass, for one short task that needs the whole screen\'s attention.',
+    use: 'a small edit belongs to the screen underneath, such as fixing one line it read.',
+    avoid: 'it is a status (use a toast) or a whole new step (use a screen).',
+    dos: [
+      ['Give it a plain title that says the task.', 'Stack two sheets.'],
+      ['Put the one gold action first, Cancel quiet below it.', 'Close it on a tap outside while there are unsaved edits.'],
+    ],
+    a11y: 'A modal dialog labelled by its title. It focuses the first field, keeps Tab inside, closes on Escape and returns focus to the control that opened it.',
+    tokens: ['surface/glass-strong', 'surface/glass-fallback', 'navy/950', 'radius/lg'],
+    node: '517:554',
   },
   ScheduleRow: {
     what: 'One line of the day: a time, what it is and its bearing.',

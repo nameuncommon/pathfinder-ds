@@ -32,6 +32,7 @@ type Story = StoryObj<typeof meta>
 export const Empty: Story = { args: { placeholder: 'Type what you wrote' } }
 export const Filled: Story = { args: { defaultValue: 'call the dentist' } }
 export const Disabled: Story = { args: { defaultValue: 'call the dentist', disabled: true } }
+export const Error: Story = { args: { defaultValue: '', error: 'Write what the line says' } }
 
 export const States: Story = {
   parameters: { ...statesParameters, layout: 'padded' },

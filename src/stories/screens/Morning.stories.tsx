@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { CSSProperties } from 'react'
-import { expect, fn } from 'storybook/test'
+import { expect, fn, userEvent, within } from 'storybook/test'
 import { snippetOnPaperFor, snippetSize } from '../../app/assets'
 import { CorrectionSheet } from '../../app/CorrectionSheet'
 import { inbox, reads, topThree } from '../../app/data'
@@ -214,4 +214,25 @@ export const StateCheckReading: Story = {
   name: 'state / check reading',
   parameters: desc('Right after the photo: a short reading pause, announced as a status. Instant when motion is reduced.'),
   render: () => <Check {...actions} reads={allReads} onFix={fn()} reading />,
+}
+
+export const StateFixEmpty: Story = {
+  name: 'state / fix, empty line',
+  parameters: desc('Saving an empty line asks for the words instead of saving: a gold edge and a plain line, never red.'),
+  render: () => {
+    const item = reads[1]
+    return (
+      <>
+        <Check {...actions} reads={allReads} onFix={fn()} />
+        <CorrectionSheet text={item.text} snippetSrc={snippetOnPaperFor(item)} snippetSize={snippetSize(item.id)} returnFocusTo={null} onSave={fn()} onCancel={fn()} />
+      </>
+    )
+  },
+  play: async ({ canvasElement }) => {
+    const c = within(canvasElement)
+    const field = c.getByLabelText('What it says')
+    await userEvent.clear(field)
+    await userEvent.click(c.getByRole('button', { name: 'Save' }))
+    await expect(field).toHaveAccessibleDescription('Write what the line says')
+  },
 }

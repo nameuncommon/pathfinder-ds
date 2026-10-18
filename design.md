@@ -100,6 +100,11 @@ title 24/32. One serif element per screen: the item in focus is sans 20/28 semib
 per screen (12/18, tracked); section labels are sentence case 14/22 semibold, 24px below the group above
 and 8px above their content. Body 16/24, secondary 14/22, data mono 13/20.
 
+**Errors ask, never scold.** A field with a problem gets a 2px `accent/default` edge, `aria-invalid`, and one
+plain line below in `text/primary` that says what to write ("Write what the line says"), led by the note mark.
+No red, no alarm icon, no blame. Actions stay enabled so the line can appear. **Sheet** is the one dialog
+shell: a bottom sheet on strong glass, labelled by its title, Tab kept inside, Escape closes, focus returns.
+
 # Colors
 
 ## Primitives (theme-invariant)
