@@ -13,6 +13,8 @@ export interface ScreenProps {
   /** 1 to 4 shows the progress bar; omit for open and done. */
   step?: number
   onBack?: () => void
+  /** The app bar dial settles in, like a compass coming to rest (Done only). */
+  settle?: boolean
   /** Move focus to the heading on mount (set after the first navigation). */
   focusTitle?: boolean
   /** A status shown just above the action, such as the offline toast. */
@@ -36,6 +38,7 @@ export function Screen({
   step,
   onBack,
   focusTitle = false,
+  settle = false,
   notice,
   action,
   escape,
@@ -47,7 +50,7 @@ export function Screen({
   }, [focusTitle])
 
   return (
-    <div className="pf-ambient pf-app">
+    <div className={settle ? 'pf-ambient pf-app pf-app--settle' : 'pf-ambient pf-app'}>
       <div className="pf-app__column">
         <div className="pf-app__top">
           <AppBar onBack={onBack} />

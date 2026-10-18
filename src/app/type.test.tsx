@@ -29,7 +29,7 @@ describe('app type', () => {
       expect(h1().classList.contains('pf-app__title--step')).toBe(true)
       r.unmount()
     }
-    for (const s of [() => <Open {...actions} />, () => <Done focusTitle={false} decisions={{}} onRestart={noop} />]) {
+    for (const s of [() => <Open {...actions} />, () => <Done focusTitle={false} decisions={{}} onRestart={noop} onRevisit={noop} />]) {
       const r = render(s())
       expect(h1().classList.contains('pf-app__title--step')).toBe(false)
       r.unmount()

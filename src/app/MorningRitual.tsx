@@ -82,6 +82,7 @@ export function MorningRitual() {
           focusTitle={navigated}
           decisions={state.decisions}
           onRestart={() => go({ type: 'reset' })}
+          onRevisit={(itemId) => go({ type: 'revisit', itemId })}
           notice={notice}
         />
       )}

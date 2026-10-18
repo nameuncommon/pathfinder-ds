@@ -91,7 +91,7 @@ export const Step4Sort3: Story = {
 export const Done_: Story = {
   name: 'done',
   parameters: doc('Every item decided: All sorted.', '517-500'),
-  render: () => <Done focusTitle={false} decisions={{ [inbox[0].id]: 'E', [inbox[1].id]: 'N', [inbox[2].id]: 'S' }} onRestart={fn()} />,
+  render: () => <Done focusTitle={false} decisions={{ [inbox[0].id]: 'E', [inbox[1].id]: 'N', [inbox[2].id]: 'S' }} onRestart={fn()} onRevisit={fn()} />,
 }
 
 export const FixWhatIRead: Story = {
@@ -189,7 +189,7 @@ export const StateDoneUndo: Story = {
   name: 'state / done, undo the last choice',
   parameters: desc('The last choice lands on Done; Undo is still one tap away.'),
   render: () => (
-    <Done focusTitle={false} decisions={{ [inbox[0].id]: 'E', [inbox[1].id]: 'N', [inbox[2].id]: 'S' }} onRestart={fn()}
+    <Done focusTitle={false} decisions={{ [inbox[0].id]: 'E', [inbox[1].id]: 'N', [inbox[2].id]: 'S' }} onRestart={fn()} onRevisit={fn()}
       notice={<Toast message={`${inbox[2].title} · Share`} action={{ label: 'Undo', onClick: fn() }} />} />
   ),
 }
@@ -201,4 +201,10 @@ export const StateCheckFixed: Story = {
     <Check {...actions} reads={allReads.map((r) => (r.id === 'read-2' ? { ...r, text: 'run 10k' } : r))} onFix={fn()}
       notice={<Toast message="Fixed: run 10k" />} />
   ),
+}
+
+export const StateDonePartial: Story = {
+  name: 'state / done, some left for Sunday',
+  parameters: desc('Left the rest for Sunday: what was decided is grouped and still changeable.'),
+  render: () => <Done focusTitle={false} decisions={{ [inbox[0].id]: 'E' }} onRestart={fn()} onRevisit={fn()} />,
 }

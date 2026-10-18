@@ -19,7 +19,7 @@ const screens = {
   'check, nothing new': () => <Check {...actions} reads={[]} onFix={noop} />,
   sort: () => <Sort {...actions} index={0} onChoose={noop} onLeave={noop} />,
   'sort, empty': () => <Sort {...actions} items={[]} index={0} onChoose={noop} onLeave={noop} />,
-  done: () => <Done focusTitle={false} decisions={{}} onRestart={noop} />,
+  done: () => <Done focusTitle={false} decisions={{}} onRestart={noop} onRevisit={noop} />,
 }
 
 const isGold = (el: Element) => el.classList.contains('pf-button--primary')

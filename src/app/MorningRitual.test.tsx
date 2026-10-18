@@ -53,7 +53,7 @@ describe('MorningRitual', () => {
       await user.keyboard('{Enter}')
     }
     expect(h1()).toHaveTextContent('All sorted')
-    expect(screen.getByText(new RegExp(`${LONG_TITLE}: Now`))).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: `Change ${LONG_TITLE}` })).toBeInTheDocument()
   })
 
   it('Skip today goes to the sort heading', async () => {
@@ -280,5 +280,18 @@ describe('MorningRitual', () => {
     expect(await screen.findByText('Fixed: run 10k')).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Looks right' }))
     expect(screen.queryByText('Fixed: run 10k')).not.toBeInTheDocument()
+  })
+
+  it('from done, Change sorts that item again and returns to done', async () => {
+    const user = userEvent.setup()
+    render(<MorningRitual />)
+    await user.click(screen.getByRole('button', { name: /Inbox · 3 to sort/ }))
+    for (let i = 0; i < 3; i++) await user.click(screen.getByRole('button', { name: /^N, Now/ }))
+    await user.click(screen.getByRole('button', { name: `Change ${LONG_TITLE}` }))
+    expect(h1()).toHaveTextContent('Sort the inbox')
+    expect(screen.getByText('1 of 3')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /^W, Drop/ }))
+    expect(h1()).toHaveTextContent('All sorted')
+    expect(within(screen.getByRole('region', { name: 'W Drop' })).getByRole('button', { name: `Change ${LONG_TITLE}` })).toBeInTheDocument()
   })
 })
