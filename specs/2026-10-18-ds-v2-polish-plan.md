@@ -70,6 +70,15 @@
 - [ ] **Step 1: Failing tests:** `.pf-compass__dir` border is `var(--border-strong)` with gold only under `[aria-pressed='true']` and `:hover`; the step eyebrow (`.pf-app__eyebrow`) is `var(--text-secondary)` except the Open greeting date (class `pf-app__eyebrow--date` keeps gold); desktop `.pf-desk__chip` border is `var(--border-strong)` and text `var(--text-primary)`, gold on hover; `.pf-desk__moves` uses `var(--text-secondary)`. Contrast test: border/strong ring on worst-case glass >= 3:1 (3.11 measured).
 - [ ] **Step 2:** FAIL. **Step 3:** Implement. **Step 4:** green; count gold elements on Sort and desktop renders (target: Sort ≤ 3, desktop ≤ 5). **Step 5:** commit `style: gold is rare again`.
 
+### Task 4b: App type pass (added 2026-10-18 at Jake's request: "best practices for type, intuitive and practical as an app")
+
+**Files:** `src/app/Screen.tsx`, `src/app/app.css`, `src/app/screens/{Snap,Check,Sort}.tsx`, `src/app/type.test.tsx` (new), `design.md`, Typography.mdx ramp.
+
+**Interfaces:** `ScreenProps` gains `titleSize?: 'large' | 'step'` (default `'large'`). `large` = display 32/40 (Open greeting, Done ending); `step` = title 24/32 (Snap, Check, Sort: inside the flow, the title is a heading, not a hero).
+
+- [ ] **Step 1: Failing tests:** Snap, Check and Sort h1 carry `pf-app__title--step`, Open and Done do not; `.pf-app__title--step` uses `--type-24-size/line`. `.pf-app__label` is sentence case (no `text-transform`), 14/22, weight 600, no tracking, and sits 24px below the previous group and 8px above its own content. `.pf-app__item-title` is sans (`--font-sans`) 20/28 weight 600, so Sort has one serif. No screen renders more than one serif element (computed in the story suite: elements whose font-family is the display font ≤ 1, Open allows the paper hand image which is not text).
+- [ ] **Step 2:** FAIL. **Step 3:** Implement. **Step 4:** green; screenshots of Open, Snap, Check, Sort at 1x before and after, sent to Jake. **Step 5:** decisions.md, design.md type roles, Typography ramp row; commit `style(app): app type pass`.
+
 ### Task 5: Undo and acknowledgement
 
 **Files:** `src/app/ritual.ts`, `src/app/ritual.test.ts`, `src/app/MorningRitual.tsx`, `src/app/MorningRitual.test.tsx`, `src/app/screens/Done.tsx`.
