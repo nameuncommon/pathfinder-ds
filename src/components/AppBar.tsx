@@ -15,7 +15,7 @@ export function AppBar({ onBack }: AppBarProps) {
         </button>
       )}
       <div className="pf-appbar__badge">
-        <AppBadge />
+        <AppBadge size={40} />
       </div>
     </header>
   )

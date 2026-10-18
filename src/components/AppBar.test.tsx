@@ -9,11 +9,11 @@ describe('AppBar', () => {
     expect(screen.queryByRole('button', { name: 'Back' })).toBeNull()
   })
 
-  it('shows the app badge: the dial alone at 52px, no navy disc', () => {
+  it('shows the app badge: the dial alone at 40px, inside the 44px bar, no navy disc', () => {
     const { container } = render(<AppBar />)
     const dial = screen.getByRole('img', { name: 'Pathfinder' })
     expect(dial.querySelectorAll('circle')).toHaveLength(1)
-    expect(dial.getAttribute('width')).toBe('52')
+    expect(dial.getAttribute('width')).toBe('40')
     expect(container.querySelector('.pf-appbar__disc')).toBeNull()
   })
 
