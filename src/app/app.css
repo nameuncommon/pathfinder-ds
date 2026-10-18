@@ -54,8 +54,9 @@
 }
 
 .pf-app__title:focus-visible {
-  outline: 2px solid var(--gold-400);
-  outline-offset: 4px;
+  outline: 1px solid var(--focus-ring);
+  outline-offset: 6px;
+  border-radius: var(--radius-sm);
 }
 
 .pf-app__support,
@@ -94,8 +95,6 @@
   display: block;
   max-width: 100%;
   height: auto;
-  /* handwriting is exported at 2x */
-  zoom: 0.5;
 }
 
 .pf-app__action {
@@ -251,6 +250,12 @@ img.pf-viewfinder__page {
   background: var(--gold-500);
 }
 
+img.pf-viewfinder__page {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}
+
 /* correction sheet */
 .pf-sheet__scrim {
   position: fixed;
@@ -293,8 +298,8 @@ img.pf-viewfinder__page {
 }
 
 img.pf-sheet__snippet {
-  /* handwriting is exported at 2x */
-  zoom: 0.5;
+  max-width: 100%;
+  height: auto;
 }
 
 .pf-sheet__label {

@@ -1,6 +1,6 @@
 import { Button } from '../../components/Button'
 import { Mark } from '../../components/Mark'
-import { snapImage } from '../assets'
+import { snapImage, snapSize } from '../assets'
 import { reads } from '../data'
 import { Screen } from '../Screen'
 import type { ScreenActions } from './Open'
@@ -31,7 +31,13 @@ export function Snap({ focusTitle, onNext, onBack, onSkip }: ScreenActions) {
         <span className="pf-viewfinder__corner pf-viewfinder__corner--bl" aria-hidden="true" />
         <span className="pf-viewfinder__corner pf-viewfinder__corner--br" aria-hidden="true" />
         {snapImage ? (
-          <img className="pf-viewfinder__page" src={snapImage} alt="" />
+          <img
+            className="pf-viewfinder__page"
+            src={snapImage}
+            alt=""
+            width={snapSize.width}
+            height={snapSize.height}
+          />
         ) : (
           <span className="pf-paper pf-viewfinder__page" aria-hidden="true">
             {lines.map((l) => (

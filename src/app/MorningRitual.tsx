@@ -1,6 +1,6 @@
 import { useReducer, useState } from 'react'
 import { CorrectionSheet } from './CorrectionSheet'
-import { snippetFor } from './assets'
+import { snippetFor, snippetSize } from './assets'
 import { inbox, reads, topThree } from './data'
 
 import { initialRitual, ritualReducer, type Action, type RitualState } from './ritual'
@@ -21,6 +21,8 @@ const reducer = (s: RitualState, a: AppAction): RitualState =>
 export function MorningRitual() {
   const [state, dispatch] = useReducer(reducer, seed, initialRitual)
   const [fixingId, setFixingId] = useState<string | null>(null)
+  // The row that opened the sheet, so focus can return to it on close.
+  const [fixOpener, setFixOpener] = useState<HTMLElement | null>(null)
   // Focus the heading only after the user has moved, not on first load.
   const [navigated, setNavigated] = useState(false)
 
@@ -43,7 +45,14 @@ export function MorningRitual() {
       {state.step === 'open' && <Open {...common} />}
       {state.step === 'snap' && <Snap {...common} />}
       {state.step === 'check' && (
-        <Check {...common} reads={state.reads} onFix={setFixingId} />
+        <Check
+          {...common}
+          reads={state.reads}
+          onFix={(id, opener) => {
+            setFixOpener(opener)
+            setFixingId(id)
+          }}
+        />
       )}
       {state.step === 'sort' && (
         <Sort
@@ -64,6 +73,8 @@ export function MorningRitual() {
         <CorrectionSheet
           text={fixing.text}
           snippetSrc={snippetFor(fixing)}
+          snippetSize={snippetSize(fixing.id)}
+          returnFocusTo={fixOpener}
           onCancel={() => setFixingId(null)}
           onSave={(text) => {
             dispatch({ type: 'fixRead', id: fixing.id, text })

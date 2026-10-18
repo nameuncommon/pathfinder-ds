@@ -4,11 +4,15 @@ import { Button } from '../components/Button'
 export interface CorrectionSheetProps {
   text: string
   snippetSrc?: string
+  snippetSize?: { width: number; height: number }
+  /** The element that opened the sheet; focus returns to it on close. Passed in
+   * because document.activeElement is body after a click in Safari. */
+  returnFocusTo: HTMLElement | null
   onSave: (text: string) => void
   onCancel: () => void
 }
 
-export function CorrectionSheet({ text, snippetSrc, onSave, onCancel }: CorrectionSheetProps) {
+export function CorrectionSheet({ text, snippetSrc, snippetSize, returnFocusTo, onSave, onCancel }: CorrectionSheetProps) {
   const [value, setValue] = useState(text)
   const titleId = useId()
   const inputId = useId()
@@ -16,10 +20,9 @@ export function CorrectionSheet({ text, snippetSrc, onSave, onCancel }: Correcti
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    const opener = document.activeElement as HTMLElement | null
     inputRef.current?.focus()
-    return () => opener?.focus()
-  }, [])
+    return () => returnFocusTo?.focus()
+  }, [returnFocusTo])
 
   function onKeyDown(e: KeyboardEvent) {
     if (e.key === 'Escape') {
@@ -53,7 +56,13 @@ export function CorrectionSheet({ text, snippetSrc, onSave, onCancel }: Correcti
           Fix what I read
         </h2>
         {snippetSrc ? (
-          <img className="pf-sheet__snippet" src={snippetSrc} alt={text} />
+          <img
+            className="pf-sheet__snippet"
+            src={snippetSrc}
+            alt={text}
+            width={snippetSize?.width}
+            height={snippetSize?.height}
+          />
         ) : (
           <p className="pf-sheet__snippet-text">{text}</p>
         )}

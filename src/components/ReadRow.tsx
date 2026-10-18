@@ -5,20 +5,29 @@ export interface ReadRowProps {
   mark: MarkType
   text: string
   snippetSrc?: string
-  onFix: () => void
+  /** Display size of the handwriting image (half its 2x pixel size). */
+  snippetSize?: { width: number; height: number }
+  /** Called with the row, so a dialog it opens can return focus to it. */
+  onFix: (opener: HTMLButtonElement) => void
 }
 
-export function ReadRow({ mark, text, snippetSrc, onFix }: ReadRowProps) {
+export function ReadRow({ mark, text, snippetSrc, snippetSize, onFix }: ReadRowProps) {
   return (
     <button
       type="button"
       className="pf-glass pf-read-row"
       aria-label={`Fix: ${text}, ${mark}`}
-      onClick={onFix}
+      onClick={(e) => onFix(e.currentTarget)}
     >
       <Mark type={mark} decorative />
       {snippetSrc ? (
-        <img className="pf-read-row__snippet" src={snippetSrc} alt={text} />
+        <img
+          className="pf-read-row__snippet"
+          src={snippetSrc}
+          alt={text}
+          width={snippetSize?.width}
+          height={snippetSize?.height}
+        />
       ) : (
         <span className="pf-read-row__text">{text}</span>
       )}

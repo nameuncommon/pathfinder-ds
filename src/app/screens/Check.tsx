@@ -2,7 +2,7 @@ import { Button } from '../../components/Button'
 import { GlassCard } from '../../components/GlassCard'
 import { ReadRow } from '../../components/ReadRow'
 import { Tally } from '../../components/Tally'
-import { snippetFor } from '../assets'
+import { snippetFor, snippetSize } from '../assets'
 import { yesterday } from '../data'
 import type { ReadItem } from '../ritual'
 import { Screen } from '../Screen'
@@ -10,7 +10,8 @@ import type { ScreenActions } from './Open'
 
 export interface CheckProps extends ScreenActions {
   reads: ReadItem[]
-  onFix: (id: string) => void
+  /** Called with the item id and the row that opened the fix, for focus return. */
+  onFix: (id: string, opener: HTMLElement) => void
 }
 
 export function Check({ focusTitle, onNext, onBack, reads: all, onFix }: CheckProps) {
@@ -46,7 +47,8 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix }: CheckPr
               mark={r.mark}
               text={r.text}
               snippetSrc={snippetFor(r)}
-              onFix={() => onFix(r.id)}
+              snippetSize={snippetSize(r.id)}
+              onFix={(opener) => onFix(r.id, opener)}
             />
           ))}
         </div>
@@ -60,7 +62,8 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix }: CheckPr
               mark={t.mark}
               text={t.text}
               snippetSrc={snippetFor(t)}
-              onFix={() => onFix(t.id)}
+              snippetSize={snippetSize(t.id)}
+              onFix={(opener) => onFix(t.id, opener)}
             />
           ))}
         </div>

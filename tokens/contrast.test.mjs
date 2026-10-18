@@ -22,6 +22,7 @@ test('worst case passes', () => {
   // the selected compass edge is a state indicator: 3:1 against its own selected fill
   const selected = composite(dark['accent/selected-fill'], worst, 1);
   assert.ok(contrast('#C9A35A', selected) >= 3, 'selected edge on selected fill');
+  assert.ok(contrast(tokens.primitives.color['gold/400'], worst) >= 3, 'focus ring (gold/400) on the worst case');
 });
 
 test('8-digit hex alpha wins', () => {

@@ -1,0 +1,27 @@
+import { readFileSync } from 'node:fs'
+import { describe, expect, it } from 'vitest'
+import { snapSize, snippetSize } from './assets'
+
+describe('2x images are sized explicitly at half their pixel size', () => {
+  it('knows each snippet at half size', () => {
+    expect(snippetSize('read-1')).toEqual({ width: 122, height: 19 })
+    expect(snippetSize('one-thing')).toEqual({ width: 274, height: 23 })
+    expect(snippetSize('nope')).toBeUndefined()
+  })
+
+  it('knows the snap image at half size', () => {
+    expect(snapSize).toEqual({ width: 262, height: 349 })
+  })
+
+  it('no stylesheet sizes images with zoom', () => {
+    for (const f of ['src/app/app.css', 'src/components/ReadRow.css']) {
+      expect(readFileSync(f, 'utf-8')).not.toMatch(/zoom\s*:/)
+    }
+  })
+
+  it('the screen title focus ring is a light 1px outline', () => {
+    const css = readFileSync('src/app/app.css', 'utf-8')
+    const rule = css.match(/\.pf-app__title:focus-visible\s*\{([^}]*)\}/)![1]
+    expect(rule).toMatch(/outline:\s*1px solid var\(--focus-ring\)/)
+  })
+})

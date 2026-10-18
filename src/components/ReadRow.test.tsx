@@ -30,4 +30,20 @@ describe('ReadRow', () => {
     expect(img.getAttribute('src')).toBe('/s.png')
     expect(screen.queryByText('Buy stamps')).toBeNull()
   })
+
+  it('passes the row itself to onFix so focus can return to it', () => {
+    let opener: HTMLElement | null = null
+    render(<ReadRow mark="done" text="draft the brief" onFix={(el) => { opener = el }} />)
+    const row = screen.getByRole('button')
+    fireEvent.click(row)
+    expect(opener).toBe(row)
+  })
+
+  it('sizes the handwriting image from snippetSize', () => {
+    render(<ReadRow mark="done" text="draft the brief" snippetSrc="x.png" snippetSize={{ width: 122, height: 19 }} onFix={() => {}} />)
+    const img = screen.getByRole('img', { name: 'draft the brief' })
+    expect(img.getAttribute('width')).toBe('122')
+    expect(img.getAttribute('height')).toBe('19')
+  })
 })
+
