@@ -11,11 +11,11 @@ describe('Dial', () => {
     expect(svg.getAttribute('viewBox')).toBe('0 0 200 200')
   })
 
-  it('renders the dial at 24px', () => {
+  it('renders the dial at 24px: ring and star, no dots', () => {
     expect(DIAL_MIN_SIZE).toBe(24)
     render(<Dial size={24} />)
     const svg = screen.getByRole('img')
-    expect(svg.querySelectorAll('circle')).toHaveLength(5)
+    expect(svg.querySelectorAll('circle')).toHaveLength(1)
     expect(svg.querySelectorAll('path')).toHaveLength(1)
   })
 

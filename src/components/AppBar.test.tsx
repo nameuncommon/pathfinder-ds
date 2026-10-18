@@ -11,7 +11,7 @@ describe('AppBar', () => {
 
   it('the disc shows the dial', () => {
     render(<AppBar />)
-    expect(screen.getByRole('img', { name: 'Pathfinder' }).querySelectorAll('circle')).toHaveLength(5)
+    expect(screen.getByRole('img', { name: 'Pathfinder' }).querySelectorAll('circle')).toHaveLength(1)
   })
 
   it('shows a working back button when onBack is given', () => {

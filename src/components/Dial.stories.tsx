@@ -10,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'The Pathfinder logo. At 24px and up it is the dial: a solid ring, four cardinal dots and the compass rose P. Below 24px it drops to the compass rose P alone, because the dots stop reading at that size. It is drawn in the brand mark colour and read as an image named "Pathfinder".',
+          'The Pathfinder logo. At 24px and up it is the dial: a solid ring around the compass rose P. Below 24px it drops to the compass rose P alone, because the ring crowds the star at that size. It is drawn in the brand mark colour and read as an image named "Pathfinder".',
       },
     },
   },

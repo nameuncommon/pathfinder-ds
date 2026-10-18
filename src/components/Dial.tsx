@@ -2,10 +2,8 @@
 // (Figma YvFbHaXgIBzzJlHoHpuzyw). The colour comes from currentColor, set to the
 // --brand-mark token, so the logo follows tokens.json.
 
-/** Below this size the dots stop reading, so the logo drops to the star alone. */
+/** Below this size the ring crowds the star, so the logo drops to the star alone. */
 export const DIAL_MIN_SIZE = 24
-
-const dots: ReadonlyArray<readonly [number, number]> = [[100, 26], [174, 100], [100, 174], [26, 100]]
 
 // The compass rose P on the dial's 200 grid: 112 tall, ray crossing at (100, 100).
 const dialStar =
@@ -35,9 +33,6 @@ export function Dial({ size = 40, label = 'Pathfinder' }: DialProps) {
       {full ? (
         <>
           <circle cx={100} cy={100} r={95} stroke="currentColor" strokeWidth={10} />
-          {dots.map(([cx, cy]) => (
-            <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={6.5} fill="currentColor" />
-          ))}
           <path d={dialStar} fill="currentColor" />
         </>
       ) : (
