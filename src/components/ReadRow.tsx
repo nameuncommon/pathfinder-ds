@@ -1,3 +1,4 @@
+import { Icon } from './Icon'
 import { Mark, type MarkType } from './Mark'
 import './ReadRow.css'
 
@@ -31,6 +32,9 @@ export function ReadRow({ mark, text, snippetSrc, snippetSize, onFix }: ReadRowP
       ) : (
         <span className="pf-read-row__text">{text}</span>
       )}
+      <span className="pf-read-row__fix">
+        <Icon name="pencil" size={16} />
+      </span>
     </button>
   )
 }

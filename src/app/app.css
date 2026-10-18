@@ -140,17 +140,7 @@
 
 /* check */
 .pf-app__yesterday {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
   margin-bottom: var(--space-3);
-}
-
-.pf-app__numeral {
-  font-family: var(--font-display);
-  font-size: var(--type-56-size);
-  line-height: var(--type-56-line);
-  color: var(--accent-text);
 }
 
 .pf-app__rows {

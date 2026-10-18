@@ -5,6 +5,10 @@ import { ReadRow } from '../../components/ReadRow'
 import { Tally } from '../../components/Tally'
 import { snippetFor, snippetSize } from '../assets'
 import { yesterday } from '../data'
+
+const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+const say = (n: number) => words[n] ?? String(n)
+const capital = (s: string) => s[0].toUpperCase() + s.slice(1)
 import type { ReadItem } from '../ritual'
 import { Screen } from '../Screen'
 import type { ScreenActions } from './Open'
@@ -22,7 +26,7 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix, notice }:
     return (
       <Screen
         eyebrow="Morning · 3 of 4"
-        title="Check the read"
+        title="Check what it read"
         titleSize="step"
         step={3}
         onBack={onBack}
@@ -36,7 +40,7 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix, notice }:
   return (
     <Screen
       eyebrow="Morning · 3 of 4"
-      title="Check the read"
+      title="Check what it read"
       titleSize="step"
       step={3}
       onBack={onBack}
@@ -45,18 +49,12 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix, notice }:
       action={<Button onClick={onNext}>Looks right</Button>}
     >
       <GlassCard>
-        <div className="pf-app__yesterday">
-          <span className="pf-app__numeral">{yesterday.done}</span>
-          <div>
-            <p className="pf-app__strong">done yesterday</p>
-            <p className="pf-app__secondary">
-              {yesterday.moved} moved forward. Your best Thursday this month.
-            </p>
-          </div>
-        </div>
+        <p className="pf-app__strong pf-app__yesterday">
+          {`${capital(say(yesterday.done))} done yesterday, ${say(yesterday.moved)} moved forward.`}
+        </p>
         <Tally done={yesterday.done} moved={yesterday.moved} />
       </GlassCard>
-      <h2 className="pf-app__label">What I read · tap to fix</h2>
+      <h2 className="pf-app__label">What it read from yesterday · tap a line to fix</h2>
       <GlassCard>
         <div className="pf-app__rows">
           {reads.map((r) => (
@@ -71,7 +69,7 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix, notice }:
           ))}
         </div>
       </GlassCard>
-      <h2 className="pf-app__label">Today&apos;s top 3 · from today&apos;s box</h2>
+      <h2 className="pf-app__label">Today’s top 3, as you wrote them</h2>
       <GlassCard>
         <div className="pf-app__rows">
           {topThree.map((t) => (

@@ -19,7 +19,7 @@ export function CalendarEvent({ time, title, bearing, kind = 'event', amount }: 
     <div className="pf-calevent" style={style} data-kind={kind}>
       <span className="pf-calevent__bar" aria-hidden="true" />
       <div className="pf-calevent__text">
-        <span className="pf-calevent__time">{time}</span>
+        <span className={/^\d/.test(time) ? 'pf-calevent__time' : 'pf-calevent__time pf-calevent__time--word'}>{time}</span>
         <span className="pf-calevent__title">{amount ? `${title} · ${amount}` : title}</span>
         <span className="pf-visually-hidden">, {bearing}</span>
       </div>

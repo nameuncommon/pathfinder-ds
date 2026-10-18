@@ -44,7 +44,7 @@ describe('MorningRitual', () => {
     expect(h1()).toHaveFocus()
     await tabTo(user, 'Take the photo')
     await user.keyboard('{Enter}')
-    expect(h1()).toHaveTextContent('Check the read')
+    expect(h1()).toHaveTextContent('Check what it read')
     await tabTo(user, 'Looks right')
     await user.keyboard('{Enter}')
     expect(h1()).toHaveTextContent('Sort the inbox')

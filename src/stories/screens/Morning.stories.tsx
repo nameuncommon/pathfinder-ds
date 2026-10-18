@@ -67,6 +67,7 @@ export const Step3Check: Story = {
   name: '03 check',
   parameters: doc('What it read from yesterday and today’s top 3; tap a row to fix it.', '516-181'),
   render: () => <Check {...actions} reads={allReads} onFix={fn()} />,
+  play: oneSerif,
 }
 
 export const Step4Sort1: Story = {

@@ -5,7 +5,7 @@ import { Icon, iconNames } from './Icon'
 describe('Icon', () => {
   it('has exactly the approved Lucide set', () => {
     expect([...iconNames].sort()).toEqual(
-      ['calendar', 'calendar-range', 'check', 'chevron-left', 'cloud-off', 'folder-kanban', 'history', 'inbox', 'library', 'plus', 'rotate-ccw', 'sun'].sort(),
+      ['calendar', 'calendar-range', 'check', 'chevron-left', 'cloud-off', 'folder-kanban', 'history', 'inbox', 'library', 'pencil', 'plus', 'rotate-ccw', 'sun'].sort(),
     )
   })
 
