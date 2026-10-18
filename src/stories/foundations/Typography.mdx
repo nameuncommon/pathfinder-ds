@@ -1,111 +1,65 @@
 import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
-import { ThemeSync } from './ThemeSync'
 import tokens from '../../../tokens/tokens.json'
+import { ThemeSync } from './ThemeSync'
+import { cell, h1Style, h2Style, headCell, page, pStyle } from './docStyles'
 
 <Meta title="Foundations/Typography" />
 
 <ThemeSync />
 
-export const scaleEntries = Object.entries(tokens.primitives.type)
-export const fontEntries = Object.entries(tokens.primitives.font)
+export const steps = Object.keys(tokens.primitives.type).length
 
-export const page = {
-  background: 'var(--surface-base)',
-  color: 'var(--text-primary)',
-  fontFamily: 'var(--font-sans)',
-  minHeight: '100vh',
-  padding: 'var(--space-8)',
-  boxSizing: 'border-box',
-}
-
-export const h1Style = {
-  fontWeight: 600,
-  fontSize: 'var(--type-32-size)',
-  lineHeight: 'var(--type-32-line)',
-  color: 'var(--text-primary)',
-  margin: '0 0 var(--space-3) 0',
-}
-
-export const h2Style = {
-  fontWeight: 600,
-  fontSize: 'var(--type-20-size)',
-  lineHeight: 'var(--type-20-line)',
-  color: 'var(--text-primary)',
-  margin: 'var(--space-8) 0 var(--space-4) 0',
-  paddingBottom: 'var(--space-2)',
-  borderBottom: '1px solid var(--border-subtle)',
-}
-
-export const pStyle = {
-  fontSize: 'var(--type-14-size)',
-  lineHeight: 'var(--type-14-line)',
-  color: 'var(--text-muted)',
-  maxWidth: 640,
-  margin: '0 0 var(--space-3) 0',
-}
-
-export const labelStyle = {
-  fontFamily: 'var(--font-mono)',
-  fontSize: 'var(--type-12-size)',
-  lineHeight: 'var(--type-12-line)',
-  color: 'var(--text-muted)',
-}
+export const ramp = [
+  ['numeral', 'var(--font-display)', 56, 56, 600, 'One hero number, only on encouragement', '6'],
+  ['display', 'var(--font-display)', 32, 40, 600, 'The screen title, one per screen', 'Good morning, Jake'],
+  ['title', 'var(--font-display)', 24, 32, 600, 'The one highlight on a card', 'Book flights for March'],
+  ['body', 'var(--font-sans)', 16, 24, 400, 'List rows and card text', 'Lunch with Sam'],
+  ['body strong', 'var(--font-sans)', 16, 24, 600, 'Buttons and the item in focus', 'Snap this week’s spread'],
+  ['secondary', 'var(--font-sans)', 14, 22, 400, 'Supporting lines and meta', 'Said on the move · Wednesday'],
+  ['label', 'var(--font-sans)', 12, 18, 500, 'Section labels and eyebrows only', 'TODAY'],
+  ['data', 'var(--font-mono)', 13, 20, 500, 'Times, week codes and directions, never words', '9:30  W42  N'],
+]
 
 <Unstyled>
   <div style={page}>
     <h1 style={h1Style}>Typography</h1>
     <p style={pStyle}>
-      {'pathfinder uses two Geist families - sans for interface text, mono for dates, numbers, and the wayfinding chrome - across an 8-step type scale. every row below renders at the exact size and line height stored in '}
-      <code style={{ fontFamily: 'var(--font-mono)', background: 'var(--surface-raised)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-sm)', padding: '2px 6px' }}>tokens/tokens.json</code>
-      {', not a copy of it.'}
+      Three faces, each with one job. Cormorant Garamond is the brand's voice for titles. Geist carries the interface. Geist Mono is only for data. {`The size scale has ${steps} steps, from 11 to 56, read from tokens.json.`}
     </p>
-    <h2 style={h2Style}>type scale</h2>
-    <div style={{ display: 'grid' }}>
-      {scaleEntries.map(([name, entry]) => (
-        <div
-          key={name}
-          style={{
-            display: 'flex',
-            alignItems: 'baseline',
-            gap: 'var(--space-5)',
-            padding: 'var(--space-3) 0',
-            borderBottom: '1px solid var(--border-subtle)',
-          }}
-        >
-          <div style={{ ...labelStyle, width: 110, flexShrink: 0 }}>
-            {name.replace('scale/', '')} / {entry.line}
+
+    <h2 style={h2Style}>The ramp</h2>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', maxWidth: 900 }}>
+      {ramp.map(([role, family, size, line, weight, use, sample]) => (
+        <div key={role} style={{ display: 'grid', gridTemplateColumns: '160px 1fr', gap: 'var(--space-5)', alignItems: 'baseline', paddingBottom: 'var(--space-4)', borderBottom: '1px solid var(--border-subtle)' }}>
+          <div>
+            <p style={{ margin: 0, fontWeight: 600, color: 'var(--text-primary)' }}>{role}</p>
+            <p style={{ margin: '2px 0 0', fontFamily: 'var(--font-mono)', fontSize: 'var(--type-12-size)', color: 'var(--text-muted)' }}>{`${size}/${line} · ${weight}`}</p>
+            <p style={{ margin: '2px 0 0', fontSize: 'var(--type-13-size)', color: 'var(--text-secondary)' }}>{use}</p>
           </div>
-          <div
-            style={{
-              fontFamily: 'var(--font-sans)',
-              fontSize: `${entry.size}px`,
-              lineHeight: `${entry.line}px`,
-              color: 'var(--text-primary)',
-            }}
-          >
-            the trail begins where you are
-          </div>
+          <p style={{ margin: 0, color: 'var(--text-primary)', fontFamily: family, fontSize: size, lineHeight: `${line}px`, fontWeight: weight, letterSpacing: role === 'label' ? '0.06em' : 0 }}>{sample}</p>
         </div>
       ))}
     </div>
-    <h2 style={h2Style}>font tokens</h2>
-    <div style={{ display: 'grid', gap: 'var(--space-5)' }}>
-      {fontEntries.map(([name, stack]) => (
-        <div key={name} style={{ display: 'grid', gap: 'var(--space-1)' }}>
-          <div style={labelStyle}>font/{name}</div>
-          <div
-            style={{
-              fontFamily: stack,
-              fontSize: 'var(--type-16-size)',
-              lineHeight: 'var(--type-16-line)',
-              color: 'var(--text-primary)',
-            }}
-          >
-            chart your week, one waypoint at a time
-          </div>
-          <div style={labelStyle}>{stack}</div>
-        </div>
-      ))}
-    </div>
+
+    <h2 style={h2Style}>Handwriting</h2>
+    <p style={pStyle}>Text read from the book is never set in a script font. It is the image of the writing, with the read text as its alternative text. In this prototype the writing is rendered; a real build shows your own hand.</p>
+
+    <h2 style={h2Style}>The scale</h2>
+    <table style={{ borderCollapse: 'collapse', maxWidth: 520, width: '100%' }}>
+      <thead><tr><th style={headCell}>Token</th><th style={headCell}>Size</th><th style={headCell}>Line</th></tr></thead>
+      <tbody>
+        {Object.entries(tokens.primitives.type).map(([k, v]) => (
+          <tr key={k}><td style={{ ...cell, fontFamily: 'var(--font-mono)' }}>{k}</td><td style={cell}>{v.size}px</td><td style={cell}>{v.line}px</td></tr>
+        ))}
+      </tbody>
+    </table>
+
+    <h2 style={h2Style}>Rules</h2>
+    <ul style={{ ...pStyle, paddingLeft: 20 }}>
+      <li>One serif title per screen. The serif never sets body text.</li>
+      <li>Capitals only for short labels and eyebrows.</li>
+      <li>Mono only for data: a time, a week code, a direction letter. A word like "due" stays in Geist.</li>
+      <li>Light text on navy gets a little more line height than it would on paper.</li>
+    </ul>
   </div>
 </Unstyled>

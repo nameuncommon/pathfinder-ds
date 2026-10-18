@@ -29,3 +29,14 @@
   border-radius: var(--radius-lg);
   background: var(--surface-base);
 }
+
+/* Phone previews on docs pages: the screen fills an 844px phone and its action bar
+   sits at the foot of the phone, not at the foot of the docs viewport. */
+.pf-phone-thumb .pf-app,
+.pf-phone-thumb .pf-app__column {
+  min-height: 844px;
+}
+
+.pf-phone-thumb .pf-app__action {
+  position: static;
+}

@@ -1,200 +1,94 @@
 import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
-import { ThemeSync } from './ThemeSync'
 import tokens from '../../../tokens/tokens.json'
+import { ThemeSync } from './ThemeSync'
+import { cell, h1Style, h2Style, headCell, page, pStyle } from './docStyles'
 
 <Meta title="Foundations/Colour" />
 
 <ThemeSync />
 
-export const primitiveEntries = Object.entries(tokens.primitives.color)
+export const prim = tokens.primitives.color
+export const dark = tokens.semantic.dark
+export const resolve = (v) => (v.startsWith('{') ? prim[v.slice(1, -1)] : v)
 
-export const ramps = primitiveEntries.reduce((acc, [name, hex]) => {
-  const ramp = name.split('/')[0]
-  if (!acc[ramp]) acc[ramp] = []
-  acc[ramp].push({ name, hex })
-  return acc
-}, {})
+export const brand = [
+  ['navy/950', 'The field. Every screen sits on it.'],
+  ['navy/900', 'Brand navy: ink on paper, the logo on cream.'],
+  ['navy/800', 'Raised surfaces and the solid glass fallback.'],
+  ['gold/500', 'The one accent: the primary action, the logo, progress.'],
+  ['gold/400', 'Hover and the focus ring.'],
+  ['cream/100', 'Paper and primary text.'],
+]
+export const bearings = ['health', 'people', 'home', 'work', 'craft']
+export const dormant = Object.keys(dark).filter((k) => k.startsWith('tag-text/'))
+export const semantic = Object.keys(dark).filter((k) => !dormant.includes(k) && !k.startsWith('bearing/'))
 
-export function resolveColor(value) {
-  const match = /^\{(.+)\}$/.exec(value)
-  if (!match) return { token: null, hex: value }
-  return { token: match[1], hex: tokens.primitives.color[match[1]] }
-}
-
-export const semanticNames = Object.keys(tokens.semantic.dark)
-
-export const page = {
-  background: 'var(--surface-base)',
-  color: 'var(--text-primary)',
-  fontFamily: 'var(--font-sans)',
-  minHeight: '100vh',
-  padding: 'var(--space-8)',
-  boxSizing: 'border-box',
-}
-
-export const h1Style = {
-  fontWeight: 600,
-  fontSize: 'var(--type-32-size)',
-  lineHeight: 'var(--type-32-line)',
-  color: 'var(--text-primary)',
-  margin: '0 0 var(--space-3) 0',
-}
-
-export const h2Style = {
-  fontWeight: 600,
-  fontSize: 'var(--type-20-size)',
-  lineHeight: 'var(--type-20-line)',
-  color: 'var(--text-primary)',
-  margin: 'var(--space-8) 0 var(--space-4) 0',
-  paddingBottom: 'var(--space-2)',
-  borderBottom: '1px solid var(--border-subtle)',
-}
-
-export const pStyle = {
-  fontSize: 'var(--type-14-size)',
-  lineHeight: 'var(--type-14-line)',
-  color: 'var(--text-muted)',
-  maxWidth: 640,
-  margin: '0 0 var(--space-3) 0',
-}
-
-export const codeStyle = {
-  fontFamily: 'var(--font-mono)',
-  fontSize: 'var(--type-13-size)',
-  background: 'var(--surface-raised)',
-  border: '1px solid var(--border-subtle)',
-  borderRadius: 'var(--radius-sm)',
-  padding: '2px 6px',
-}
-
-export const labelStyle = {
-  fontFamily: 'var(--font-mono)',
-  fontSize: 'var(--type-12-size)',
-  lineHeight: 'var(--type-12-line)',
-  color: 'var(--text-muted)',
-}
-
-export const valueStyle = {
-  fontFamily: 'var(--font-mono)',
-  fontSize: 'var(--type-12-size)',
-  lineHeight: 'var(--type-12-line)',
-  color: 'var(--text-primary)',
-}
-
-export function Swatch({ hex, size = 64 }) {
+export function Swatch({ hex, size = 40 }) {
   return (
-    <div
-      style={{
-        width: size,
-        height: size,
-        borderRadius: 'var(--radius-md)',
-        border: '1px solid var(--border-subtle)',
-        background: hex,
-        flexShrink: 0,
-      }}
-    />
+    <span style={{ position: 'relative', display: 'inline-block', width: size, height: size, borderRadius: 8, background: 'var(--navy-950)', border: '1px solid var(--border-subtle)', overflow: 'hidden', flexShrink: 0 }}>
+      <span style={{ position: 'absolute', inset: 0, background: hex }} />
+    </span>
   )
 }
 
 <Unstyled>
   <div style={page}>
     <h1 style={h1Style}>Colour</h1>
-    <p style={pStyle}>
-      {'everything on this page is read straight out of '}
-      <code style={codeStyle}>tokens/tokens.json</code>
-      {" - nothing here is retyped, so it can't drift from the source. primitives are the raw ramps; semantic tokens point at a primitive per theme and are what components actually consume."}
-    </p>
-    <h2 style={h2Style}>primitives</h2>
-    <div style={{ display: 'grid', gap: 'var(--space-6)' }}>
-      {Object.entries(ramps).map(([ramp, swatches]) => (
-        <div key={ramp}>
-          <div style={{ ...labelStyle, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: 'var(--space-3)' }}>
-            {ramp}
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: 'var(--space-4)' }}>
-            {swatches.map(({ name, hex }) => (
-              <div key={name} style={{ display: 'grid', gap: 'var(--space-2)' }}>
-                <Swatch hex={hex} />
-                <div style={valueStyle}>{name}</div>
-                <div style={labelStyle}>{hex}</div>
-              </div>
-            ))}
+    <p style={pStyle}>A calm navy field, gold as the single accent, cream for paper and text. Everything on this page is read from tokens.json, so it cannot drift from the system.</p>
+
+    <h2 style={h2Style}>Brand</h2>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 'var(--space-5)', maxWidth: 900 }}>
+      {brand.map(([k, role]) => (
+        <div key={k} style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'flex-start' }}>
+          <Swatch hex={prim[k]} size={56} />
+          <div>
+            <p style={{ margin: 0, fontWeight: 600, color: 'var(--text-primary)' }}>{k}</p>
+            <p style={{ margin: '2px 0', fontFamily: 'var(--font-mono)', fontSize: 'var(--type-13-size)', color: 'var(--text-secondary)' }}>{prim[k]}</p>
+            <p style={{ margin: 0, fontSize: 'var(--type-14-size)', color: 'var(--text-secondary)' }}>{role}</p>
           </div>
         </div>
       ))}
     </div>
-    <h2 style={h2Style}>semantic</h2>
-    <p style={pStyle}>
-      {'each semantic token resolves to a different primitive per theme - dark and light are shown side by side so the swap is visible at a glance. a few tokens (danger, warning) are hand-tuned hex values rather than ramp references, and are marked as such.'}
-    </p>
-    <div style={{ overflowX: 'auto' }}>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-        <thead>
-          <tr>
-            <th style={{ ...labelStyle, textAlign: 'left', padding: 'var(--space-2) var(--space-3)', borderBottom: '1px solid var(--border-subtle)' }}>token</th>
-            <th style={{ ...labelStyle, textAlign: 'left', padding: 'var(--space-2) var(--space-3)', borderBottom: '1px solid var(--border-subtle)' }}>dark</th>
-            <th style={{ ...labelStyle, textAlign: 'left', padding: 'var(--space-2) var(--space-3)', borderBottom: '1px solid var(--border-subtle)' }}>light</th>
+
+    <h2 style={h2Style}>Bearings</h2>
+    <p style={pStyle}>The parts of life an item belongs to. Each colour has its own fill and edge token for its pill, and always travels with its word.</p>
+    <table style={{ borderCollapse: 'collapse', maxWidth: 720, width: '100%' }}>
+      <thead><tr><th style={headCell}>Bearing</th><th style={headCell}>Colour</th><th style={headCell}>Fill</th><th style={headCell}>Edge</th></tr></thead>
+      <tbody>
+        {bearings.map((b) => (
+          <tr key={b}>
+            <td style={{ ...cell, color: prim[`bearing/${b}`], fontWeight: 600 }}>{b}</td>
+            <td style={cell}><span style={{ display: 'flex', gap: 8, alignItems: 'center' }}><Swatch hex={prim[`bearing/${b}`]} size={24} /><code>{prim[`bearing/${b}`]}</code></span></td>
+            <td style={cell}><span style={{ display: 'flex', gap: 8, alignItems: 'center' }}><Swatch hex={dark[`bearing/${b}/fill`]} size={24} /><code>{dark[`bearing/${b}/fill`]}</code></span></td>
+            <td style={cell}><span style={{ display: 'flex', gap: 8, alignItems: 'center' }}><Swatch hex={dark[`bearing/${b}/edge`]} size={24} /><code>{dark[`bearing/${b}/edge`]}</code></span></td>
           </tr>
-        </thead>
-        <tbody>
-          {semanticNames.map((name) => {
-            const dark = resolveColor(tokens.semantic.dark[name])
-            const light = resolveColor(tokens.semantic.light[name])
-            return (
-              <tr key={name}>
-                <td style={{ ...valueStyle, padding: 'var(--space-2) var(--space-3)', borderBottom: '1px solid var(--border-subtle)' }}>
-                  {name}
-                </td>
-                <td style={{ padding: 'var(--space-2) var(--space-3)', borderBottom: '1px solid var(--border-subtle)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-                    <Swatch hex={dark.hex} size={20} />
-                    <span style={valueStyle}>{dark.token ?? 'hand-tuned'}</span>
-                  </div>
-                </td>
-                <td style={{ padding: 'var(--space-2) var(--space-3)', borderBottom: '1px solid var(--border-subtle)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-                    <Swatch hex={light.hex} size={20} />
-                    <span style={valueStyle}>{light.token ?? 'hand-tuned'}</span>
-                  </div>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+        ))}
+      </tbody>
+    </table>
 
-      <h2 style={h2Style}>Using these</h2>
-      <p style={pStyle}>
-        {'Four rules govern how these tokens get applied. Each one exists because a measurement contradicted an assumption, not because it sounded tidy.'}
-      </p>
+    <h2 style={h2Style}>Semantic tokens</h2>
+    <p style={pStyle}>Components read these, never the primitives. Alpha tokens are shown over navy/950, the way they are used.</p>
+    <table style={{ borderCollapse: 'collapse', maxWidth: 720, width: '100%' }}>
+      <thead><tr><th style={headCell}>Token</th><th style={headCell}>Value</th></tr></thead>
+      <tbody>
+        {semantic.map((k) => (
+          <tr key={k}>
+            <td style={{ ...cell, fontFamily: 'var(--font-mono)' }}>{k}</td>
+            <td style={cell}><span style={{ display: 'flex', gap: 8, alignItems: 'center' }}><Swatch hex={resolve(dark[k])} size={24} /><code>{dark[k]}</code></span></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
 
-      <h3 style={{ ...h2Style, fontSize: 'var(--type-16-size)', lineHeight: 'var(--type-16-line)', border: 'none', margin: 'var(--space-6) 0 var(--space-2) 0', paddingBottom: 0 }}>
-        {'Accent is a fill. accent/text is text.'}
-      </h3>
-      <p style={pStyle}>
-        <code style={codeStyle}>accent/default</code>{' is sized for use as a background. Set as text on '}<code style={codeStyle}>surface/raised</code>{' it measures 4.40:1 in dark, just under AA. Use '}<code style={codeStyle}>accent/text</code>{' for accent-coloured type, which steps to blue/400 in dark and blue/700 in light and clears 6.6:1 and 6.5:1. The '}<code style={codeStyle}>tag-text/*</code>{' tier makes the same distinction for tinted chips.'}
-      </p>
-
-      <h3 style={{ ...h2Style, fontSize: 'var(--type-16-size)', lineHeight: 'var(--type-16-line)', border: 'none', margin: 'var(--space-6) 0 var(--space-2) 0', paddingBottom: 0 }}>
-        {'Button labels flip with the theme.'}
-      </h3>
-      <p style={pStyle}>
-        <code style={codeStyle}>button/accent-label</code>{' is ink on dark and paper on light. It is not a fixed colour, because it cannot be: ink on the dark accent measures 5.08:1 and ink on the light accent measures 3.17:1. This token originally sat in the component tier, which has no theme modes, and therefore could not be fixed by choosing a better value. It had to move to the semantic tier.'}
-      </p>
-
-      <h3 style={{ ...h2Style, fontSize: 'var(--type-16-size)', lineHeight: 'var(--type-16-line)', border: 'none', margin: 'var(--space-6) 0 var(--space-2) 0', paddingBottom: 0 }}>
-        {'Two border weights, and they are not interchangeable.'}
-      </h3>
-      <p style={pStyle}>
-        <code style={codeStyle}>border/subtle</code>{' is for dividers and decorative edges. '}<code style={codeStyle}>border/strong</code>{' is for boundaries that ARE the control, such as an input or a checkbox, where WCAG 1.4.11 requires 3:1 against the adjacent surface. Subtle sits at roughly 2.5:1 and strong at 4.65:1 dark, 4.09:1 light. Reaching for subtle on a form control is an accessibility failure, not a style preference.'}
-      </p>
-
-      <h3 style={{ ...h2Style, fontSize: 'var(--type-16-size)', lineHeight: 'var(--type-16-line)', border: 'none', margin: 'var(--space-6) 0 var(--space-2) 0', paddingBottom: 0 }}>
-        {'Keep danger off raised surfaces.'}
-      </h3>
-      <p style={pStyle}>
-        {'Danger text on '}<code style={codeStyle}>surface/raised</code>{' measures 4.36:1 in dark, short of the 4.5:1 floor, and it cannot be fixed inside the danger hue family: 13% is already the maximum opacity the tint can carry before its own luminance closes on the text. This is a documented exception rather than a solved problem. Danger belongs on '}<code style={codeStyle}>surface/base</code>{'. The one deliberate use on a raised surface is the overdue DateChip, where the red is the signal and losing it would cost more than the contrast gains.'}
-      </p>
-    </div>
+    <h2 style={h2Style}>Rules</h2>
+    <ul style={{ ...pStyle, paddingLeft: 20 }}>
+      <li>Gold is rare: one gold action per view, plus the logo. A state edge (a selected choice) is full gold; decorative edges use the nudge edge.</li>
+      <li>Cream means paper: a cream surface only holds something that came from the book.</li>
+      <li>Never colour alone: bearings carry their word, marks have their own shapes.</li>
+      <li>Every pair is measured over the worst case, glass over the brightest point of the gold glow. See Accessibility for the numbers.</li>
+    </ul>
+    <p style={{ ...pStyle, fontSize: 'var(--type-14-size)' }}>
+      {`Dormant: ${dormant.length} tag-text tokens from version 1 and the light theme values stay in tokens.json for a later light pass; no v2 component reads them.`}
+    </p>
   </div>
 </Unstyled>

@@ -1,92 +1,41 @@
 import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
 import { ThemeSync } from './foundations/ThemeSync'
+import { h2Style, page, pStyle } from './foundations/docStyles'
+import { Dial } from '../components/Dial'
+import { snippet, snippetSize } from '../app/assets'
+import { oneThing, reads, topThree } from '../app/data'
+import { Open } from '../app/screens/Open'
+import { Check } from '../app/screens/Check'
+import { Sort } from '../app/screens/Sort'
 import tokens from '../../tokens/tokens.json'
+import '../app/app.css'
 
 <Meta title="Introduction" />
 
 <ThemeSync />
 
-export const page = {
-  background: 'var(--surface-base)',
+export const noop = () => {}
+export const actions = { focusTitle: false, onNext: noop, onBack: noop, onSkip: noop }
+export const componentCount = Object.keys(import.meta.glob(['../components/*.tsx', '!../components/*.test.tsx', '!../components/*.stories.tsx'])).length
+export const hand = snippetSize('one-thing')
+
+export const wordmark = {
+  fontFamily: 'var(--font-display)',
+  fontWeight: 600,
+  fontSize: 'var(--type-56-size)',
+  lineHeight: 'var(--type-56-line)',
   color: 'var(--text-primary)',
-  fontFamily: 'var(--font-sans)',
-  minHeight: '100vh',
-  padding: 'var(--space-8)',
-  boxSizing: 'border-box',
+  margin: 0,
 }
 
-export const h1Style = {
+export const lead = {
+  fontFamily: 'var(--font-display)',
   fontWeight: 600,
-  fontSize: 'var(--type-32-size)',
+  fontSize: 'var(--type-24-size)',
   lineHeight: 'var(--type-32-line)',
   color: 'var(--text-primary)',
-  margin: '0 0 var(--space-3) 0',
-}
-
-export const h2Style = {
-  fontWeight: 600,
-  fontSize: 'var(--type-20-size)',
-  lineHeight: 'var(--type-20-line)',
-  color: 'var(--text-primary)',
-  margin: 'var(--space-10) 0 var(--space-4) 0',
-  paddingBottom: 'var(--space-2)',
-  borderBottom: '1px solid var(--border-subtle)',
-}
-
-export const pStyle = {
-  fontSize: 'var(--type-14-size)',
-  lineHeight: 'var(--type-14-line)',
-  color: 'var(--text-muted)',
-  maxWidth: 660,
-  margin: '0 0 var(--space-3) 0',
-}
-
-export const leadStyle = {
-  ...pStyle,
-  fontSize: 'var(--type-16-size)',
-  lineHeight: 'var(--type-16-line)',
-  color: 'var(--text-primary)',
-  margin: '0 0 var(--space-6) 0',
-}
-
-export const monoStyle = {
-  fontFamily: 'var(--font-mono)',
-  fontSize: 'var(--type-12-size)',
-  lineHeight: 'var(--type-12-line)',
-  color: 'var(--text-muted)',
-  letterSpacing: '0.02em',
-}
-
-export const codeStyle = {
-  fontFamily: 'var(--font-mono)',
-  fontSize: 'var(--type-13-size)',
-  background: 'var(--surface-raised)',
-  border: '1px solid var(--border-subtle)',
-  borderRadius: 'var(--radius-sm)',
-  padding: '2px 6px',
-  color: 'var(--text-primary)',
-}
-
-export const noteStyle = {
-  borderLeft: '2px solid var(--accent-default)',
-  background: 'var(--surface-raised)',
-  borderRadius: '0 var(--radius-sm) var(--radius-sm) 0',
-  padding: 'var(--space-4) var(--space-5)',
-  maxWidth: 660,
-  margin: 'var(--space-5) 0',
-}
-
-export function Stat({ value, label }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
-      <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--type-24-size)', lineHeight: 'var(--type-24-line)', color: 'var(--text-primary)' }}>{value}</span>
-      <span style={monoStyle}>{label}</span>
-    </div>
-  )
-}
-
-export function Row({ children }) {
-  return <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-10)', margin: 'var(--space-6) 0' }}>{children}</div>
+  maxWidth: 620,
+  margin: 'var(--space-6) 0 var(--space-4)',
 }
 
 export const linkStyle = {
@@ -96,54 +45,78 @@ export const linkStyle = {
   paddingBottom: 1,
 }
 
+export const primaryLink = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  minHeight: 52,
+  padding: '0 var(--space-5)',
+  borderRadius: 'var(--button-radius)',
+  background: 'var(--accent-default)',
+  color: 'var(--button-accent-label)',
+  fontWeight: 600,
+  textDecoration: 'none',
+}
+
+export function Phone({ children, label, story }) {
+  return (
+    <figure style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
+      <div inert="" aria-hidden="true" style={{ width: 215, height: 464, overflow: 'hidden', borderRadius: 24, border: '1px solid var(--border-subtle)', pointerEvents: 'none' }}>
+        <div className="pf-phone-thumb" style={{ width: 390, height: 844, transform: 'scale(0.55)', transformOrigin: 'top left' }}>{children}</div>
+      </div>
+      <figcaption style={{ fontSize: 'var(--type-14-size)', color: 'var(--text-secondary)' }}>
+        <a style={linkStyle} href={`/?path=/story/${story}`} target="_top">{label}</a>
+      </figcaption>
+    </figure>
+  )
+}
+
 <Unstyled>
   <div style={page}>
-    <p style={monoStyle}>concept design system</p>
-    <h1 style={h1Style}>Pathfinder</h1>
-    <p style={leadStyle}>
-      {'A design system for a planner app that does not exist. Pathfinder is a self-initiated concept brand, built end to end to show one person carrying a system from a brand decision through to shipped, tested code. It is not a real product and it is not pretending to be one.'}
-    </p>
-
-    <Row>
-      <Stat value={String(Object.keys(tokens.primitives.color).length)} label="colour primitives" />
-      <Stat value={String(Object.keys(tokens.semantic.dark).length)} label="semantic tokens, per theme" />
-    </Row>
-
-    <h2 style={h2Style}>How it fits together</h2>
-    <p style={pStyle}>
-      {'One file is authored by hand: '}<code style={codeStyle}>tokens/tokens.json</code>{'. Everything else is downstream of it. A build script generates the CSS custom properties the components consume, and the Figma variables mirror the same file. The pipeline runs one direction only, so nothing can drift back upstream.'}
-    </p>
-    <p style={pStyle}>
-      {'The four Foundations pages you see in the sidebar are not written by hand either. They import '}<code style={codeStyle}>tokens.json</code>{' and render whatever is in it, which means these docs cannot fall out of date with the system they describe.'}
-    </p>
-
-    <h2 style={h2Style}>What is deliberately not here</h2>
-    <p style={pStyle}>
-      {'The v2 components are built in code and Figma. Version 1 is frozen at tag v1.0.0 with its own deployment. The code layer exists to prove the token pipeline survives contact with a real browser.'}
-    </p>
-    <p style={pStyle}>
-      {'The 26 v2 components are assembled into one flow, the morning ritual, which runs as a coded phone app at /app/ on the same deployment, and into 14 screen stories: the eight ritual frames, five states and the desktop week. It is a demonstration of the system, not a product: the data is a fixed sample week.'}
-    </p>
-
-    <div style={noteStyle}>
-      <p style={{ ...pStyle, margin: 0, color: 'var(--text-primary)' }}>
-        {'Every design decision in this system, including the ones that turned out wrong, is recorded in a running decision log in the repository. The reasoning is the point of the project as much as the output.'}
-      </p>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
+      <Dial size={64} label="Pathfinder" />
+      <p style={wordmark}>Pathfinder</p>
     </div>
 
-    <h2 style={h2Style}>Where to start</h2>
+    <p style={lead}>A planner on paper, an app for everything the paper touches. You write by hand; the app reads it, files it, and asks before it decides anything.</p>
+
     <p style={pStyle}>
-      {'Foundations covers colour, type, spacing, glass, ambient, paper, bearings, the logo, icons, motion, voice and content, and accessibility. Every component page has its docs and a States story; Screens shows the real app screens.'}
+      This is the design system behind it: {componentCount} components, built in code and in Figma from one token file, with every screen of the morning ritual running for real. Pathfinder is a concept brand, made end to end as a portfolio study.
     </p>
 
-    <h2 style={h2Style}>Elsewhere</h2>
+    <p style={{ margin: 'var(--space-6) 0 var(--space-8)' }}>
+      <a style={primaryLink} href="/app/" target="_blank" rel="noreferrer">Open the morning ritual</a>
+    </p>
+
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-6)' }}>
+      <Phone label="01 open" story="screens-morning-ritual--step-1-open"><Open {...actions} /></Phone>
+      <Phone label="03 check" story="screens-morning-ritual--step-3-check"><Check {...actions} reads={[...reads, ...topThree]} onFix={noop} /></Phone>
+      <Phone label="04 sort" story="screens-morning-ritual--step-4-sort-1"><Sort {...actions} index={0} onChoose={noop} onLeave={noop} /></Phone>
+    </div>
+
+    <h2 style={h2Style}>What makes it Pathfinder</h2>
+    <p style={pStyle}>The app shows your own handwriting back to you. Cream means paper: a cream surface only ever holds something that came from the book.</p>
+    <div className="pf-paper" style={{ display: 'inline-block', padding: '12px 16px', borderRadius: 14 }}>
+      <img src={snippet('one-thing')} alt={oneThing} width={hand.width} height={hand.height} style={{ display: 'block', maxWidth: '100%', height: 'auto' }} />
+    </div>
+    <p style={pStyle}>It cheers you on and never scolds. Counts and visible progress, yes; streaks, points and guilt, no. Every loose item is sorted one of four ways: now, later, share or drop, and dropping is a decision, not a failure.</p>
+
+    <h2 style={h2Style}>How it is built</h2>
+    <ol style={{ ...pStyle, paddingLeft: 20 }}>
+      <li>One file is written by hand: tokens.json, with {Object.keys(tokens.primitives.color).length} colour primitives and {Object.keys(tokens.semantic.dark).length} semantic tokens.</li>
+      <li>A build step turns it into CSS custom properties; the Figma variables mirror the same values.</li>
+      <li>Components read only those tokens, and every story here runs as a test in a real browser, including an accessibility check that fails the build.</li>
+    </ol>
+
+    <h2 style={h2Style}>Where to go next</h2>
     <p style={pStyle}>
-      <a style={linkStyle} href="https://github.com/nameuncommon/pathfinder-ds" target="_blank" rel="noreferrer">Repository</a>
-      {'  ·  the source, the token pipeline, and the running decision log.'}
+      Screens shows the ritual and the desktop week. Foundations covers colour, type, glass, paper, the logo, motion, voice and accessibility. Patterns explains how the parts work together. Every component page has its guidance and a States story.
     </p>
     <p style={pStyle}>
+      <a style={linkStyle} href="https://github.com/nameuncommon/pathfinder-ds" target="_blank" rel="noreferrer">Repository and decision log</a>
+      {'  ·  '}
       <a style={linkStyle} href="https://www.figma.com/design/ZKIX0oa2fm0OwNIGvRWJXJ/pathfinder-design-system?node-id=0-1" target="_blank" rel="noreferrer">Figma library</a>
-      {'  ·  variables, components and the product screens the code layer was built from.'}
+      {'  ·  '}
+      <a style={linkStyle} href="https://pathfinder-ds-v1.vercel.app" target="_blank" rel="noreferrer">Version 1, frozen</a>
     </p>
   </div>
 </Unstyled>

@@ -85,10 +85,11 @@ const preview: Preview = {
       storySort: {
         order: [
           'Introduction',
-          'Foundations', ['Colour', 'Typography', 'Spacing', 'Glass', 'Ambient', 'Paper', 'Bearings', 'Logo', 'Icons', 'Motion', 'Voice and content', 'Accessibility'],
-          'Components',
           'Screens',
-          'Composed',
+          'Foundations', ['Colour', 'Typography', 'Spacing', 'Glass', 'Ambient', 'Paper', 'Bearings', 'Logo', 'Icons', 'Motion', 'Voice and content', 'Accessibility'],
+          'Patterns',
+          'Components',
+          'Changelog',
         ],
       },
     },
