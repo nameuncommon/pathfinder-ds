@@ -209,3 +209,9 @@ export const StateDonePartial: Story = {
   parameters: desc('Left the rest for Sunday: what was decided is grouped and still changeable.'),
   render: () => <Done focusTitle={false} decisions={{ [inbox[0].id]: 'E' }} onRestart={fn()} onRevisit={fn()} />,
 }
+
+export const StateCheckReading: Story = {
+  name: 'state / check reading',
+  parameters: desc('Right after the photo: a short reading pause, announced as a status. Instant when motion is reduced.'),
+  render: () => <Check {...actions} reads={allReads} onFix={fn()} reading />,
+}

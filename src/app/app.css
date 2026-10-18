@@ -139,6 +139,14 @@
 }
 
 /* check */
+.pf-app__placeholder {
+  display: block;
+  height: 12px;
+  margin: 16px var(--space-2);
+  border-radius: 999px;
+  background: var(--surface-glass-strong);
+}
+
 .pf-app__yesterday {
   margin-bottom: var(--space-3);
 }

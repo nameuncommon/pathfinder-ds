@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import { CorrectionSheet } from './CorrectionSheet'
 import { snippetOnPaperFor, snippetSize } from './assets'
 import { Toast } from '../components/Toast'
@@ -19,7 +19,16 @@ type AppAction = Action | { type: 'reset' }
 const reducer = (s: RitualState, a: AppAction): RitualState =>
   a.type === 'reset' ? initialRitual(seed) : ritualReducer(s, a, inbox.length)
 
-export function MorningRitual() {
+const motionReduced = () =>
+  document.documentElement.dataset.motion === 'reduced' ||
+  (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+
+export interface MorningRitualProps {
+  /** How long the reading pause lasts after the photo; 0 (or reduced motion) skips it. */
+  readingMs?: number
+}
+
+export function MorningRitual({ readingMs = 700 }: MorningRitualProps) {
   const [state, dispatch] = useReducer(reducer, seed, initialRitual)
   const [fixingId, setFixingId] = useState<string | null>(null)
   // The row that opened the sheet, so focus can return to it on close.
@@ -28,6 +37,12 @@ export function MorningRitual() {
   const [navigated, setNavigated] = useState(false)
   // One acknowledgement at a time: the latest choice (with Undo) or the latest fix.
   const [toast, setToast] = useState<{ message: string; undo: boolean } | null>(null)
+  const [reading, setReading] = useState(false)
+  useEffect(() => {
+    if (!reading) return
+    const t = window.setTimeout(() => setReading(false), readingMs)
+    return () => window.clearTimeout(t)
+  }, [reading, readingMs])
 
   function go(a: AppAction) {
     setNavigated(true)
@@ -49,8 +64,14 @@ export function MorningRitual() {
 
   const common = {
     focusTitle: navigated,
-    onNext: () => go({ type: 'next' }),
-    onBack: () => go({ type: 'back' }),
+    onNext: () => {
+      if (state.step === 'snap' && readingMs > 0 && !motionReduced()) setReading(true)
+      go({ type: 'next' })
+    },
+    onBack: () => {
+      setReading(false)
+      go({ type: 'back' })
+    },
     onSkip: () => go({ type: 'skipSnap' }),
     notice,
   }
@@ -63,6 +84,7 @@ export function MorningRitual() {
         <Check
           {...common}
           reads={state.reads}
+          reading={reading}
           onFix={(id, opener) => {
             setFixOpener(opener)
             setFixingId(id)

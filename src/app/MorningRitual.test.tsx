@@ -30,14 +30,14 @@ const h1 = () => screen.getByRole('heading', { level: 1 })
 
 describe('MorningRitual', () => {
   it('starts on the open screen', () => {
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     expect(h1()).toHaveTextContent('Good morning, Jake')
     expect(screen.getByText('Fri 22 Oct · week 42')).toBeInTheDocument()
   })
 
   it('walks the full keyboard path to All sorted', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await tabTo(user, "Snap this week's spread")
     await user.keyboard('{Enter}')
     expect(h1()).toHaveTextContent('Snap the spread')
@@ -58,7 +58,7 @@ describe('MorningRitual', () => {
 
   it('Skip today goes to the sort heading', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: "Snap this week's spread" }))
     await user.click(screen.getByRole('button', { name: 'Skip today' }))
     expect(h1()).toHaveTextContent('Sort the inbox')
@@ -66,14 +66,14 @@ describe('MorningRitual', () => {
 
   it('the inbox button on open goes straight to sorting', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: /Inbox · 3 to sort/ }))
     expect(h1()).toHaveTextContent('Sort the inbox')
   })
 
   it('back returns to the previous step', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: "Snap this week's spread" }))
     await user.click(screen.getByRole('button', { name: 'Back' }))
     expect(h1()).toHaveTextContent('Good morning, Jake')
@@ -81,7 +81,7 @@ describe('MorningRitual', () => {
 
   it('compass is a labelled group of buttons', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: /Inbox · 3 to sort/ }))
     const group = screen.getByRole('group', { name: 'Which way does it go?' })
     expect(within(group).getAllByRole('button')).toHaveLength(4)
@@ -90,10 +90,10 @@ describe('MorningRitual', () => {
 
   it('a read row opens the fix dialog and save updates the row', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: "Snap this week's spread" }))
     await user.click(screen.getByRole('button', { name: 'Take the photo' }))
-    await user.click(screen.getByRole('button', { name: 'Fix: run 5k, done' }))
+    await user.click(screen.getByRole('button', { name: 'Fix: run 5k, done, not sure' }))
     const dialog = screen.getByRole('dialog', { name: 'Fix what I read' })
     expect(dialog).toHaveAttribute('aria-modal', 'true')
     const input = within(dialog).getByLabelText('What it says')
@@ -103,12 +103,12 @@ describe('MorningRitual', () => {
     await user.type(input, 'run 10k')
     await user.click(within(dialog).getByRole('button', { name: 'Save' }))
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Fix: run 10k, done' })).toHaveFocus()
+    expect(screen.getByRole('button', { name: 'Fix: run 10k, done, not sure' })).toHaveFocus()
   })
 
   it('after a correction the row drops the handwriting image and shows the new text', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: "Snap this week's spread" }))
     await user.click(screen.getByRole('button', { name: 'Take the photo' }))
     const before = screen.getByRole('button', { name: 'Fix: draft the brief, done' })
@@ -126,10 +126,10 @@ describe('MorningRitual', () => {
 
   it('Escape closes the dialog and returns focus to the row', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: "Snap this week's spread" }))
     await user.click(screen.getByRole('button', { name: 'Take the photo' }))
-    const row = screen.getByRole('button', { name: 'Fix: run 5k, done' })
+    const row = screen.getByRole('button', { name: 'Fix: run 5k, done, not sure' })
     await user.click(row)
     await user.keyboard('{Escape}')
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
@@ -138,7 +138,7 @@ describe('MorningRitual', () => {
 
   it('renders a long inbox title in full', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: /Inbox · 3 to sort/ }))
     expect(LONG_TITLE.length).toBeGreaterThanOrEqual(60)
     expect(screen.getByText(LONG_TITLE)).toBeInTheDocument()
@@ -146,7 +146,7 @@ describe('MorningRitual', () => {
 
   it('Back to today resets from done', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: /Inbox · 3 to sort/ }))
     await user.click(screen.getByRole('button', { name: 'Leave the rest for Sunday' }))
     expect(h1()).toHaveTextContent('Sorted 0 of 3')
@@ -156,7 +156,7 @@ describe('MorningRitual', () => {
 
   it('saving a top 3 fix updates that row, and Back to today restores it', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: "Snap this week's spread" }))
     await user.click(screen.getByRole('button', { name: 'Take the photo' }))
     await user.click(screen.getByRole('button', { name: 'Fix: case study images, task' }))
@@ -176,7 +176,7 @@ describe('MorningRitual', () => {
 
   it('moves focus to the next item title after choosing, and back returns to the first', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: /Inbox · 3 to sort/ }))
     expect(h1()).toHaveFocus()
     await user.click(screen.getByRole('button', { name: /^N, Now/ }))
@@ -189,7 +189,7 @@ describe('MorningRitual', () => {
 
   it('read rows announce the mark word', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: "Snap this week's spread" }))
     await user.click(screen.getByRole('button', { name: 'Take the photo' }))
     expect(screen.getByRole('button', { name: 'Fix: call the dentist, moved' })).toBeInTheDocument()
@@ -198,7 +198,7 @@ describe('MorningRitual', () => {
 
   it('the snap button is described by the found-state text', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: "Snap this week's spread" }))
     expect(screen.getByRole('button', { name: 'Take the photo' })).toHaveAccessibleDescription(
       /Found W42/,
@@ -207,7 +207,7 @@ describe('MorningRitual', () => {
 
   it('done says All sorted only when everything was decided', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: /Inbox · 3 to sort/ }))
     await user.click(screen.getByRole('button', { name: /^N, Now/ }))
     await user.click(screen.getByRole('button', { name: 'Leave the rest for Sunday' }))
@@ -217,10 +217,10 @@ describe('MorningRitual', () => {
 
   it('Save is disabled while the correction is empty or blank', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: "Snap this week's spread" }))
     await user.click(screen.getByRole('button', { name: 'Take the photo' }))
-    await user.click(screen.getByRole('button', { name: 'Fix: run 5k, done' }))
+    await user.click(screen.getByRole('button', { name: 'Fix: run 5k, done, not sure' }))
     const input = screen.getByLabelText('What it says')
     const save = screen.getByRole('button', { name: 'Save' })
     await user.clear(input)
@@ -230,12 +230,12 @@ describe('MorningRitual', () => {
     await user.type(input, ' run 8k ')
     expect(save).toBeEnabled()
     await user.click(save)
-    expect(screen.getByRole('button', { name: 'Fix: run 8k, done' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Fix: run 8k, done, not sure' })).toBeInTheDocument()
   })
 
   it('the correction sheet shows the navy-ink handwriting on paper', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: /Snap this week/ }))
     await user.click(screen.getByRole('button', { name: 'Take the photo' }))
     await user.click(screen.getByRole('button', { name: 'Fix: call the dentist, moved' }))
@@ -245,7 +245,7 @@ describe('MorningRitual', () => {
 
   it('choosing shows an undo toast and Undo brings the item back', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: /Inbox · 3 to sort/ }))
     await user.click(screen.getByRole('button', { name: /^N, Now/ }))
     expect(screen.getByText('2 of 3')).toBeInTheDocument()
@@ -258,7 +258,7 @@ describe('MorningRitual', () => {
 
   it('undo from done goes back to the last item', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: /Inbox · 3 to sort/ }))
     for (let i = 0; i < 3; i++) await user.click(screen.getByRole('button', { name: /^N, Now/ }))
     expect(h1()).toHaveTextContent('All sorted')
@@ -269,10 +269,10 @@ describe('MorningRitual', () => {
 
   it('saving a fix says Fixed', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: "Snap this week's spread" }))
     await user.click(screen.getByRole('button', { name: 'Take the photo' }))
-    await user.click(screen.getByRole('button', { name: 'Fix: run 5k, done' }))
+    await user.click(screen.getByRole('button', { name: 'Fix: run 5k, done, not sure' }))
     const input = screen.getByLabelText('What it says')
     await user.clear(input)
     await user.type(input, 'run 10k')
@@ -284,7 +284,7 @@ describe('MorningRitual', () => {
 
   it('from done, Change sorts that item again and returns to done', async () => {
     const user = userEvent.setup()
-    render(<MorningRitual />)
+    render(<MorningRitual readingMs={0} />)
     await user.click(screen.getByRole('button', { name: /Inbox · 3 to sort/ }))
     for (let i = 0; i < 3; i++) await user.click(screen.getByRole('button', { name: /^N, Now/ }))
     await user.click(screen.getByRole('button', { name: `Change ${LONG_TITLE}` }))

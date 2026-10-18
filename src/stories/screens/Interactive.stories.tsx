@@ -7,6 +7,7 @@ import { MorningRitual } from '../../app/MorningRitual'
 const meta = {
   title: 'Screens/Morning ritual (interactive)',
   component: MorningRitual,
+  args: { readingMs: 700 },
   parameters: { layout: 'fullscreen' },
   decorators: [
     (Story) => (

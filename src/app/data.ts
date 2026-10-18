@@ -32,7 +32,7 @@ export const schedule: ScheduleItem[] = [
 
 export const reads: ReadItem[] = [
   { id: 'read-1', mark: 'done', text: 'draft the brief' },
-  { id: 'read-2', mark: 'done', text: 'run 5k' },
+  { id: 'read-2', mark: 'done', text: 'run 5k', unsure: true },
   { id: 'read-3', mark: 'moved', text: 'call the dentist' },
 ]
 

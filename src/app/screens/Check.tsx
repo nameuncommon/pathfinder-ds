@@ -17,11 +17,37 @@ export interface CheckProps extends ScreenActions {
   reads: ReadItem[]
   /** Called with the item id and the row that opened the fix, for focus return. */
   onFix: (id: string, opener: HTMLElement) => void
+  /** The photo is still being read: a status and placeholder rows, no action yet. */
+  reading?: boolean
 }
 
-export function Check({ focusTitle, onNext, onBack, reads: all, onFix, notice }: CheckProps) {
-  const reads = all.filter((r) => r.id.startsWith('read-'))
-  const topThree = all.filter((r) => r.id.startsWith('top-'))
+// Lines it is not sure about come first, so they get looked at.
+const unsureFirst = (items: ReadItem[]) => [...items.filter((r) => r.unsure), ...items.filter((r) => !r.unsure)]
+
+export function Check({ focusTitle, onNext, onBack, reads: all, onFix, notice, reading = false }: CheckProps) {
+  const reads = unsureFirst(all.filter((r) => r.id.startsWith('read-')))
+  const topThree = unsureFirst(all.filter((r) => r.id.startsWith('top-')))
+  if (reading) {
+    return (
+      <Screen
+        eyebrow="Morning · 3 of 4"
+        title="Check what it read"
+        titleSize="step"
+        step={3}
+        onBack={onBack}
+        focusTitle={focusTitle}
+      >
+        <p className="pf-app__secondary" role="status">Reading your spread…</p>
+        <GlassCard>
+          <div className="pf-app__rows" aria-hidden="true">
+            {[72, 48, 60].map((w) => (
+              <span key={w} className="pf-app__placeholder" style={{ width: `${w}%` }} />
+            ))}
+          </div>
+        </GlassCard>
+      </Screen>
+    )
+  }
   if (all.length === 0) {
     return (
       <Screen
@@ -64,6 +90,7 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix, notice }:
               text={r.text}
               snippetSrc={snippetFor(r)}
               snippetSize={snippetSize(r.id)}
+              unsure={r.unsure}
               onFix={(opener) => onFix(r.id, opener)}
             />
           ))}
@@ -79,6 +106,7 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix, notice }:
               text={t.text}
               snippetSrc={snippetFor(t)}
               snippetSize={snippetSize(t.id)}
+              unsure={t.unsure}
               onFix={(opener) => onFix(t.id, opener)}
             />
           ))}

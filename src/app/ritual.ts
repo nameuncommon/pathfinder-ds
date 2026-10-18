@@ -6,6 +6,8 @@ export interface ReadItem {
   id: string
   mark: MarkType
   text: string
+  /** The reader is not confident about this line: flag it and list it first. */
+  unsure?: boolean
 }
 
 export type Step = 'open' | 'snap' | 'check' | 'sort' | 'done'
