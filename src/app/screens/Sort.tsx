@@ -32,7 +32,8 @@ export function Sort({ focusTitle, onBack, items = inbox, index, onChoose, onLea
         eyebrow="Morning · 4 of 4"
         title="Sort the inbox"
         support="Nothing waiting"
-        step={4}
+        titleSize="step"
+      step={4}
         onBack={onBack}
         focusTitle={focusTitle}
         action={<Button onClick={onLeave}>Back to today</Button>}
@@ -46,6 +47,7 @@ export function Sort({ focusTitle, onBack, items = inbox, index, onChoose, onLea
       eyebrow="Morning · 4 of 4"
       title="Sort the inbox"
       support={`${index + 1} of ${items.length}`}
+      titleSize="step"
       step={4}
       onBack={onBack}
       focusTitle={focusTitle}

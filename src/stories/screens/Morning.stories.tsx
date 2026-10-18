@@ -22,6 +22,17 @@ const doc = (text: string, node: string) => ({
 const actions = { focusTitle: false, onNext: fn(), onBack: fn(), onSkip: fn() }
 const allReads = [...reads, ...topThree]
 
+
+// One serif per screen: count elements with their own text set in the display face.
+const oneSerif = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+  const serif = [...canvasElement.querySelectorAll('*')].filter(
+    (el) =>
+      [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent?.trim()) &&
+      getComputedStyle(el).fontFamily.includes('Cormorant'),
+  )
+  await expect(serif.map((el) => el.textContent)).toHaveLength(1)
+}
+
 const meta = {
   title: 'Screens/Morning ritual',
   parameters: { layout: 'fullscreen', viewport: { defaultViewport: 'mobile' } },
@@ -41,12 +52,14 @@ export const Step1Open: Story = {
   name: '01 open',
   parameters: doc('Today and the door to the ritual: the one thing on paper, today’s calendar, the snap.', '515-3'),
   render: () => <Open {...actions} />,
+  play: oneSerif,
 }
 
 export const Step2Snap: Story = {
   name: '02 snap',
   parameters: doc('The viewfinder has found the spread; tap to take the photo or skip today.', '515-137'),
   render: () => <Snap {...actions} />,
+  play: oneSerif,
 }
 
 export const Step3Check: Story = {
@@ -59,6 +72,7 @@ export const Step4Sort1: Story = {
   name: '04 sort / 1 of 3',
   parameters: doc('One inbox item at a time; one tap on a direction decides it.', '516-315'),
   render: () => <Sort {...actions} index={0} onChoose={fn()} onLeave={fn()} />,
+  play: oneSerif,
 }
 
 export const Step4Sort2: Story = {

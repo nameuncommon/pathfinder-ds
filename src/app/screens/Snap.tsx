@@ -30,6 +30,7 @@ export function Snap({ focusTitle, onNext, onBack, onSkip, photo = 'ok', onRetry
           ? 'It came out blurry. Hold the phone steady over the spread and tap to try again.'
           : "Same spread every morning; it reads what's new"
       }
+      titleSize="step"
       step={2}
       onBack={onBack}
       focusTitle={focusTitle}

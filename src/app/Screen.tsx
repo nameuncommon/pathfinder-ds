@@ -7,6 +7,8 @@ export interface ScreenProps {
   /** The eyebrow is today's date (Open only): it keeps the gold. */
   dateEyebrow?: boolean
   title: string
+  /** large: the greeting and the ending. step: a heading inside the flow. */
+  titleSize?: 'large' | 'step'
   support?: string
   /** 1 to 4 shows the progress bar; omit for open and done. */
   step?: number
@@ -29,6 +31,7 @@ export function Screen({
   eyebrow,
   dateEyebrow = false,
   title,
+  titleSize = 'large',
   support,
   step,
   onBack,
@@ -52,7 +55,7 @@ export function Screen({
         </div>
         <main className="pf-app__content">
           <p className={dateEyebrow ? 'pf-app__eyebrow pf-app__eyebrow--date' : 'pf-app__eyebrow'}>{eyebrow}</p>
-          <h1 ref={headingRef} tabIndex={-1} className="pf-app__title">
+          <h1 ref={headingRef} tabIndex={-1} className={titleSize === 'step' ? 'pf-app__title pf-app__title--step' : 'pf-app__title'}>
             {title}
           </h1>
           {support && <p className="pf-app__support">{support}</p>}

@@ -11,12 +11,14 @@ export const steps = Object.keys(tokens.primitives.type).length
 
 export const ramp = [
   ['numeral', 'var(--font-display)', 56, 56, 600, 'One hero number, only on encouragement', '6'],
-  ['display', 'var(--font-display)', 32, 40, 600, 'The screen title, one per screen', 'Good morning, Jake'],
-  ['title', 'var(--font-display)', 24, 32, 600, 'The one highlight on a card', 'Book flights for March'],
+  ['display', 'var(--font-display)', 32, 40, 600, 'The large title: the greeting and the ending only', 'Good morning, Jake'],
+  ['title', 'var(--font-display)', 24, 32, 600, 'A step title inside the flow', 'Sort the inbox'],
+  ['item', 'var(--font-sans)', 20, 28, 600, 'The item in focus, in sans so the serif stays single', 'Book flights for March'],
   ['body', 'var(--font-sans)', 16, 24, 400, 'List rows and card text', 'Lunch with Sam'],
   ['body strong', 'var(--font-sans)', 16, 24, 600, 'Buttons and the item in focus', 'Snap this week’s spread'],
   ['secondary', 'var(--font-sans)', 14, 22, 400, 'Supporting lines and meta', 'Said on the move · Wednesday'],
-  ['label', 'var(--font-sans)', 12, 18, 500, 'Section labels and eyebrows only', 'TODAY'],
+  ['label', 'var(--font-sans)', 14, 22, 600, 'Section labels, sentence case', 'Today'],
+  ['eyebrow', 'var(--font-sans)', 12, 18, 500, 'One eyebrow per screen, capitals', 'MORNING · 2 OF 4'],
   ['data', 'var(--font-mono)', 13, 20, 500, 'Times, week codes and directions, never words', '9:30  W42  N'],
 ]
 
@@ -36,7 +38,7 @@ export const ramp = [
             <p style={{ margin: '2px 0 0', fontFamily: 'var(--font-mono)', fontSize: 'var(--type-12-size)', color: 'var(--text-muted)' }}>{`${size}/${line} · ${weight}`}</p>
             <p style={{ margin: '2px 0 0', fontSize: 'var(--type-13-size)', color: 'var(--text-secondary)' }}>{use}</p>
           </div>
-          <p style={{ margin: 0, color: 'var(--text-primary)', fontFamily: family, fontSize: size, lineHeight: `${line}px`, fontWeight: weight, letterSpacing: role === 'label' ? '0.06em' : 0 }}>{sample}</p>
+          <p style={{ margin: 0, color: 'var(--text-primary)', fontFamily: family, fontSize: size, lineHeight: `${line}px`, fontWeight: weight, letterSpacing: role === 'eyebrow' ? '0.06em' : 0 }}>{sample}</p>
         </div>
       ))}
     </div>
@@ -57,7 +59,8 @@ export const ramp = [
     <h2 style={h2Style}>Rules</h2>
     <ul style={{ ...pStyle, paddingLeft: 20 }}>
       <li>One serif title per screen. The serif never sets body text.</li>
-      <li>Capitals only for short labels and eyebrows.</li>
+      <li>Capitals only for the one eyebrow per screen. Section labels are sentence case.</li>
+      <li>The large title is for the greeting and the ending; steps inside the flow use the 24 title.</li>
       <li>Mono only for data: a time, a week code, a direction letter. A word like "due" stays in Geist.</li>
       <li>Light text on navy gets a little more line height than it would on paper.</li>
     </ul>

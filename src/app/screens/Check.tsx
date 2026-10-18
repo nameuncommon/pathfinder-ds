@@ -23,7 +23,8 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix }: CheckPr
       <Screen
         eyebrow="Morning · 3 of 4"
         title="Check the read"
-        step={3}
+        titleSize="step"
+      step={3}
         onBack={onBack}
         focusTitle={focusTitle}
         action={<Button onClick={onNext}>Continue</Button>}
@@ -36,6 +37,7 @@ export function Check({ focusTitle, onNext, onBack, reads: all, onFix }: CheckPr
     <Screen
       eyebrow="Morning · 3 of 4"
       title="Check the read"
+      titleSize="step"
       step={3}
       onBack={onBack}
       focusTitle={focusTitle}

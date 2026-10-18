@@ -54,6 +54,11 @@
   overflow-wrap: anywhere;
 }
 
+.pf-app__title--step {
+  font-size: var(--type-24-size);
+  line-height: var(--type-24-line);
+}
+
 .pf-app__title:focus {
   outline: none;
 }
@@ -79,14 +84,13 @@
   font-weight: 600;
 }
 
+/* Section labels: sentence case, closer to their content than to the group above. */
 .pf-app__label {
-  margin: var(--space-2) 0 0;
+  margin: var(--space-2) 0 calc(var(--space-2) * -1);
   color: var(--text-secondary);
-  font-size: var(--type-12-size);
-  line-height: var(--type-12-line);
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+  font-weight: 600;
 }
 
 .pf-app__paper {
@@ -158,9 +162,10 @@
 /* sort */
 .pf-app__item-title {
   margin: 0 0 var(--space-1);
-  font-family: var(--font-display);
-  font-size: var(--type-24-size);
-  line-height: var(--type-24-line);
+  font-family: var(--font-sans);
+  font-size: var(--type-20-size);
+  line-height: var(--type-20-line);
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 
