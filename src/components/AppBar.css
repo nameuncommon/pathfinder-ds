@@ -36,5 +36,4 @@
   height: 52px;
   border-radius: 50%;
   background: var(--navy-800);
-  border: 1px solid color-mix(in srgb, var(--gold-500) 45%, transparent);
 }

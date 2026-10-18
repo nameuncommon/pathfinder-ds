@@ -1,4 +1,4 @@
-import { StarRing } from './StarRing'
+import { Dial } from './Dial'
 import './AppBar.css'
 
 export interface AppBarProps {
@@ -26,7 +26,7 @@ export function AppBar({ onBack }: AppBarProps) {
         </button>
       )}
       <div className="pf-appbar__disc">
-        <StarRing size={40} />
+        <Dial size={34} />
       </div>
     </header>
   )

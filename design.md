@@ -58,6 +58,7 @@ components:               # 17 v2 components, built in code (Storybook) and in F
   - checkbox
   - compass-choice
   - date-chip
+  - dial
   - empty-state
   - glass-card
   - input
@@ -65,7 +66,6 @@ components:               # 17 v2 components, built in code (Storybook) and in F
   - progress-bar
   - read-row
   - schedule-row
-  - star-ring
   - tag
   - tally
   - toast
@@ -227,6 +227,7 @@ or spacing value in `src/components/`.
 | checkbox | native input underneath, styled box on top |
 | compass-choice | one large choice (64px minimum) in the sort step |
 | date-chip | when an item is due; state is derived from the date |
+| dial | the logo: solid ring, four cardinal dots and the compass rose P at 24px and up; the compass rose P alone below 24px |
 | empty-state | art, a line of copy and one action |
 | glass-card | container on the glass surface |
 | input | text field with helper and error text |
@@ -234,7 +235,6 @@ or spacing value in `src/components/`.
 | progress-bar | thin bar showing step of total |
 | read-row | one row of the snap read-back, tappable to correct |
 | schedule-row | a time, a title and a bearing in the week |
-| star-ring | the brand ring of dots around a star |
 | tag | translucent tinted pill |
 | tally | done and moved marks in a row |
 | toast | status message on a floating surface |

@@ -3,10 +3,15 @@ import { describe, expect, it, vi } from 'vitest'
 import { AppBar } from './AppBar'
 
 describe('AppBar', () => {
-  it('shows the star ring and no back button by default', () => {
+  it('shows the dial and no back button by default', () => {
     render(<AppBar />)
     expect(screen.getByRole('img', { name: 'Pathfinder' })).toBeTruthy()
     expect(screen.queryByRole('button', { name: 'Back' })).toBeNull()
+  })
+
+  it('the disc shows the dial', () => {
+    render(<AppBar />)
+    expect(screen.getByRole('img', { name: 'Pathfinder' }).querySelectorAll('circle')).toHaveLength(5)
   })
 
   it('shows a working back button when onBack is given', () => {
