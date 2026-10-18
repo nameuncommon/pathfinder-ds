@@ -18,6 +18,32 @@ const preview: Preview = {
         showName: true,
       },
     },
+    transparency: {
+      name: 'Transparency',
+      description: 'Reduce Transparency: glass becomes solid navy with no blur',
+      defaultValue: 'full',
+      toolbar: {
+        icon: 'contrast',
+        items: [
+          { value: 'full', title: 'Glass' },
+          { value: 'reduced', title: 'Reduced transparency' },
+        ],
+        showName: true,
+      },
+    },
+    motion: {
+      name: 'Motion',
+      description: 'Reduce Motion: animations and transitions stop',
+      defaultValue: 'full',
+      toolbar: {
+        icon: 'lightning',
+        items: [
+          { value: 'full', title: 'Motion' },
+          { value: 'reduced', title: 'Reduced motion' },
+        ],
+        showName: true,
+      },
+    },
   },
 
   decorators: [
@@ -25,10 +51,13 @@ const preview: Preview = {
       const theme = context.globals.theme || 'dark'
       if (typeof document !== 'undefined') {
         document.documentElement.setAttribute('data-theme', theme)
+        document.documentElement.setAttribute('data-transparency', context.globals.transparency || 'full')
+        document.documentElement.setAttribute('data-motion', context.globals.motion || 'full')
         document.body.style.background = 'var(--surface-base)'
         document.body.style.color = 'var(--text-primary)'
         document.body.style.margin = '0'
-        document.body.style.padding = '24px'
+        // fullscreen stories (the screens) own their canvas edge to edge
+        document.body.style.padding = context.parameters.layout === 'fullscreen' ? '0' : '24px'
         document.body.style.fontFamily = 'var(--font-sans)'
         document.body.style.minHeight = '100vh'
         document.body.style.boxSizing = 'border-box'
@@ -69,6 +98,7 @@ const preview: Preview = {
           'Introduction',
           'Foundations', ['Color', 'Typography', 'Spacing', 'Motion'],
           'Components',
+          'Screens',
           'Composed',
         ],
       },

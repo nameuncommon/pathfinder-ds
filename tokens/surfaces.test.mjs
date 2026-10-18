@@ -19,6 +19,7 @@ function blockAfter(marker) {
 for (const marker of [
   '@media (prefers-reduced-transparency: reduce)',
   '@supports not (backdrop-filter: blur(1px))',
+  ':root[data-transparency="reduced"]',
 ]) {
   test(`.pf-glass falls back under ${marker}`, () => {
     const body = blockAfter(marker)
@@ -35,4 +36,13 @@ test('@supports fallback also clears the prefixed backdrop-filter', () => {
 
 test('glow peak reads the token', () => {
   assert.match(css, /var\(--effect-glow-peak\)/)
+})
+
+test('the Storybook reduced-motion switch has a CSS hook', () => {
+  assert.match(css, /:root\[data-motion="reduced"\]/)
+})
+
+test('the ambient dot field shows at the top and fades out by 240px, as in Figma', () => {
+  const body = blockAfter('.pf-ambient::before')
+  assert.match(body, /mask-image:\s*linear-gradient\(to bottom,\s*#000 0,\s*transparent 240px\)/)
 })

@@ -1,0 +1,326 @@
+/* Desktop "this week": fixed 1440 by 900, laid out as Figma 518:534. */
+.pf-desk {
+  position: relative;
+  display: flex;
+  gap: var(--space-4);
+  box-sizing: border-box;
+  width: 1440px;
+  height: 900px;
+  padding: var(--space-5);
+  overflow: hidden;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}
+
+.pf-desk p,
+.pf-desk h1,
+.pf-desk h2,
+.pf-desk ul {
+  margin: 0;
+}
+
+.pf-desk__sidebar,
+.pf-desk__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  box-sizing: border-box;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.pf-desk__sidebar {
+  width: 208px;
+  padding: var(--space-6) var(--space-4);
+}
+
+.pf-desk__panel {
+  width: 300px;
+  padding: var(--space-6) var(--space-5);
+}
+
+.pf-desk__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.pf-desk__wordmark {
+  font-family: var(--font-display);
+  font-size: var(--type-24-size);
+  line-height: var(--type-24-line);
+  font-weight: 600;
+}
+
+.pf-desk__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pf-desk__spacer {
+  flex: 1;
+}
+
+.pf-desk__label {
+  color: var(--text-muted);
+  font-size: var(--type-12-size);
+  line-height: var(--type-12-line);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pf-desk__bearings ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  padding: 0;
+  list-style: none;
+  color: var(--text-secondary);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+}
+
+.pf-desk__bearings li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.pf-desk__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.pf-desk__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  flex: 1;
+  min-width: 0;
+  padding-top: var(--space-2);
+}
+
+.pf-desk__header {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.pf-desk__header > .pf-button {
+  width: 200px;
+}
+
+.pf-desk__title {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.pf-desk__eyebrow {
+  color: var(--accent-text);
+  font-size: var(--type-12-size);
+  line-height: var(--type-12-line);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pf-desk__display {
+  font-family: var(--font-display);
+  font-size: var(--type-32-size);
+  line-height: var(--type-32-line);
+  font-weight: 600;
+}
+
+.pf-desk__week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--space-2);
+  flex: 1;
+  min-height: 0;
+}
+
+.pf-desk__day {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-2);
+  border-radius: 16px;
+}
+
+.pf-desk__day--today {
+  border-color: var(--accent-nudge-edge);
+}
+
+.pf-desk__date {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding-left: var(--space-1);
+}
+
+.pf-desk__weekday {
+  color: var(--text-muted);
+  font-size: var(--type-12-size);
+  line-height: var(--type-12-line);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pf-desk__daynum {
+  font-family: var(--font-display);
+  font-size: var(--type-24-size);
+  line-height: var(--type-24-line);
+  font-weight: 600;
+}
+
+.pf-desk__day--today .pf-desk__weekday,
+.pf-desk__day--today .pf-desk__daynum {
+  color: var(--accent-text);
+}
+
+.pf-desk__lower {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.pf-desk__lower .pf-glass-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pf-desk__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--text-secondary);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+}
+
+.pf-desk__glyph {
+  width: 18px;
+  color: var(--accent-text);
+  font-family: var(--font-mono);
+  font-size: var(--type-13-size);
+  text-align: center;
+}
+
+.pf-desk__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.pf-desk__paper {
+  padding: 10px var(--space-4);
+  border-radius: var(--radius-lg);
+}
+
+.pf-desk__paper img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.pf-desk__moves {
+  color: var(--accent-text);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+}
+
+.pf-desk__tally {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pf-desk__numeral {
+  color: var(--accent-text);
+  font-family: var(--font-display);
+  font-size: var(--type-56-size);
+  line-height: var(--type-56-line);
+  font-weight: 600;
+}
+
+.pf-desk__strong {
+  font-weight: 600;
+}
+
+.pf-desk__secondary {
+  color: var(--text-secondary);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+}
+
+.pf-desk__body {
+  margin-bottom: 10px !important;
+}
+
+.pf-desk__chips {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-2);
+}
+
+.pf-desk__chip {
+  min-height: 44px;
+  border: 1px solid var(--accent-default);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--accent-text);
+  font-family: var(--font-mono);
+  font-size: var(--type-13-size);
+  cursor: pointer;
+}
+
+.pf-desk__chip:hover {
+  background: var(--accent-selected-fill);
+}
+
+.pf-desk__chip:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.pf-desk__destination {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pf-desk__line {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  color: var(--text-secondary);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+}
+
+.pf-desk__pct {
+  font-family: var(--font-mono);
+  font-size: var(--type-13-size);
+}
+
+.pf-desk__track {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--surface-glass-strong);
+  overflow: hidden;
+}
+
+.pf-desk__track > span {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+}

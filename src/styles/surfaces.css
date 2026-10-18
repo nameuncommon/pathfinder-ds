@@ -55,8 +55,8 @@
     transparent 1px
   );
   background-size: 16px 16px;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 240px);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 240px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, transparent 240px);
+  mask-image: linear-gradient(to bottom, #000 0, transparent 240px);
 }
 
 /* Fallbacks: opaque fill, no blur. */
@@ -75,5 +75,26 @@
     background: var(--surface-glass-fallback);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
+  }
+}
+
+/* Storybook toolbar switches (and any host that sets them): the same fallback
+   and motion stop as the media queries, forced on with an attribute. */
+:root[data-transparency="reduced"] {
+  & .pf-glass,
+  & .pf-glass--strong {
+    background: var(--surface-glass-fallback);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+:root[data-motion="reduced"] {
+  & *,
+  & *::before,
+  & *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -24,7 +24,6 @@
   right: var(--space-6);
   height: 44px;
   overflow: hidden;
-  opacity: 0.6;
 }
 
 .pf-empty__title {
