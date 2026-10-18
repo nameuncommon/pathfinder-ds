@@ -35,11 +35,7 @@ export function Sort({ focusTitle, onBack, items = inbox, index, onChoose, onLea
         step={4}
         onBack={onBack}
         focusTitle={focusTitle}
-        action={
-          <Button variant="ghost" onClick={onLeave}>
-            Back to today
-          </Button>
-        }
+        action={<Button onClick={onLeave}>Back to today</Button>}
       >
         <EmptyState surface="dots" title="All sorted" line="Nothing is waiting. New captures land here." />
       </Screen>
@@ -53,7 +49,7 @@ export function Sort({ focusTitle, onBack, items = inbox, index, onChoose, onLea
       step={4}
       onBack={onBack}
       focusTitle={focusTitle}
-      action={
+      escape={
         <Button variant="ghost" onClick={onLeave}>
           Leave the rest for Sunday
         </Button>

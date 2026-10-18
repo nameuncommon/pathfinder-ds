@@ -26,10 +26,19 @@ export function Open({ focusTitle, onNext, onSkip, snapSkipped = false, lastSync
       title="Good morning, Jake"
       focusTitle={focusTitle}
       notice={offline ? <Toast message="Saved on this phone. It will sync when you are back online." /> : undefined}
-      action={
-        <Button variant="quiet" onClick={onSkip}>
+      escape={
+        <Button variant="ghost" onClick={onSkip}>
           {`Inbox · ${inbox.length} to sort`}
         </Button>
+      }
+      action={
+        snapSkipped ? (
+          <Button variant="quiet" onClick={onNext}>
+            Snap the spread
+          </Button>
+        ) : (
+          <Button onClick={onNext}>Snap this week&apos;s spread</Button>
+        )
       }
     >
       <h2 className="pf-app__label">The one thing this week</h2>
@@ -46,16 +55,7 @@ export function Open({ focusTitle, onNext, onSkip, snapSkipped = false, lastSync
           oneThing
         )}
       </div>
-      {snapSkipped ? (
-        <>
-          <Button variant="quiet" onClick={onNext}>
-            Snap the spread
-          </Button>
-          {lastSync && <p className="pf-app__secondary pf-app__muted">{`Last synced ${lastSync}`}</p>}
-        </>
-      ) : (
-        <Button onClick={onNext}>Snap this week&apos;s spread</Button>
-      )}
+      {snapSkipped && lastSync && <p className="pf-app__secondary pf-app__muted">{`Last synced ${lastSync}`}</p>}
       <h2 className="pf-app__label">Today</h2>
       <div>
         {schedule.map((s) => (

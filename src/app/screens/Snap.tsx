@@ -1,3 +1,4 @@
+import { useId } from 'react'
 import { Button } from '../../components/Button'
 import { Mark } from '../../components/Mark'
 import { Viewfinder } from '../../components/Viewfinder'
@@ -18,6 +19,8 @@ export interface SnapProps extends ScreenActions {
 
 export function Snap({ focusTitle, onNext, onBack, onSkip, photo = 'ok', onRetry }: SnapProps) {
   const blurry = photo === 'blurry'
+  const statusId = useId()
+  const take = blurry ? (onRetry ?? (() => {})) : onNext
   return (
     <Screen
       eyebrow="Morning · 2 of 4"
@@ -30,13 +33,18 @@ export function Snap({ focusTitle, onNext, onBack, onSkip, photo = 'ok', onRetry
       step={2}
       onBack={onBack}
       focusTitle={focusTitle}
-      action={
-        <Button variant="quiet" onClick={onSkip}>
+      escape={
+        <Button variant="ghost" onClick={onSkip}>
           Skip today
         </Button>
       }
+      action={
+        <Button onClick={take} aria-describedby={statusId}>
+          Take the photo
+        </Button>
+      }
     >
-      <Viewfinder found={!blurry} blurry={blurry} weekCode="W42" corners={4} onTake={blurry ? (onRetry ?? (() => {})) : onNext}>
+      <Viewfinder found={!blurry} blurry={blurry} weekCode="W42" corners={4} onTake={take} pointerOnly statusId={statusId}>
         {snapImage ? (
           <img
             className="pf-viewfinder__page"

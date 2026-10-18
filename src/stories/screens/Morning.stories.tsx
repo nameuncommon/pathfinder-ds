@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { fn } from 'storybook/test'
+import type { CSSProperties } from 'react'
+import { expect, fn } from 'storybook/test'
 import { snippetOnPaperFor, snippetSize } from '../../app/assets'
 import { CorrectionSheet } from '../../app/CorrectionSheet'
 import { inbox, reads, topThree } from '../../app/data'
@@ -9,6 +10,7 @@ import { Open } from '../../app/screens/Open'
 import { Snap } from '../../app/screens/Snap'
 import { Sort } from '../../app/screens/Sort'
 import '../../app/app.css'
+import tokens from '../../../tokens/tokens.json'
 
 // These stories render the real screens from src/app/screens with the sample
 // data, so the app and Storybook can never drift apart.
@@ -126,4 +128,33 @@ export const StateSnapSkipped: Story = {
   name: 'state / snap skipped',
   parameters: doc('The snap was skipped today: Today shows what it already knows, with no nag.', '541-832'),
   render: () => <Open {...actions} snapSkipped lastSync="Thu 21 Oct · 7:40 pm" />,
+}
+
+// Every type token doubled, the way a 200% text setting would set them.
+const doubled = Object.fromEntries(
+  Object.entries(tokens.primitives.type).flatMap(([k, v]) => {
+    const n = k.split('/')[1]
+    return [[`--type-${n}-size`, `${v.size * 2}px`], [`--type-${n}-line`, `${v.line * 2}px`]]
+  }),
+) as CSSProperties
+
+const barDoesNotOverlap = async ({ canvasElement }: { canvasElement: HTMLElement }) => {
+  const bar = canvasElement.querySelector('.pf-app__action')!
+  const [escape, primary] = [...bar.querySelectorAll('button')].map((b) => b.getBoundingClientRect())
+  await expect(escape.bottom).toBeLessThanOrEqual(primary.top)
+  await expect(primary.height).toBeGreaterThanOrEqual(44)
+}
+
+export const ActionBar2xOpen: Story = {
+  name: 'action bar at 2x text / open',
+  parameters: { docs: { description: { story: 'The pinned action bar with every type size doubled: the escape and the gold action stack and never overlap.' } } },
+  render: () => <div style={doubled}><Open {...actions} /></div>,
+  play: barDoesNotOverlap,
+}
+
+export const ActionBar2xSnap: Story = {
+  name: 'action bar at 2x text / snap',
+  parameters: { docs: { description: { story: 'Snap at doubled type: Skip today sits above the shutter, both still tappable.' } } },
+  render: () => <div style={doubled}><Snap {...actions} /></div>,
+  play: barDoesNotOverlap,
 }

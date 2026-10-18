@@ -13,8 +13,13 @@ export interface ScreenProps {
   focusTitle?: boolean
   /** A status shown just above the action, such as the offline toast. */
   notice?: ReactNode
-  /** Pinned to the bottom of the viewport. */
+  /**
+   * Pinned to the bottom of the viewport. The one rule: this is the step's gold
+   * forward action when it has one. Any way out goes in `escape`.
+   */
   action?: ReactNode
+  /** A quiet way out (skip, leave for later, the inbox), rendered just above the action. */
+  escape?: ReactNode
   children: ReactNode
 }
 
@@ -27,6 +32,7 @@ export function Screen({
   focusTitle = false,
   notice,
   action,
+  escape,
   children,
 }: ScreenProps) {
   const headingRef = useRef<HTMLHeadingElement>(null)
@@ -49,9 +55,10 @@ export function Screen({
           {support && <p className="pf-app__support">{support}</p>}
           {children}
         </main>
-        {(notice || action) && (
+        {(notice || escape || action) && (
           <div className="pf-app__action">
             {notice}
+            {escape}
             {action}
           </div>
         )}

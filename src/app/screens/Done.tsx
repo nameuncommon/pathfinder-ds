@@ -20,11 +20,7 @@ export function Done({ focusTitle, decisions, onRestart }: DoneProps) {
         all ? 'See you tomorrow morning.' : `${inbox.length - decided.length} left for Sunday.`
       }
       focusTitle={focusTitle}
-      action={
-        <Button variant="quiet" onClick={onRestart}>
-          Start again
-        </Button>
-      }
+      action={<Button onClick={onRestart}>Back to today</Button>}
     >
       {decided.length > 0 && (
         <ul className="pf-app__summary">

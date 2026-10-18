@@ -144,17 +144,17 @@ describe('MorningRitual', () => {
     expect(screen.getByText(LONG_TITLE)).toBeInTheDocument()
   })
 
-  it('Start again resets from done', async () => {
+  it('Back to today resets from done', async () => {
     const user = userEvent.setup()
     render(<MorningRitual />)
     await user.click(screen.getByRole('button', { name: /Inbox · 3 to sort/ }))
     await user.click(screen.getByRole('button', { name: 'Leave the rest for Sunday' }))
     expect(h1()).toHaveTextContent('Sorted 0 of 3')
-    await user.click(screen.getByRole('button', { name: 'Start again' }))
+    await user.click(screen.getByRole('button', { name: 'Back to today' }))
     expect(h1()).toHaveTextContent('Good morning, Jake')
   })
 
-  it('saving a top 3 fix updates that row, and Start again restores it', async () => {
+  it('saving a top 3 fix updates that row, and Back to today restores it', async () => {
     const user = userEvent.setup()
     render(<MorningRitual />)
     await user.click(screen.getByRole('button', { name: "Snap this week's spread" }))
@@ -167,7 +167,7 @@ describe('MorningRitual', () => {
     expect(screen.getByRole('button', { name: 'Fix: case study copy, task' })).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Looks right' }))
     await user.click(screen.getByRole('button', { name: 'Leave the rest for Sunday' }))
-    await user.click(screen.getByRole('button', { name: 'Start again' }))
+    await user.click(screen.getByRole('button', { name: 'Back to today' }))
     await user.click(screen.getByRole('button', { name: "Snap this week's spread" }))
     await user.click(screen.getByRole('button', { name: 'Take the photo' }))
     expect(screen.getByRole('button', { name: 'Fix: case study images, task' })).toBeInTheDocument()
