@@ -1,12 +1,14 @@
-/* Background and border come from .pf-glass. */
+/* A plain row, as Figma `row / read`: it sits inside a glass card, so it has no glass of its own. */
 .pf-read-row {
   display: flex;
   align-items: center;
   gap: var(--space-3);
   width: 100%;
   min-height: 44px;
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--radius-lg);
+  padding: 6px var(--space-2);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
   color: var(--text-primary);
   font-family: var(--font-sans);
   font-size: var(--type-16-size);
@@ -15,8 +17,16 @@
   cursor: pointer;
 }
 
+.pf-read-row:hover {
+  background: var(--surface-glass);
+}
+
+.pf-read-row:active {
+  background: var(--accent-selected-fill);
+}
+
 .pf-read-row:focus-visible {
-  outline: 2px solid var(--gold-400);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 

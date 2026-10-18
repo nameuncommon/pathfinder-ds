@@ -5,11 +5,11 @@
   inset: 0;
   pointer-events: none;
   background-size: 16px 16px;
-  background-image: radial-gradient(circle at 0.5px 0.5px, var(--pf-dot) 0.5px, transparent 1px);
+  background-image: radial-gradient(circle at 1px 1px, var(--pf-dot) 1px, transparent 1.5px);
 }
 
 .pf-dot-grid--navy {
-  --pf-dot: color-mix(in srgb, var(--cream-100) 12%, transparent);
+  --pf-dot: color-mix(in srgb, var(--cream-100) 7%, transparent);
 }
 
 .pf-dot-grid--cream {

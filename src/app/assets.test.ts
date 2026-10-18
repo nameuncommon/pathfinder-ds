@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { snapImage, snippet, snippetFor } from './assets'
+import { snapImage, snippet, snippetFor, snippetOnPaper } from './assets'
 
 describe('assets', () => {
   it.each(['read-1', 'read-2', 'read-3', 'top-1', 'top-2', 'top-3', 'one-thing'])(
@@ -22,5 +22,10 @@ describe('assets', () => {
 
   it('has a snap image', () => {
     expect(typeof snapImage).toBe('string')
+  })
+
+  it.each(['read-1', 'read-2', 'read-3', 'top-1', 'top-2', 'top-3'])('has a navy-ink copy of %s for paper', (id) => {
+    expect(typeof snippetOnPaper(id)).toBe('string')
+    expect(snippetOnPaper(id)).not.toBe(snippet(id))
   })
 })

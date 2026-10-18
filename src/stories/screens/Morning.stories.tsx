@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
-import { snippetFor, snippetSize } from '../../app/assets'
+import { snippetOnPaperFor, snippetSize } from '../../app/assets'
 import { CorrectionSheet } from '../../app/CorrectionSheet'
 import { inbox, reads, topThree } from '../../app/data'
 import { Check } from '../../app/screens/Check'
@@ -74,7 +74,7 @@ export const Step4Sort3: Story = {
 export const Done_: Story = {
   name: 'done',
   parameters: doc('Every item decided: All sorted.', '517-500'),
-  render: () => <Done focusTitle={false} decisions={Object.fromEntries(inbox.map((i) => [i.id, 'N' as const]))} onRestart={fn()} />,
+  render: () => <Done focusTitle={false} decisions={{ [inbox[0].id]: 'E', [inbox[1].id]: 'N', [inbox[2].id]: 'S' }} onRestart={fn()} />,
 }
 
 export const FixWhatIRead: Story = {
@@ -87,7 +87,7 @@ export const FixWhatIRead: Story = {
         <Check {...actions} reads={allReads} onFix={fn()} />
         <CorrectionSheet
           text={item.text}
-          snippetSrc={snippetFor(item)}
+          snippetSrc={snippetOnPaperFor(item)}
           snippetSize={snippetSize(item.id)}
           returnFocusTo={null}
           onSave={fn()}

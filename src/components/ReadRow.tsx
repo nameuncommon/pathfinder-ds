@@ -15,7 +15,7 @@ export function ReadRow({ mark, text, snippetSrc, snippetSize, onFix }: ReadRowP
   return (
     <button
       type="button"
-      className="pf-glass pf-read-row"
+      className="pf-read-row"
       aria-label={`Fix: ${text}, ${mark}`}
       onClick={(e) => onFix(e.currentTarget)}
     >

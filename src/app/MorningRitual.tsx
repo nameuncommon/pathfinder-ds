@@ -1,6 +1,6 @@
 import { useReducer, useState } from 'react'
 import { CorrectionSheet } from './CorrectionSheet'
-import { snippetFor, snippetSize } from './assets'
+import { snippetOnPaperFor, snippetSize } from './assets'
 import { inbox, reads, topThree } from './data'
 
 import { initialRitual, ritualReducer, type Action, type RitualState } from './ritual'
@@ -72,7 +72,7 @@ export function MorningRitual() {
       {fixing && (
         <CorrectionSheet
           text={fixing.text}
-          snippetSrc={snippetFor(fixing)}
+          snippetSrc={snippetOnPaperFor(fixing)}
           snippetSize={snippetSize(fixing.id)}
           returnFocusTo={fixOpener}
           onCancel={() => setFixingId(null)}

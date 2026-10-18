@@ -204,7 +204,14 @@
   overflow-wrap: anywhere;
 }
 
+/* the handwriting sits on paper: cream means paper */
+.pf-sheet__paper {
+  padding: 10px var(--space-4);
+  border-radius: var(--radius-lg);
+}
+
 img.pf-sheet__snippet {
+  display: block;
   max-width: 100%;
   height: auto;
 }

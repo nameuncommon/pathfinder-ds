@@ -45,5 +45,9 @@ describe('ReadRow', () => {
     expect(img.getAttribute('width')).toBe('122')
     expect(img.getAttribute('height')).toBe('19')
   })
-})
 
+  it('is a plain row like Figma row / read: no glass of its own', () => {
+    render(<ReadRow mark="done" text="draft the brief" onFix={() => {}} />)
+    expect(screen.getByRole('button').className).not.toContain('pf-glass')
+  })
+})

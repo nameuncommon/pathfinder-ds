@@ -15,4 +15,9 @@ describe('CorrectionSheet', () => {
     expect(document.activeElement).toBe(opener)
     opener.remove()
   })
+
+  it('shows the handwriting on paper: cream means paper', () => {
+    render(<CorrectionSheet text="call the dentist" snippetSrc="x.png" returnFocusTo={null} onSave={() => {}} onCancel={() => {}} />)
+    expect(document.querySelector('.pf-paper img.pf-sheet__snippet')).toBeTruthy()
+  })
 })

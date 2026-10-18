@@ -56,13 +56,15 @@ export function CorrectionSheet({ text, snippetSrc, snippetSize, returnFocusTo, 
           Fix what I read
         </h2>
         {snippetSrc ? (
-          <img
+          <div className="pf-paper pf-sheet__paper">
+            <img
             className="pf-sheet__snippet"
             src={snippetSrc}
             alt={text}
             width={snippetSize?.width}
             height={snippetSize?.height}
           />
+          </div>
         ) : (
           <p className="pf-sheet__snippet-text">{text}</p>
         )}

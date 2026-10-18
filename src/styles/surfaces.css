@@ -50,9 +50,9 @@
   z-index: -1;
   pointer-events: none;
   background-image: radial-gradient(
-    circle at 0.5px 0.5px,
-    color-mix(in srgb, var(--cream-100) 12%, transparent) 0.5px,
-    transparent 1px
+    circle at 1px 1px,
+    color-mix(in srgb, var(--cream-100) 7%, transparent) 1px,
+    transparent 1.5px
   );
   background-size: 16px 16px;
   -webkit-mask-image: linear-gradient(to bottom, #000 0, transparent 240px);

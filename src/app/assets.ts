@@ -5,6 +5,12 @@ import oneThing from './img/one-thing.png'
 import read1 from './img/read-1.png'
 import read2 from './img/read-2.png'
 import read3 from './img/read-3.png'
+import read1Paper from './img/read-1-paper.png'
+import read2Paper from './img/read-2-paper.png'
+import read3Paper from './img/read-3-paper.png'
+import top1Paper from './img/top-1-paper.png'
+import top2Paper from './img/top-2-paper.png'
+import top3Paper from './img/top-3-paper.png'
 import snapW42 from './img/snap-w42.png'
 import top1 from './img/top-1.png'
 import top2 from './img/top-2.png'
@@ -19,6 +25,21 @@ const snippets: Record<string, string> = {
   'top-2': top2,
   'top-3': top3,
   'one-thing': oneThing,
+}
+
+// The same handwriting in navy ink (text/on-paper), for showing it on paper,
+// such as in the correction sheet. Recoloured from the cream originals, not redrawn.
+const onPaper: Record<string, string> = {
+  'read-1': read1Paper,
+  'read-2': read2Paper,
+  'read-3': read3Paper,
+  'top-1': top1Paper,
+  'top-2': top2Paper,
+  'top-3': top3Paper,
+}
+
+export function snippetOnPaper(id: string): string | undefined {
+  return Object.prototype.hasOwnProperty.call(onPaper, id) ? onPaper[id] : undefined
 }
 
 export interface ImageSize {
@@ -54,6 +75,11 @@ export function snippet(id: string): string | undefined {
 export function snippetFor(item: ReadItem): string | undefined {
   const original = [...reads, ...topThree].find((r) => r.id === item.id)
   return original && original.text === item.text ? snippet(item.id) : undefined
+}
+
+/** The navy-ink handwriting for a read item, on the same terms as snippetFor. */
+export function snippetOnPaperFor(item: ReadItem): string | undefined {
+  return snippetFor(item) ? snippetOnPaper(item.id) : undefined
 }
 
 export const snapImage: string | undefined = snapW42

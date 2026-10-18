@@ -7,8 +7,10 @@
   justify-content: center;
   box-sizing: border-box;
   width: 100%;
-  min-height: 360px;
-  padding: var(--space-8) var(--space-6);
+  /* as Figma 509:895: the page near the top, brackets framing it, the pill below */
+  min-height: 460px;
+  align-items: flex-start;
+  padding: var(--space-6) var(--space-6) 76px;
   border: 0;
   border-radius: 20px;
   background: color-mix(in srgb, var(--navy-950) 70%, black);
@@ -64,8 +66,8 @@ img.pf-viewfinder__page {
 
 .pf-viewfinder__corner--tl { top: 12px; left: 12px; border-width: 3px 0 0 3px; border-top-left-radius: 8px; }
 .pf-viewfinder__corner--tr { top: 12px; right: 12px; border-width: 3px 3px 0 0; border-top-right-radius: 8px; }
-.pf-viewfinder__corner--bl { bottom: 12px; left: 12px; border-width: 0 0 3px 3px; border-bottom-left-radius: 8px; }
-.pf-viewfinder__corner--br { bottom: 12px; right: 12px; border-width: 0 3px 3px 0; border-bottom-right-radius: 8px; }
+.pf-viewfinder__corner--bl { bottom: 64px; left: 12px; border-width: 0 0 3px 3px; border-bottom-left-radius: 8px; }
+.pf-viewfinder__corner--br { bottom: 64px; right: 12px; border-width: 0 3px 3px 0; border-bottom-right-radius: 8px; }
 
 .pf-viewfinder__pill {
   position: absolute;

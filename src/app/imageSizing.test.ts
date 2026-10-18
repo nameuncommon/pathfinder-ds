@@ -32,4 +32,15 @@ describe('2x images are sized explicitly at half their pixel size', () => {
     const shared = css.match(/(^|\n)\.pf-viewfinder__page\s*\{([^}]*)\}/)
     expect(shared?.[2] ?? '').not.toMatch(/(^|\s)width:/)
   })
+
+  it('the viewfinder frames the page like Figma: 460px tall, pill below the page', () => {
+    const css = readFileSync('src/components/Viewfinder.css', 'utf-8')
+    expect(css).toMatch(/\.pf-viewfinder\s*\{[^}]*min-height:\s*460px/)
+  })
+
+  it('dots are 2px, as in the Figma dot grid', () => {
+    for (const f of ['src/components/DotGrid.css', 'src/styles/surfaces.css']) {
+      expect(readFileSync(f, 'utf-8')).toMatch(/radial-gradient\(\s*circle at 1px 1px/)
+    }
+  })
 })

@@ -232,4 +232,14 @@ describe('MorningRitual', () => {
     await user.click(save)
     expect(screen.getByRole('button', { name: 'Fix: run 8k, done' })).toBeInTheDocument()
   })
+
+  it('the correction sheet shows the navy-ink handwriting on paper', async () => {
+    const user = userEvent.setup()
+    render(<MorningRitual />)
+    await user.click(screen.getByRole('button', { name: /Snap this week/ }))
+    await user.click(screen.getByRole('button', { name: 'Take the photo' }))
+    await user.click(screen.getByRole('button', { name: 'Fix: call the dentist, moved' }))
+    const img = within(screen.getByRole('dialog')).getByRole('img', { name: 'call the dentist' })
+    expect(img.getAttribute('src')).toContain('paper')
+  })
 })
