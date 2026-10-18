@@ -34,6 +34,7 @@
 }
 
 .pf-input__field:hover {
+  border-color: var(--text-secondary);
   background: var(--surface-glass-strong);
 }
 

@@ -21,15 +21,18 @@
   min-width: 0;
   min-height: 44px;
   text-align: center;
-  overflow-wrap: anywhere;
+  /* labels break only between words; like iOS tab bars, the label size is capped
+     at 1.25x so a one-word label always fits its tab */
+  overflow-wrap: normal;
+  hyphens: none;
   padding: 0;
   border: 0;
   border-radius: var(--radius-md);
   background: transparent;
   color: var(--text-muted);
   font-family: var(--font-sans);
-  font-size: var(--type-14-size);
-  line-height: var(--type-14-line);
+  font-size: min(var(--type-14-size), 17.5px);
+  line-height: min(var(--type-14-line), 26px);
   cursor: pointer;
 }
 

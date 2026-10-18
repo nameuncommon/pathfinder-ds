@@ -1,0 +1,31 @@
+/* Story frames: a plain padded frame on the base navy, so a small component never
+   sits on an offset tile of glows. The ambient background is for screens only. */
+.pf-story-frame {
+  box-sizing: border-box;
+  /* phone width by default, so full-width parts (tab bar, toast, input) show at their real size */
+  width: min(390px, calc(100vw - 48px));
+  padding: var(--space-6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--surface-base);
+}
+
+/* A States gallery needs the whole canvas: the frame around it steps aside. */
+.pf-story-frame:has(.pf-states) {
+  width: auto;
+  padding: 0;
+  border: 0;
+}
+
+.pf-states {
+  display: flex;
+  flex-wrap: wrap;
+  /* a centred story shrink-wraps, so give the gallery a real width to wrap within */
+  width: min(1040px, calc(100vw - 64px));
+  gap: var(--space-6);
+  box-sizing: border-box;
+  padding: var(--space-6);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--surface-base);
+}

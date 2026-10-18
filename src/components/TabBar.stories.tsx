@@ -18,7 +18,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div className="pf-ambient" style={{ padding: '24px', borderRadius: '14px', maxWidth: 420 }}>
+      <div className="pf-story-frame" style={{ padding: '24px', borderRadius: '14px', maxWidth: 420 }}>
         <Story />
       </div>
     ),
@@ -58,6 +58,14 @@ export const LargeText: Story = {
   play: async ({ canvasElement }) => {
     const tabs = within(canvasElement).getAllByRole('button').filter((b) => b.getAttribute('aria-label') !== 'Capture')
     const boxes = tabs.map((t) => t.getBoundingClientRect())
+    // no word is split across lines: every line box of a label's text starts at a word
+    for (const t of tabs) {
+      const node = [...t.childNodes].find((n) => n.nodeType === Node.TEXT_NODE)!
+      const r = document.createRange()
+      r.selectNodeContents(node)
+      const tops = [...new Set([...r.getClientRects()].map((b) => Math.round(b.top)))]
+      await expect(tops.length).toBeLessThanOrEqual(node.textContent!.trim().split(/\s+/).length)
+    }
     for (let i = 1; i < boxes.length; i++) {
       // each tab starts after the previous one ends: no label runs into its neighbour
       await expect(boxes[i].left).toBeGreaterThanOrEqual(boxes[i - 1].right - 0.5)

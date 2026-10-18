@@ -19,7 +19,7 @@ const meta = {
   args: { label: 'What it says', onChange: fn() },
   decorators: [
     (Story) => (
-      <div className="pf-ambient" style={{ padding: '24px', borderRadius: '14px', width: 390 }}>
+      <div className="pf-story-frame" style={{ padding: '24px', borderRadius: '14px', width: 390 }}>
         <Story />
       </div>
     ),

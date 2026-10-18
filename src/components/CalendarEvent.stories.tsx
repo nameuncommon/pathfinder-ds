@@ -16,7 +16,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div className="pf-ambient" style={{ padding: '24px', borderRadius: '14px', width: 200 }}>
+      <div className="pf-story-frame" style={{ padding: '24px', borderRadius: '14px', width: 200 }}>
         <Story />
       </div>
     ),

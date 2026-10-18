@@ -31,7 +31,7 @@ export const Task: Story = {
   args: { type: 'task' },
   decorators: [
     (Story) => (
-      <div className="pf-ambient" style={{ padding: '24px', borderRadius: '14px' }}>
+      <div className="pf-story-frame" style={{ padding: '24px', borderRadius: '14px' }}>
         <Story />
       </div>
     ),
@@ -55,7 +55,7 @@ export const AllMarks: Story = {
   args: { type: 'task' },
   render: () => (
     <div style={{ display: 'grid', gap: '16px' }}>
-      <div className="pf-ambient" style={{ padding: '24px', borderRadius: '14px' }}>
+      <div className="pf-story-frame" style={{ padding: '24px', borderRadius: '14px' }}>
         <Row tone="gold" />
       </div>
       <div className="pf-paper" style={{ padding: '24px', borderRadius: '14px' }}>
