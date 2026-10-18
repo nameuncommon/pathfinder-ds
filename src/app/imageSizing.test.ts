@@ -24,4 +24,12 @@ describe('2x images are sized explicitly at half their pixel size', () => {
     const rule = css.match(/\.pf-app__title:focus-visible\s*\{([^}]*)\}/)![1]
     expect(rule).toMatch(/outline:\s*1px solid var\(--focus-ring\)/)
   })
+
+  it('no CSS width rule overrides the snap image width attribute', () => {
+    const css = readFileSync('src/components/Viewfinder.css', 'utf-8')
+    const imgRule = css.match(/img\.pf-viewfinder__page\s*\{([^}]*)\}/)![1]
+    expect(imgRule).not.toMatch(/(^|\s)width:/)
+    const shared = css.match(/(^|\n)\.pf-viewfinder__page\s*\{([^}]*)\}/)
+    expect(shared?.[2] ?? '').not.toMatch(/(^|\s)width:/)
+  })
 })

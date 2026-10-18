@@ -299,3 +299,4 @@ file in `specs/decisions/`.
 | States galleries target the control in each cell and size to their content | the pseudo-states addon applies a state to the matched element only, so wrapper selectors never reached the control |
 | Counts aligned: 26 components and 14 screens in design.md, the Storybook introduction and the Figma cover (114 variables) | hand-typed counts drift; all three now say the same |
 | og.png: the v1 blue rule recoloured gold | the last v1 colour on a v2 asset; the rest of the card already matched |
+| The drawn viewfinder page keeps width 100%, the snapped image keeps only its width attribute | Proof 7 measured the snap image at 294x392 (upscaled): a CSS width on the shared class overrode the 262px attribute, which is only a low-priority style hint |

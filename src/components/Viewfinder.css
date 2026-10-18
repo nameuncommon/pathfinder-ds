@@ -27,7 +27,6 @@
   flex-direction: column;
   gap: var(--space-3);
   box-sizing: border-box;
-  width: 100%;
   padding: var(--space-5);
   border-radius: var(--radius-md);
   transform: rotate(-2deg);
@@ -36,8 +35,13 @@
   text-align: left;
 }
 
+/* the drawn page fills the frame; the snapped image keeps its width attribute (half its 2x size) */
+span.pf-viewfinder__page {
+  width: 100%;
+}
+
 img.pf-viewfinder__page {
-  width: auto;
+  display: block;
   max-width: 100%;
   height: auto;
   padding: 0;
