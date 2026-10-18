@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 import { CompassChoice } from './CompassChoice'
@@ -33,5 +34,10 @@ describe('CompassChoice', () => {
     render(<CompassChoice direction="S" title="t" detail={detail} onSelect={() => {}} />)
     expect(screen.getAllByRole('button')).toHaveLength(1)
     expect(screen.getByText(detail).textContent).toBe(detail)
+  })
+
+  it('the direction ring is 40px, as in Figma compass / choice', () => {
+    const css = readFileSync('src/components/CompassChoice.css', 'utf-8')
+    expect(css).toMatch(/\.pf-compass__dir\s*\{[^}]*width:\s*40px;[^}]*height:\s*40px/)
   })
 })

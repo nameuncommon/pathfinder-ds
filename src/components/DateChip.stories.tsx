@@ -34,6 +34,7 @@ export const Selected: Story = { args: { selected: true } }
 export const Disabled: Story = { args: { disabled: true } }
 
 export const States: Story = {
-  parameters: statesParameters,
+  parameters: { ...statesParameters, layout: 'padded' },
+  decorators: [(Story) => <Story />],
   render: () => <StatesGrid width={140} render={(s) => <DateChip disabled={s === 'disabled'}>Fri 22 Oct</DateChip>} />,
 }

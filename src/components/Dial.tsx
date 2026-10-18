@@ -16,9 +16,12 @@ const markStar =
 export interface DialProps {
   size?: number
   label?: string
+  /** Hide it from screen readers when it only decorates text that says the same thing. */
+  decorative?: boolean
 }
 
-export function Dial({ size = 40, label = 'Pathfinder' }: DialProps) {
+export function Dial({ size = 40, label = 'Pathfinder', decorative = false }: DialProps) {
+  const a11y = decorative ? ({ 'aria-hidden': true } as const) : ({ role: 'img', 'aria-label': label } as const)
   const full = size >= DIAL_MIN_SIZE
   return (
     <svg
@@ -26,8 +29,7 @@ export function Dial({ size = 40, label = 'Pathfinder' }: DialProps) {
       height={size}
       viewBox={full ? '0 0 200 200' : '-2.8 0 100 100'}
       fill="none"
-      role="img"
-      aria-label={label}
+      {...a11y}
       style={{ color: 'var(--brand-mark)', flexShrink: 0 }}
     >
       {full ? (

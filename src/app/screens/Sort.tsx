@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Button } from '../../components/Button'
 import { CompassChoice, type Direction } from '../../components/CompassChoice'
+import { Dial } from '../../components/Dial'
 import { EmptyState } from '../../components/EmptyState'
 import { GlassCard } from '../../components/GlassCard'
 import { choices, inbox } from '../data'
@@ -13,17 +14,6 @@ export interface SortProps extends ScreenActions {
   index: number
   onChoose: (d: Direction) => void
   onLeave: () => void
-}
-
-function Rose() {
-  return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true" className="pf-app__rose">
-      <circle cx="20" cy="20" r="17" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M20 5l3 12-3 3-3-3z" fill="currentColor" />
-      <path d="M20 35l-3-12 3-3 3 3z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M5 20l12-3 3 3-3 3zM35 20l-12 3-3-3 3-3z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-    </svg>
-  )
 }
 
 export function Sort({ focusTitle, onBack, items = inbox, index, onChoose, onLeave }: SortProps) {
@@ -69,12 +59,14 @@ export function Sort({ focusTitle, onBack, items = inbox, index, onChoose, onLea
         </Button>
       }
     >
-      <GlassCard>
-        <p ref={itemRef} tabIndex={-1} className="pf-app__item-title">{item.title}</p>
-        <p className="pf-app__secondary">{item.source}</p>
-      </GlassCard>
+      <div key={item.id} className="pf-app__item">
+        <GlassCard>
+          <p ref={itemRef} tabIndex={-1} className="pf-app__item-title">{item.title}</p>
+          <p className="pf-app__secondary">{item.source}</p>
+        </GlassCard>
+      </div>
       <div className="pf-app__question">
-        <Rose />
+        <Dial size={40} decorative />
         <div>
           <p className="pf-app__strong">Which way does it go?</p>
           <p className="pf-app__secondary">Pick a direction. You can change it later.</p>

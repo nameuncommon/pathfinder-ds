@@ -47,4 +47,12 @@ describe('screen states', () => {
     expect(screen.getByRole('button', { name: 'Back to today' })).toBeTruthy()
     expect(screen.queryByRole('group', { name: 'Which way does it go?' })).toBeNull()
   })
+
+  it('sort shows the decorative dial by the question, not the old rose drawing', () => {
+    const { container } = render(<Sort {...actions} index={0} onChoose={() => {}} onLeave={() => {}} />)
+    const q = container.querySelector('.pf-app__question svg')!
+    expect(q.getAttribute('aria-hidden')).toBe('true')
+    expect(q.querySelectorAll('circle')).toHaveLength(1)
+    expect(q.getAttribute('viewBox')).toBe('0 0 200 200')
+  })
 })

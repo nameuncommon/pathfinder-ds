@@ -1,0 +1,93 @@
+/* Motion for app and web: the system's signature moments. Every animation runs
+   only when the reader allows motion, and uses only the motion tokens. Under
+   Reduce Motion (or the Storybook Motion switch) nothing moves. */
+
+@keyframes pf-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pf-lock {
+  from {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pf-pop {
+  from {
+    transform: scale(0.6);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes pf-rise {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* screen to screen: each step's content settles in */
+  .pf-app__content {
+    animation: pf-enter var(--motion-duration-base) var(--motion-ease-standard);
+  }
+
+  /* the next inbox item arriving after a choice */
+  .pf-app__item {
+    animation: pf-enter var(--motion-duration-base) var(--motion-ease-standard);
+  }
+
+  /* a compass choice landing under the thumb */
+  .pf-compass {
+    transition: transform var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+
+  .pf-compass:active {
+    transform: scale(0.98);
+  }
+
+  /* the snap corners locking on to the page */
+  .pf-viewfinder__corner {
+    animation: pf-lock var(--motion-duration-slow) var(--motion-ease-standard) both;
+  }
+
+  /* the tally counting up, one mark after another */
+  .pf-tally > * {
+    animation: pf-enter var(--motion-duration-fast) var(--motion-ease-standard) both;
+  }
+
+  .pf-tally > :nth-child(2) { animation-delay: calc(var(--motion-duration-fast) * 0.5); }
+  .pf-tally > :nth-child(3) { animation-delay: calc(var(--motion-duration-fast) * 1); }
+  .pf-tally > :nth-child(4) { animation-delay: calc(var(--motion-duration-fast) * 1.5); }
+  .pf-tally > :nth-child(5) { animation-delay: calc(var(--motion-duration-fast) * 2); }
+  .pf-tally > :nth-child(6) { animation-delay: calc(var(--motion-duration-fast) * 2.5); }
+  .pf-tally > :nth-child(n + 7) { animation-delay: calc(var(--motion-duration-fast) * 3); }
+
+  /* the correction sheet rising from the bottom; it closes instantly */
+  .pf-sheet {
+    animation: pf-rise var(--motion-duration-base) var(--motion-ease-standard);
+  }
+
+  /* the checkbox check popping in */
+  .pf-checkbox__box svg {
+    animation: pf-pop var(--motion-duration-fast) var(--motion-ease-standard);
+  }
+}

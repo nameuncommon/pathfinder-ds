@@ -5,11 +5,15 @@ export type UiState = 'default' | 'hover' | 'focus' | 'pressed' | 'disabled'
 export const allStates: UiState[] = ['default', 'hover', 'focus', 'pressed', 'disabled']
 
 /** Story parameters that force each cell's pseudo-class with storybook-addon-pseudo-states. */
+// The addon applies the state to the matched element itself, so target the
+// control in each cell (and the input or button inside composite controls).
+const cellTargets = (state: string) => [`.pf-state--${state} > *`, `.pf-state--${state} input`, `.pf-state--${state} button`, `.pf-state--${state} a`]
+
 export const statesParameters = {
   pseudo: {
-    hover: ['.pf-state--hover'],
-    focusVisible: ['.pf-state--focus'],
-    active: ['.pf-state--pressed'],
+    hover: cellTargets('hover'),
+    focusVisible: cellTargets('focus'),
+    active: cellTargets('pressed'),
   },
 }
 
@@ -24,7 +28,7 @@ export function StatesGrid({
   width?: number
 }) {
   return (
-    <div className="pf-ambient" style={{ display: 'flex', flexWrap: 'wrap', gap: 24, padding: 24, borderRadius: 14 }}>
+    <div className="pf-ambient" style={{ display: 'flex', gap: 24, padding: 24, borderRadius: 14, width: 'max-content' }}>
       {states.map((s) => (
         <div key={s} style={{ display: 'flex', flexDirection: 'column', gap: 8, width }}>
           <div className={`pf-state--${s}`}>{render(s)}</div>

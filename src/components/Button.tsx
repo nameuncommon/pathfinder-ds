@@ -1,24 +1,22 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import './Button.css'
 
-export type ButtonVariant = 'primary' | 'quiet' | 'secondary' | 'ghost' | 'danger'
-export type ButtonSize = 'sm' | 'md' | 'lg'
+/** primary: the one gold action. quiet: glass, for everything else. ghost: a calm text action. */
+export type ButtonVariant = 'primary' | 'quiet' | 'ghost'
 
 export interface ButtonProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   variant?: ButtonVariant
-  size?: ButtonSize
   children: ReactNode
 }
 
 export function Button({
   variant = 'primary',
-  size = 'md',
   children,
   className,
   ...rest
 }: ButtonProps) {
-  const classes = ['pf-button', `pf-button--${variant}`, `pf-button--${size}`]
+  const classes = ['pf-button', `pf-button--${variant}`]
   if (variant === 'quiet') classes.push('pf-glass', 'pf-glass--strong')
   if (className) classes.push(className)
 

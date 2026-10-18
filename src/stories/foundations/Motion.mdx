@@ -67,7 +67,7 @@ export function MotionDemo() {
     <div style={{ display: 'grid', gap: 'var(--space-3)' }}>
       <Checkbox checked={checked} onChange={setChecked} label="plan the next waypoint" />
       <p style={{ ...labelStyle, margin: 0 }}>
-        {`toggling animates the check glyph over duration/fast (${fast}ms) with ease/standard (${ease}) - a scale from 0.8 to 1 plus a stroke draw-on, both using the same two tokens shown above.`}
+        {`Ticking it pops the check in over duration/fast (${fast}ms) with ease/standard (${ease}). With the Motion switch in the toolbar set to reduced, it appears instantly.`}
       </p>
     </div>
   )
@@ -75,10 +75,19 @@ export function MotionDemo() {
 
 <Unstyled>
   <div style={page}>
-    <h1 style={h1Style}>motion</h1>
+    <h1 style={h1Style}>Motion</h1>
     <p style={pStyle}>
-      {'motion is short and consistent everywhere - three durations and one easing curve, all sourced from tokens/tokens.json. the fast duration (120ms) is what drives the check glyph draw-on below - toggle it to see the token in motion, not just in a table.'}
+      {'Motion is short and the same everywhere: three durations and one easing curve, all from tokens/tokens.json. It shows that something happened, never decorates, and stops entirely under Reduce Motion.'}
     </p>
+    <h2 style={h2Style}>The signature moments</h2>
+    <ul style={{ ...pStyle, paddingLeft: 20 }}>
+      <li>Screen to screen: each step settles in from 8px below over duration/base.</li>
+      <li>A compass choice lands: the choice dips to 98% under the thumb, then the next item settles in.</li>
+      <li>The snap corners lock on: the gold brackets close in from 135% over duration/slow.</li>
+      <li>The tally counts up: the marks arrive one after another, half a fast step apart.</li>
+      <li>The correction sheet rises from the bottom over duration/base and closes instantly.</li>
+    </ul>
+    <p style={pStyle}>{'Under Reduce Motion each moment is instant: the content is simply there. Nothing is ever hidden behind an animation.'}</p>
     <h2 style={h2Style}>durations & easing</h2>
     <div style={{ overflowX: 'auto' }}>
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>

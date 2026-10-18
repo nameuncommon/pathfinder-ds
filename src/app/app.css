@@ -148,11 +148,6 @@
   gap: var(--space-3);
 }
 
-.pf-app__rose {
-  flex-shrink: 0;
-  color: var(--accent-text);
-}
-
 .pf-app__choices {
   display: flex;
   flex-direction: column;

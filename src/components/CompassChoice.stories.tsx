@@ -63,7 +63,8 @@ export const Group: Story = {
 
 export const States: Story = {
   args: { ...Default.args },
-  parameters: statesParameters,
+  parameters: { ...statesParameters, layout: 'padded' },
+  decorators: [(Story) => <Story />],
   render: (args) => (
     <StatesGrid states={['default', 'hover', 'focus', 'pressed']} width={320} render={() => <CompassChoice {...args} />} />
   ),

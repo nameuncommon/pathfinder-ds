@@ -34,7 +34,8 @@ export const Filled: Story = { args: { defaultValue: 'call the dentist' } }
 export const Disabled: Story = { args: { defaultValue: 'call the dentist', disabled: true } }
 
 export const States: Story = {
-  parameters: statesParameters,
+  parameters: { ...statesParameters, layout: 'padded' },
+  decorators: [(Story) => <Story />],
   render: () => (
     <StatesGrid width={300} render={(s) => <Input label="What it says" defaultValue="call the dentist" disabled={s === 'disabled'} />} />
   ),

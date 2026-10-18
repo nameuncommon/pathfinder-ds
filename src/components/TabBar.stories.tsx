@@ -34,7 +34,9 @@ export const Library: Story = { args: { active: 'library' } }
 
 export const States: Story = {
   args: { active: 'today' },
+  decorators: [(Story) => <Story />],
   parameters: {
+    layout: 'padded',
     ...statesParameters,
     // the gallery shows two tab bars, so two "Main" landmarks; a real screen has one
     a11y: { config: { rules: [{ id: 'landmark-unique', enabled: false }] } },

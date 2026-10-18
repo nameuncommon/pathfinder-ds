@@ -30,4 +30,11 @@ describe('Dial', () => {
     render(<Dial label="Pathfinder home" />)
     expect(screen.getByRole('img', { name: 'Pathfinder home' })).toBeTruthy()
   })
+
+  it('can be decorative: hidden from screen readers, no name', () => {
+    const { container } = render(<Dial size={40} decorative />)
+    const svg = container.querySelector('svg')!
+    expect(svg.getAttribute('aria-hidden')).toBe('true')
+    expect(svg.getAttribute('role')).toBeNull()
+  })
 })

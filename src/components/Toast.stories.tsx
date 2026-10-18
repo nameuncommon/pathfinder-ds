@@ -33,7 +33,8 @@ export const WithAction: Story = { args: { message: 'Dropped on purpose. Logged,
 
 export const States: Story = {
   args: { message: 'Dropped on purpose. Logged, not lost.' },
-  parameters: statesParameters,
+  parameters: { ...statesParameters, layout: 'padded' },
+  decorators: [(Story) => <Story />],
   render: (args) => (
     <StatesGrid states={['default', 'hover', 'focus']} width={340} render={() => <Toast {...args} action={{ label: 'Undo', onClick: () => {} }} />} />
   ),

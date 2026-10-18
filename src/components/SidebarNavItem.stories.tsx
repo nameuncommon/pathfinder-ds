@@ -48,6 +48,7 @@ export const Sidebar: Story = {
 
 export const States: Story = {
   args: { label: 'Calendar', href: '#calendar', icon: 'calendar' },
-  parameters: statesParameters,
+  parameters: { ...statesParameters, layout: 'padded' },
+  decorators: [(Story) => <Story />],
   render: (args) => <StatesGrid states={['default', 'hover', 'focus']} width={190} render={() => <SidebarNavItem {...args} />} />,
 }

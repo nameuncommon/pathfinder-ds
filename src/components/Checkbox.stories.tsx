@@ -36,6 +36,7 @@ export const CheckedDisabled: Story = { args: { checked: true, disabled: true } 
 
 export const States: Story = {
   args: { checked: false },
-  parameters: statesParameters,
+  parameters: { ...statesParameters, layout: 'padded' },
+  decorators: [(Story) => <Story />],
   render: () => <StatesGrid render={(s) => <Checkbox checked={false} onChange={() => {}} label="Call the dentist" disabled={s === 'disabled'} />} />,
 }

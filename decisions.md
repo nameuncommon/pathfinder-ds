@@ -292,3 +292,10 @@ file in `specs/decisions/`.
 | The compass Group story uses the product's Now, Later, Share, Drop copy | it still carried v1 placeholder choices |
 | Foundations gained Glass, Ambient, Paper, Bearings, Logo, Icons, Voice and content and Accessibility pages | the spec's foundations list; each reads values from tokens.json where it shows numbers |
 | The tab bar States gallery turns off axe's landmark-unique rule | two tab bars on one page are two "Main" landmarks only in the gallery; every real screen has one |
+| Button carries only the v2 variants (primary, quiet, ghost) at one 52px size; secondary, danger, sm and lg removed with their v1 stories | Figma v2 has primary and quiet, the app uses ghost for "Leave the rest for Sunday"; sm was 28px, under the 44px floor |
+| Compass direction ring is 40px in code, as in Figma (was 32) | Figma is the approved design and the 64px choice has the room |
+| Sort's "Which way does it go?" shows the dial (decorative) instead of an old hand-drawn rose; Dial gained a `decorative` prop | the old drawing predated the logo; Figma uses brand / dial at 40px there |
+| Motion: one motion.css with the five signature moments plus the checkbox check, all inside prefers-reduced-motion: no-preference and only on motion tokens; the tally "counts up" by staggering its marks | no animation hides content (the DOM always holds the final state), so screen readers and tests never wait on motion; the Motion page now describes what actually moves |
+| States galleries target the control in each cell and size to their content | the pseudo-states addon applies a state to the matched element only, so wrapper selectors never reached the control |
+| Counts aligned: 26 components and 14 screens in design.md, the Storybook introduction and the Figma cover (114 variables) | hand-typed counts drift; all three now say the same |
+| og.png: the v1 blue rule recoloured gold | the last v1 colour on a v2 asset; the rest of the card already matched |
