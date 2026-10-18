@@ -1,0 +1,68 @@
+/* Phone tab bar. Matches Figma `tab bar` (509:866). Glass comes from .pf-glass--strong. */
+.pf-tabbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--space-2);
+  border-radius: 20px;
+}
+
+.pf-tabbar__tab {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  width: 60px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+  cursor: pointer;
+}
+
+/* Every tab keeps the dot's slot so the tabs line up; only the active one shows it,
+   so the active state is never colour alone. */
+.pf-tabbar__indicator {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  visibility: hidden;
+}
+
+.pf-tabbar__tab[aria-current='page'] {
+  color: var(--accent-text);
+}
+
+.pf-tabbar__tab[aria-current='page'] .pf-tabbar__indicator {
+  visibility: visible;
+}
+
+.pf-tabbar__capture {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent-default);
+  color: var(--button-accent-label);
+  cursor: pointer;
+}
+
+.pf-tabbar__tab:focus-visible,
+.pf-tabbar__capture:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}

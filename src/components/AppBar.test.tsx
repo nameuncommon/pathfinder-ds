@@ -9,9 +9,12 @@ describe('AppBar', () => {
     expect(screen.queryByRole('button', { name: 'Back' })).toBeNull()
   })
 
-  it('the disc shows the dial', () => {
-    render(<AppBar />)
-    expect(screen.getByRole('img', { name: 'Pathfinder' }).querySelectorAll('circle')).toHaveLength(1)
+  it('shows the app badge: the dial alone at 52px, no navy disc', () => {
+    const { container } = render(<AppBar />)
+    const dial = screen.getByRole('img', { name: 'Pathfinder' })
+    expect(dial.querySelectorAll('circle')).toHaveLength(1)
+    expect(dial.getAttribute('width')).toBe('52')
+    expect(container.querySelector('.pf-appbar__disc')).toBeNull()
   })
 
   it('shows a working back button when onBack is given', () => {

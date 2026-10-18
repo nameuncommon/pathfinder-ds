@@ -1,5 +1,6 @@
 import { Button } from '../../components/Button'
 import { Mark } from '../../components/Mark'
+import { Viewfinder } from '../../components/Viewfinder'
 import { snapImage, snapSize } from '../assets'
 import { reads } from '../data'
 import { Screen } from '../Screen'
@@ -25,11 +26,7 @@ export function Snap({ focusTitle, onNext, onBack, onSkip }: ScreenActions) {
         </Button>
       }
     >
-      <button type="button" className="pf-viewfinder" aria-label="Take the photo" aria-describedby="pf-snap-found" onClick={onNext}>
-        <span className="pf-viewfinder__corner pf-viewfinder__corner--tl" aria-hidden="true" />
-        <span className="pf-viewfinder__corner pf-viewfinder__corner--tr" aria-hidden="true" />
-        <span className="pf-viewfinder__corner pf-viewfinder__corner--bl" aria-hidden="true" />
-        <span className="pf-viewfinder__corner pf-viewfinder__corner--br" aria-hidden="true" />
+      <Viewfinder found weekCode="W42" corners={4} onTake={onNext}>
         {snapImage ? (
           <img
             className="pf-viewfinder__page"
@@ -48,11 +45,7 @@ export function Snap({ focusTitle, onNext, onBack, onSkip }: ScreenActions) {
             ))}
           </span>
         )}
-        <span id="pf-snap-found" className="pf-viewfinder__pill">
-          <span className="pf-viewfinder__dot" />
-          Found W42 · 4 corners
-        </span>
-      </button>
+      </Viewfinder>
     </Screen>
   )
 }

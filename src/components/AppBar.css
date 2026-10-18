@@ -24,16 +24,10 @@
   outline-offset: 2px;
 }
 
-.pf-appbar__disc {
+.pf-appbar__badge {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--navy-800);
 }

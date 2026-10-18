@@ -10,13 +10,13 @@ const meta = {
     docs: {
       description: {
         component:
-          'The top bar of every screen: the Pathfinder mark on a navy disc, centred. Pass `onBack` to add a 44px back button on the left.',
+          'The top bar of every screen: the app badge (the dial alone) centred. Pass `onBack` to add a 44px back button on the left.',
       },
     },
   },
   decorators: [
     (Story) => (
-      <div className="pf-ambient" style={{ padding: '24px', borderRadius: '14px', maxWidth: 420 }}>
+      <div className="pf-ambient" style={{ padding: '24px', borderRadius: '14px', width: 342 }}>
         <Story />
       </div>
     ),

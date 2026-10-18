@@ -1,4 +1,5 @@
-import { Dial } from './Dial'
+import { AppBadge } from './AppBadge'
+import { Icon } from './Icon'
 import './AppBar.css'
 
 export interface AppBarProps {
@@ -10,23 +11,11 @@ export function AppBar({ onBack }: AppBarProps) {
     <header className="pf-appbar">
       {onBack && (
         <button type="button" className="pf-appbar__back" aria-label="Back" onClick={onBack}>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M15 5l-7 7 7 7" />
-          </svg>
+          <Icon name="chevron-left" size={20} />
         </button>
       )}
-      <div className="pf-appbar__disc">
-        <Dial size={34} />
+      <div className="pf-appbar__badge">
+        <AppBadge />
       </div>
     </header>
   )

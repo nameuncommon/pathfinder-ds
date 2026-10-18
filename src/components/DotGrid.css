@@ -1,0 +1,22 @@
+/* The notes dot grid: a 16px grid of 1px dots. Matches Figma `paper / dot grid` and
+   `paper / dot grid on cream`. Fills its positioned parent. */
+.pf-dot-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-size: 16px 16px;
+  background-image: radial-gradient(circle at 0.5px 0.5px, var(--pf-dot) 0.5px, transparent 1px);
+}
+
+.pf-dot-grid--navy {
+  --pf-dot: color-mix(in srgb, var(--cream-100) 12%, transparent);
+}
+
+.pf-dot-grid--cream {
+  --pf-dot: color-mix(in srgb, var(--navy-900) 22%, transparent);
+}
+
+.pf-dot-grid--fade {
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, transparent 240px);
+  mask-image: linear-gradient(to bottom, #000 0, transparent 240px);
+}
