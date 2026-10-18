@@ -87,7 +87,7 @@ const preview: Preview = {
           'Introduction',
           'Screens',
           'Foundations', ['Colour', 'Typography', 'Spacing', 'Glass', 'Ambient', 'Paper', 'Bearings', 'Logo', 'Icons', 'Motion', 'Voice and content', 'Accessibility'],
-          'Patterns',
+          'Patterns', ['Action bar', 'Undo and acknowledgement', 'States'],
           'Components',
           'Changelog',
         ],

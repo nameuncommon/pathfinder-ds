@@ -37,6 +37,7 @@
   min-height: 844px;
 }
 
+/* In flow, not sticky, but still positioned: the bar's full-bleed fade must anchor to the bar, not the phone. */
 .pf-phone-thumb .pf-app__action {
-  position: static;
+  position: relative;
 }

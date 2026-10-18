@@ -45,4 +45,9 @@ describe('Storybook chrome', () => {
     expect(read('src/components/DateChip.css')).toMatch(/\.pf-date-chip:hover\s*\{[^}]*border-color:\s*var\(--text-secondary\)/)
     expect(read('src/components/Input.css')).toMatch(/\.pf-input__field:hover\s*\{[^}]*border-color:\s*var\(--text-secondary\)/)
   })
+
+  it('docs phone thumbnails keep the action bar positioned, so its full-bleed fade cannot cover the screen', () => {
+    const css = readFileSync('src/stories/stories.css', 'utf-8')
+    expect(css).toMatch(/\.pf-phone-thumb \.pf-app__action\s*\{[^}]*position:\s*relative/)
+  })
 })

@@ -8,6 +8,7 @@ import { Open } from '../app/screens/Open'
 import { Check } from '../app/screens/Check'
 import { Sort } from '../app/screens/Sort'
 import tokens from '../../tokens/tokens.json'
+import { Phone, linkStyle } from './PhoneThumb'
 import '../app/app.css'
 
 <Meta title="Introduction" />
@@ -38,12 +39,6 @@ export const lead = {
   margin: 'var(--space-6) 0 var(--space-4)',
 }
 
-export const linkStyle = {
-  color: 'var(--accent-text)',
-  textDecoration: 'none',
-  borderBottom: '1px solid var(--border-strong)',
-  paddingBottom: 1,
-}
 
 export const primaryLink = {
   display: 'inline-flex',
@@ -57,18 +52,6 @@ export const primaryLink = {
   textDecoration: 'none',
 }
 
-export function Phone({ children, label, story }) {
-  return (
-    <figure style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-      <div inert="" aria-hidden="true" style={{ width: 215, height: 464, overflow: 'hidden', borderRadius: 24, border: '1px solid var(--border-subtle)', pointerEvents: 'none' }}>
-        <div className="pf-phone-thumb" style={{ width: 390, height: 844, transform: 'scale(0.55)', transformOrigin: 'top left' }}>{children}</div>
-      </div>
-      <figcaption style={{ fontSize: 'var(--type-14-size)', color: 'var(--text-secondary)' }}>
-        <a style={linkStyle} href={`/?path=/story/${story}`} target="_top">{label}</a>
-      </figcaption>
-    </figure>
-  )
-}
 
 <Unstyled>
   <div style={page}>
