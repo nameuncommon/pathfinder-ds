@@ -1,0 +1,20 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import tokens from '../../../tokens/tokens.json'
+import { ThemeSync } from './ThemeSync'
+import { h1Style, h2Style, page, pStyle } from './docStyles'
+
+<Meta title="Foundations/Ambient" />
+
+<ThemeSync />
+
+<Unstyled>
+  <div style={page}>
+    <h1 style={h1Style}>Ambient</h1>
+    <p style={pStyle}>Each screen has two soft glows (gold top right, sky bottom left) and the dot field under the header, fading out by 240px. They give the navy depth without becoming decoration.</p>
+    <div className="pf-ambient" style={{ height: 320, maxWidth: 390, borderRadius: 20, border: '1px solid var(--border-subtle)' }} aria-label="Ambient background sample" role="img" />
+    <h2 style={h2Style}>The 10% cap</h2>
+    <p style={pStyle}>{`Each glow is at most ${tokens.primitives.effect['glow/peak'] * 100}% at its brightest point (effect/glow/peak). This is a contrast rule: at a 22% gold peak, muted text fell to 4.4:1 and bearing tags to 3.7:1. At 10% every pair clears 4.5:1, and every contrast test measures over that worst case.`}</p>
+    <h2 style={h2Style}>Dots are texture</h2>
+    <p style={pStyle}>The dot field is the insert's notes grid. It never sits behind body text or lists; on an empty state it lives in a strip above the title.</p>
+  </div>
+</Unstyled>

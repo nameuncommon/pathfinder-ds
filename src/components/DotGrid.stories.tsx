@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { DotGrid } from './DotGrid'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/DotGrid',
@@ -9,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'The insert\'s notes dot grid, used as texture. On navy it fades out over the top 240px of a screen; on cream it sits under paper content. It is decorative only and never sits behind text that has to be read.',
+          componentDocs.DotGrid,
       },
     },
   },

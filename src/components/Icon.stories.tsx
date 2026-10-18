@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Icon, iconNames } from './Icon'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/Icon',
@@ -9,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'The approved Lucide icons (ISC licence): 24px grid, 2px stroke, coloured by the text around them. An icon always sits next to a text label and is hidden from screen readers.',
+          componentDocs.Icon,
       },
     },
   },

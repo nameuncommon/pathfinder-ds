@@ -1,0 +1,33 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { ThemeSync } from './ThemeSync'
+import { cell, h1Style, h2Style, headCell, page, pStyle } from './docStyles'
+
+<Meta title="Foundations/Accessibility" />
+
+<ThemeSync />
+
+export const pairs = [
+  ['Cream text on navy/950', '15.5:1', '4.5'],
+  ['Primary text on worst-case glass', '11.37:1', '4.5'],
+  ['Muted text (60% cream) on worst-case glass', '5.17:1', '4.5'],
+  ['Gold text on worst-case glass', '5.56:1', '4.5'],
+  ['Ink label on a gold button', '8.32:1', '4.5'],
+  ['Navy ink on cream paper', '13.8:1', '4.5'],
+  ['Bearing label on its fill', '4.54 to 5.28:1', '4.5'],
+  ['border/strong control edge on glass', '3.11:1', '3'],
+  ['Gold selected edge on the selected fill', '4.63:1', '3'],
+  ['Focus ring (gold/400) on worst-case glass', '6.84:1', '3'],
+]
+
+<Unstyled>
+  <div style={page}>
+    <h1 style={h1Style}>Accessibility</h1>
+    <p style={pStyle}>Contrast is measured, not assumed, over the worst case: 6% cream glass over the 10% gold glow on navy/950. The token tests fail the build if any pair drops below target, and every story runs an accessibility check in a real browser.</p>
+    <table style={{ borderCollapse: 'collapse', maxWidth: 680, width: '100%' }}>
+      <thead><tr><th style={headCell}>Pair</th><th style={headCell}>Measured</th><th style={headCell}>Target</th></tr></thead>
+      <tbody>{pairs.map(([p, m, t]) => <tr key={p}><td style={cell}>{p}</td><td style={{ ...cell, fontFamily: 'var(--font-mono)' }}>{m}</td><td style={{ ...cell, fontFamily: 'var(--font-mono)' }}>{t}</td></tr>)}</tbody>
+    </table>
+    <h2 style={h2Style}>The rules</h2>
+    <p style={pStyle}>Tap targets are at least 44px; compass choices 64px. Never colour alone: bearings carry a word, marks have distinct glyphs, the current tab has a dot. Glass always has a solid fallback. Screens scroll at large text sizes; nothing relies on fixed absolute layout. Glyphs and the snap state are named for screen readers. Disabled controls keep readable labels.</p>
+  </div>
+</Unstyled>

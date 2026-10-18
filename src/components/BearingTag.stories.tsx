@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { BearingTag, type Bearing } from './BearingTag'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/BearingTag',
@@ -12,7 +13,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A pill that names which area of life a task belongs to: health, people, home, work or craft. It is separate from Tag on purpose. Tag carries status colour. A bearing is one of your own life areas, so it has its own five colours and its own meaning.',
+          componentDocs.BearingTag,
       },
     },
   },

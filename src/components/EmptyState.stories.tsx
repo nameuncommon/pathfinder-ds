@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 import { EmptyState } from './EmptyState'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/EmptyState',
@@ -10,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "A serif title, one supporting line and at most one action. On glass, or on the faint dot strip above the title, which is the dot texture's one allowed empty-state use. The dots never sit behind the text.",
+          componentDocs.EmptyState,
       },
     },
   },

@@ -1,0 +1,22 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { snippet, snippetSize } from '../../app/assets'
+import { ThemeSync } from './ThemeSync'
+import { h1Style, h2Style, page, pStyle } from './docStyles'
+
+<Meta title="Foundations/Paper" />
+
+<ThemeSync />
+
+export const hand = snippetSize('one-thing')
+
+<Unstyled>
+  <div className="pf-ambient" style={page}>
+    <h1 style={h1Style}>Paper</h1>
+    <p style={pStyle}>Cream means paper. In the app, a cream surface only ever holds something that came from the book: the one thing, a snapped page, a line of handwriting. Everything else is navy and glass.</p>
+    <div className="pf-paper" style={{ maxWidth: 342, padding: '12px 16px', borderRadius: 14 }}>
+      <img src={snippet('one-thing')} alt="Ship the planner film, tell 3 people" width={hand.width} height={hand.height} style={{ maxWidth: '100%', height: 'auto', display: 'block' }} />
+    </div>
+    <h2 style={h2Style}>Handwriting</h2>
+    <p style={pStyle}>Handwriting is always an image of the writing with the read text as its alternative text. In this prototype it is rendered, not real; a real build shows your own hand. Navy ink on cream measures 13.8:1.</p>
+  </div>
+</Unstyled>

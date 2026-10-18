@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { SidebarNavItem } from './SidebarNavItem'
+import { componentDocs } from '../stories/componentDocs'
+import { StatesGrid, statesParameters } from '../stories/StatesGrid'
 
 const meta = {
   title: 'Components/SidebarNavItem',
@@ -9,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'One row of the desktop sidebar: an icon, a label and an optional count. 44px tall. The current page has a soft gold fill, gold text and aria-current="page". A count reads as "3 to sort".',
+          componentDocs.SidebarNavItem,
       },
     },
   },
@@ -42,4 +44,10 @@ export const Sidebar: Story = {
       <SidebarNavItem label="Look back" href="#look-back" icon="history" />
     </nav>
   ),
+}
+
+export const States: Story = {
+  args: { label: 'Calendar', href: '#calendar', icon: 'calendar' },
+  parameters: statesParameters,
+  render: (args) => <StatesGrid states={['default', 'hover', 'focus']} width={190} render={() => <SidebarNavItem {...args} />} />,
 }

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 import { AppBar } from './AppBar'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/AppBar',
@@ -10,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'The top bar of every screen: the app badge (the dial alone) centred. Pass `onBack` to add a 44px back button on the left.',
+          componentDocs.AppBar,
       },
     },
   },

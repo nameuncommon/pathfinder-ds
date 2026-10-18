@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ScheduleRow } from './ScheduleRow'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/ScheduleRow',
@@ -9,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'One line of the day: a time, what it is, and the bearing it belongs to. Long titles wrap onto more lines instead of being cut off.',
+          componentDocs.ScheduleRow,
       },
     },
   },

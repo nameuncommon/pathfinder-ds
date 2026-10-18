@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { snapImage, snapSize } from '../app/assets'
 import { Viewfinder } from './Viewfinder'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/Viewfinder',
@@ -10,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'The snap step camera frame. It is one big button ("Take the photo"). When the page is found, gold brackets lock on and a pill names the week and corners; the pill is the button\'s description for screen readers.',
+          componentDocs.Viewfinder,
       },
     },
   },

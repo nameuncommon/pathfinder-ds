@@ -1,0 +1,22 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { GlassCard } from '../../components/GlassCard'
+import { ThemeSync } from './ThemeSync'
+import { h1Style, h2Style, page, pStyle } from './docStyles'
+
+<Meta title="Foundations/Glass" />
+
+<ThemeSync />
+
+<Unstyled>
+  <div className="pf-ambient" style={page}>
+    <h1 style={h1Style}>Glass</h1>
+    <p style={pStyle}>Everything that is not paper sits on glass: cream at 6% with a 16% edge and a 24px background blur, so the faint glow shows through. Quiet buttons and the tab bar use the stronger glass (10% fill, 28% edge). A nudge uses the gold edge at 60%, and only to draw the eye, never to show a state.</p>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16, maxWidth: 760 }}>
+      <GlassCard><strong>Glass</strong><p style={{ margin: '4px 0 0', color: 'var(--text-secondary)' }}>surface/glass, surface/glass-edge</p></GlassCard>
+      <div className="pf-glass pf-glass--strong" style={{ borderRadius: 16, padding: '14px 16px' }}><strong>Strong glass</strong><p style={{ margin: '4px 0 0', color: 'var(--text-secondary)' }}>surface/glass-strong and its edge</p></div>
+      <GlassCard tone="nudge"><strong>Nudge</strong><p style={{ margin: '4px 0 0', color: 'var(--text-secondary)' }}>accent/nudge-edge, decorative only</p></GlassCard>
+    </div>
+    <h2 style={h2Style}>The solid fallback</h2>
+    <p style={pStyle}>Under Reduce Transparency, on browsers without backdrop blur, or with the Transparency switch in the toolbar set to reduced, every glass surface becomes solid navy (surface/glass-fallback, #1D2A4A) with no blur. Text contrast is measured on both.</p>
+  </div>
+</Unstyled>

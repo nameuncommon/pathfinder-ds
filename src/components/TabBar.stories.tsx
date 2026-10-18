@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { TabBar } from './TabBar'
+import { componentDocs } from '../stories/componentDocs'
+import { StatesGrid, statesParameters } from '../stories/StatesGrid'
 
 const meta = {
   title: 'Components/TabBar',
@@ -9,7 +11,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'The phone tab bar: Today, Week, Inbox and Library, with the capture button in the middle. Every target is at least 44px. The active tab is gold, carries a dot and is marked aria-current, so it is never shown by colour alone.',
+          componentDocs.TabBar,
       },
     },
   },
@@ -29,3 +31,13 @@ export const Today: Story = { args: { active: 'today' } }
 export const Week: Story = { args: { active: 'week' } }
 export const Inbox: Story = { args: { active: 'inbox' } }
 export const Library: Story = { args: { active: 'library' } }
+
+export const States: Story = {
+  args: { active: 'today' },
+  parameters: {
+    ...statesParameters,
+    // the gallery shows two tab bars, so two "Main" landmarks; a real screen has one
+    a11y: { config: { rules: [{ id: 'landmark-unique', enabled: false }] } },
+  },
+  render: (args) => <StatesGrid states={['default', 'focus']} width={342} render={() => <TabBar {...args} />} />,
+}

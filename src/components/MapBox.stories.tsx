@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { MapBox } from './MapBox'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/MapBox',
@@ -8,7 +9,7 @@ const meta = {
   parameters: {
     docs: {
       description: {
-        component: 'A small solid box with a title and one line of description, on the raised navy surface.',
+        component: componentDocs.MapBox,
       },
     },
   },

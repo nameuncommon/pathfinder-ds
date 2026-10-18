@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { GlassCard } from './GlassCard'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/GlassCard',
@@ -13,7 +14,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A frosted card for grouping content on the ambient background. The nudge tone adds a gold edge for the one card that needs a look. Use `as="section"` when the card is a labelled region of the page.',
+          componentDocs.GlassCard,
       },
     },
   },

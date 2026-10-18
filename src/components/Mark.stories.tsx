@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Mark, type MarkTone, type MarkType } from './Mark'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/Mark',
@@ -17,7 +18,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Six line glyphs that tag a task by what happened to it: task, done, moved, dropped, matters, note. Two tones: gold on dark surfaces, navy on paper. A mark on its own is an image with the type word as its label. When the row already says the same thing in words, pass `decorative` so screen readers skip it.',
+          componentDocs.Mark,
       },
     },
   },

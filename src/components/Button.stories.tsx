@@ -2,6 +2,8 @@ import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Button, type ButtonSize, type ButtonVariant } from './Button'
 import { StoryGrid } from '../stories/storyGrid'
+import { componentDocs } from '../stories/componentDocs'
+import { StatesGrid, statesParameters } from '../stories/StatesGrid'
 
 const meta = {
   title: 'Components/Button',
@@ -21,7 +23,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'One primary action per view. Primary carries the accent fill and marks the single thing you most want done on this screen; secondary and ghost carry everything else. Labels on primary and danger use `button/accent-label`, which flips between ink and paper by theme rather than being a fixed colour, so do not override it. Danger buttons pair with a confirmation step - see the `ConfirmPattern` story below for the minimal inline version. A real confirmation surface (focus-trapped, scrim-blocked) is the `Modal` component, which lives in the Figma layer of this system rather than in code.',
+          componentDocs.Button,
       },
     },
   },
@@ -153,4 +155,15 @@ export const ConfirmPattern: Story = {
       },
     },
   },
+}
+
+export const States: Story = {
+  args: { children: 'Snap the spread' },
+  parameters: statesParameters,
+  render: () => (
+    <div style={{ display: 'grid', gap: 16 }}>
+      <StatesGrid render={(s) => <Button disabled={s === 'disabled'}>Snap the spread</Button>} />
+      <StatesGrid render={(s) => <Button variant="quiet" disabled={s === 'disabled'}>Skip today</Button>} />
+    </div>
+  ),
 }

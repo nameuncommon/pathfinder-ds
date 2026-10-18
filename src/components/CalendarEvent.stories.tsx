@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { CalendarEvent } from './CalendarEvent'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/CalendarEvent',
@@ -9,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'One event in a desktop day column: a bearing-coloured rule, the time in type / data and the title. The bearing is also named for screen readers, so colour never carries it alone. Long titles wrap.',
+          componentDocs.CalendarEvent,
       },
     },
   },

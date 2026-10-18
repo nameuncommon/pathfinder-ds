@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ProgressBar } from './ProgressBar'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/ProgressBar',
@@ -9,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A thin gold bar for how far through a short flow you are. Screen readers hear "Step 3 of 4".',
+          componentDocs.ProgressBar,
       },
     },
   },

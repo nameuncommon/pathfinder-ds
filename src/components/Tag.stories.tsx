@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Tag } from './Tag'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/Tag',
@@ -9,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A neutral glass label for plain facts, like where a capture came from. It has no status colour, so it never competes with the bearing tag, which carries the colours of life areas.',
+          componentDocs.Tag,
       },
     },
   },

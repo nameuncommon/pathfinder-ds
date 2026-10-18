@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { GlassPanel } from './GlassPanel'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/GlassPanel',
@@ -9,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'The desktop glass panel: cream 6% glass with a 16% edge and a 24px blur, with an optional small caps title that names the region. Under Reduce Transparency it becomes solid navy. Use GlassCard for compact phone cards.',
+          componentDocs.GlassPanel,
       },
     },
   },

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Tally } from './Tally'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/Tally',
@@ -9,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A row of small marks, one for each task finished and one for each moved to another day. The whole row is read as one sentence, such as "6 done, 2 moved".',
+          componentDocs.Tally,
       },
     },
   },

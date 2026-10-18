@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 import { ReadRow } from './ReadRow'
+import { componentDocs } from '../stories/componentDocs'
+import { StatesGrid, statesParameters } from '../stories/StatesGrid'
 
 const meta = {
   title: 'Components/ReadRow',
@@ -14,7 +16,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A line the app read from your notebook, shown so you can correct it. The whole row is one button named "Fix:" plus the text. When a cropped image of your handwriting is available it shows that instead of typed text, with the text as its description.',
+          componentDocs.ReadRow,
       },
     },
   },
@@ -42,4 +44,10 @@ const snippet =
 
 export const WithSnippet: Story = {
   args: { mark: 'note', text: 'Buy stamps', snippetSrc: snippet },
+}
+
+export const States: Story = {
+  args: { ...Default.args },
+  parameters: statesParameters,
+  render: (args) => <StatesGrid states={['default', 'hover', 'focus', 'pressed']} width={300} render={() => <ReadRow {...args} />} />,
 }

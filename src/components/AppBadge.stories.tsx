@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { AppBadge } from './AppBadge'
+import { componentDocs } from '../stories/componentDocs'
 
 const meta = {
   title: 'Components/AppBadge',
@@ -9,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'The brand slot in the app bar and the desktop sidebar: the dial alone, filling its box, with no disc behind it. Below 24px it drops to the compass rose P alone, like the Dial.',
+          componentDocs.AppBadge,
       },
     },
   },

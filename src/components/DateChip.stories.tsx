@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 import { DateChip } from './DateChip'
+import { componentDocs } from '../stories/componentDocs'
+import { StatesGrid, statesParameters } from '../stories/StatesGrid'
 
 const meta = {
   title: 'Components/DateChip',
@@ -10,7 +12,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A date you can pick, in type / data ("Fri 22 Oct"). It is a toggle button, 44px tall: selected shows a gold edge on the soft gold fill, gold text and aria-pressed.',
+          componentDocs.DateChip,
       },
     },
   },
@@ -30,3 +32,8 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = { args: { selected: false } }
 export const Selected: Story = { args: { selected: true } }
 export const Disabled: Story = { args: { disabled: true } }
+
+export const States: Story = {
+  parameters: statesParameters,
+  render: () => <StatesGrid width={140} render={(s) => <DateChip disabled={s === 'disabled'}>Fri 22 Oct</DateChip>} />,
+}

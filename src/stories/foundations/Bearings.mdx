@@ -1,0 +1,33 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { BearingTag } from '../../components/BearingTag'
+import tokens from '../../../tokens/tokens.json'
+import { ThemeSync } from './ThemeSync'
+import { cell, h1Style, h2Style, headCell, page, pStyle } from './docStyles'
+
+<Meta title="Foundations/Bearings" />
+
+<ThemeSync />
+
+export const names = ['health', 'people', 'home', 'work', 'craft']
+
+<Unstyled>
+  <div className="pf-ambient" style={page}>
+    <h1 style={h1Style}>Bearings</h1>
+    <p style={pStyle}>Bearings are the parts of life an item belongs to. Each has a colour, assigned in setup, used on its tag, its calendar rule and its destination bar. They are tags, not themes: never general accents, and never colour alone.</p>
+    <table style={{ borderCollapse: 'collapse', maxWidth: 680, width: '100%' }}>
+      <thead><tr><th style={headCell}>Bearing</th><th style={headCell}>Colour</th><th style={headCell}>Fill</th><th style={headCell}>Edge</th></tr></thead>
+      <tbody>
+        {names.map((n) => (
+          <tr key={n}>
+            <td style={cell}><BearingTag bearing={n} /></td>
+            <td style={{ ...cell, fontFamily: 'var(--font-mono)' }}>{tokens.primitives.color[`bearing/${n}`]}</td>
+            <td style={{ ...cell, fontFamily: 'var(--font-mono)' }}>{tokens.semantic.dark[`bearing/${n}/fill`]}</td>
+            <td style={{ ...cell, fontFamily: 'var(--font-mono)' }}>{tokens.semantic.dark[`bearing/${n}/edge`]}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <h2 style={h2Style}>Contrast</h2>
+    <p style={pStyle}>Each label sits in its own colour on its 16% fill, measured over the worst-case glass: 4.54:1 (people) to 5.28:1 (work).</p>
+  </div>
+</Unstyled>

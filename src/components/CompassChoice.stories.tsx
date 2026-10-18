@@ -2,6 +2,10 @@ import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 import { CompassChoice, type Direction } from './CompassChoice'
+import { componentDocs } from '../stories/componentDocs'
+import { StatesGrid, statesParameters } from '../stories/StatesGrid'
+import { choices } from '../app/data'
+import { expect, userEvent, within } from 'storybook/test'
 
 const meta = {
   title: 'Components/CompassChoice',
@@ -15,7 +19,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'One of up to four big choices, each tied to a compass point. Put them inside an element with `role="group"` and an accessible name. Each is a plain button: one tap decides. Each choice is at least 64px tall and the detail text wraps.',
+          componentDocs.CompassChoice,
       },
     },
   },
@@ -41,12 +45,7 @@ export const Default: Story = {
 
 export const Selected: Story = { args: { ...Default.args, selected: true } }
 
-const options: { direction: Direction; title: string; detail: string }[] = [
-  { direction: 'N', title: 'Keep going', detail: 'Carry it to tomorrow as it is.' },
-  { direction: 'E', title: 'Make it smaller', detail: 'Split it into a first step you can finish in ten minutes.' },
-  { direction: 'S', title: 'Set it down', detail: 'Drop it for now. It stays in your notebook if you want it back later this month or next.' },
-  { direction: 'W', title: 'Ask for help', detail: 'Note who could take this on with you.' },
-]
+const options = choices
 
 export const Group: Story = {
   args: Default.args,
@@ -59,5 +58,25 @@ export const Group: Story = {
         ))}
       </div>
     )
+  },
+}
+
+export const States: Story = {
+  args: { ...Default.args },
+  parameters: statesParameters,
+  render: (args) => (
+    <StatesGrid states={['default', 'hover', 'focus', 'pressed']} width={320} render={() => <CompassChoice {...args} />} />
+  ),
+}
+
+export const PickLater: Story = {
+  args: Default.args,
+  render: Group.render,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const later = canvas.getByRole('button', { name: /Later/ })
+    await userEvent.click(later)
+    await expect(later).toHaveAttribute('aria-pressed', 'true')
+    await expect(canvas.getByRole('button', { name: /Now/ })).toHaveAttribute('aria-pressed', 'false')
   },
 }

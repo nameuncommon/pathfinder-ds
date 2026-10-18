@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 import { Input } from './Input'
+import { componentDocs } from '../stories/componentDocs'
+import { StatesGrid, statesParameters } from '../stories/StatesGrid'
 
 const meta = {
   title: 'Components/Input',
@@ -10,7 +12,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'A text field with its label above. A 52px glass field with a border/strong edge (3:1); focus turns the edge gold and 2px. The correction sheet uses it for "What it says".',
+          componentDocs.Input,
       },
     },
   },
@@ -30,3 +32,10 @@ type Story = StoryObj<typeof meta>
 export const Empty: Story = { args: { placeholder: 'Type what you wrote' } }
 export const Filled: Story = { args: { defaultValue: 'call the dentist' } }
 export const Disabled: Story = { args: { defaultValue: 'call the dentist', disabled: true } }
+
+export const States: Story = {
+  parameters: statesParameters,
+  render: () => (
+    <StatesGrid width={300} render={(s) => <Input label="What it says" defaultValue="call the dentist" disabled={s === 'disabled'} />} />
+  ),
+}
