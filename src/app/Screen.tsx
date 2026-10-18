@@ -4,6 +4,8 @@ import { ProgressBar } from '../components/ProgressBar'
 
 export interface ScreenProps {
   eyebrow: string
+  /** The eyebrow is today's date (Open only): it keeps the gold. */
+  dateEyebrow?: boolean
   title: string
   support?: string
   /** 1 to 4 shows the progress bar; omit for open and done. */
@@ -25,6 +27,7 @@ export interface ScreenProps {
 
 export function Screen({
   eyebrow,
+  dateEyebrow = false,
   title,
   support,
   step,
@@ -48,7 +51,7 @@ export function Screen({
           {step !== undefined && <ProgressBar step={step} total={4} label="Morning ritual" />}
         </div>
         <main className="pf-app__content">
-          <p className="pf-app__eyebrow">{eyebrow}</p>
+          <p className={dateEyebrow ? 'pf-app__eyebrow pf-app__eyebrow--date' : 'pf-app__eyebrow'}>{eyebrow}</p>
           <h1 ref={headingRef} tabIndex={-1} className="pf-app__title">
             {title}
           </h1>

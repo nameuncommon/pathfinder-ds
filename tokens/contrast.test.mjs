@@ -23,6 +23,8 @@ test('worst case passes', () => {
   const selected = composite(dark['accent/selected-fill'], worst, 1);
   assert.ok(contrast('#C9A35A', selected) >= 3, 'selected edge on selected fill');
   assert.ok(contrast(tokens.primitives.color['gold/400'], worst) >= 3, 'focus ring (gold/400) on the worst case');
+  const strong = dark['border/strong'].startsWith('{') ? tokens.primitives.color[dark['border/strong'].slice(1, -1)] : dark['border/strong'];
+  assert.ok(contrast(strong, worst) >= 3, 'neutral control ring (border/strong) on the worst case');
 });
 
 test('8-digit hex alpha wins', () => {

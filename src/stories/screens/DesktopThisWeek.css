@@ -122,7 +122,7 @@
 }
 
 .pf-desk__eyebrow {
-  color: var(--accent-text);
+  color: var(--text-secondary);
   font-size: var(--type-12-size);
   line-height: var(--type-12-line);
   font-weight: 500;
@@ -182,7 +182,8 @@
 
 .pf-desk__day--today .pf-desk__weekday,
 .pf-desk__day--today .pf-desk__daynum {
-  color: var(--accent-text);
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .pf-desk__lower {
@@ -208,7 +209,7 @@
 
 .pf-desk__glyph {
   width: 18px;
-  color: var(--accent-text);
+  color: var(--text-secondary);
   font-family: var(--font-mono);
   font-size: var(--type-13-size);
   text-align: center;
@@ -232,7 +233,7 @@
 }
 
 .pf-desk__moves {
-  color: var(--accent-text);
+  color: var(--text-secondary);
   font-size: var(--type-14-size);
   line-height: var(--type-14-line);
 }
@@ -244,7 +245,7 @@
 }
 
 .pf-desk__numeral {
-  color: var(--accent-text);
+  color: var(--text-primary);
   font-family: var(--font-display);
   font-size: var(--type-56-size);
   line-height: var(--type-56-line);
@@ -273,16 +274,17 @@
 
 .pf-desk__chip {
   min-height: 44px;
-  border: 1px solid var(--accent-default);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-md);
   background: transparent;
-  color: var(--accent-text);
+  color: var(--text-primary);
   font-family: var(--font-mono);
   font-size: var(--type-13-size);
   cursor: pointer;
 }
 
 .pf-desk__chip:hover {
+  border-color: var(--accent-default);
   background: var(--accent-selected-fill);
 }
 

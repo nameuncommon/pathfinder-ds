@@ -34,11 +34,16 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid var(--gold-500);
-  color: var(--gold-500);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
   font-family: var(--font-mono);
   font-size: var(--type-13-size);
   line-height: var(--type-13-line);
+}
+
+/* Gold arrives with intent: under the pointer, or once chosen. */
+.pf-compass:hover .pf-compass__dir {
+  border-color: var(--accent-default);
 }
 
 .pf-compass[aria-pressed='true'] .pf-compass__dir {

@@ -90,6 +90,11 @@ subtle hint rather than costume theming. Light is a mirror at the semantic tier 
 principle: every visual decision routes through `tokens/tokens.json`, never invented ad hoc. The
 desktop, keyboard-first v1 is frozen at tag `v1.0.0` and stays live at its own URL.
 
+**Gold is rare.** Per view, gold marks only: the logo, the one primary action, the current place (progress
+fill, active nav item, today's date) and a chosen state. Controls at rest use `border/strong` with
+`text/primary`; gold arrives on hover or once chosen. Labels, eyebrows, counts and data glyphs are neutral.
+Target: three gold things on a phone screen, five on desktop.
+
 # Colors
 
 ## Primitives (theme-invariant)

@@ -114,8 +114,8 @@ export function DesktopThisWeek() {
         <div className="pf-desk__lower">
           <GlassCard>
             <h2 className="pf-desk__label">Carried forward</h2>
-            <p className="pf-desk__row"><Mark type="moved" size={18} />Call the dentist (3rd week)</p>
-            <p className="pf-desk__row"><Mark type="moved" size={18} />Update case study images</p>
+            <p className="pf-desk__row"><Mark type="moved" tone="quiet" size={18} />Call the dentist (3rd week)</p>
+            <p className="pf-desk__row"><Mark type="moved" tone="quiet" size={18} />Update case study images</p>
           </GlassCard>
           <GlassCard>
             <h2 className="pf-desk__label">Due this week</h2>

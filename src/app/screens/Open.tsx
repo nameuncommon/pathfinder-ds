@@ -23,6 +23,7 @@ export function Open({ focusTitle, onNext, onSkip, snapSkipped = false, lastSync
   return (
     <Screen
       eyebrow={`${today.weekday} ${today.date} ${today.month} · week ${today.week}`}
+      dateEyebrow
       title="Good morning, Jake"
       focusTitle={focusTitle}
       notice={offline ? <Toast message="Saved on this phone. It will sync when you are back online." /> : undefined}
