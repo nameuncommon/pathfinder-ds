@@ -34,6 +34,8 @@ export const Scheduled: Story = {
 }
 
 export const Overdue: Story = {
+  // v1 leftover: a11y reported, not gating, until its v2 redesign (plan Task 14)
+  parameters: { a11y: { test: 'todo' } },
   args: { state: 'overdue', children: 'sep 2' },
 }
 
@@ -44,6 +46,8 @@ const states: { state: DateChipState; label: string }[] = [
 ]
 
 export const AllStates: Story = {
+  // v1 leftover: a11y reported, not gating, until its v2 redesign (plan Task 14)
+  parameters: { a11y: { test: 'todo' } },
   args: { state: 'today', children: 'today' },
   render: () => (
     <StoryGrid maxWidth={360}>

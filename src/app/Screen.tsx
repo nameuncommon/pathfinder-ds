@@ -36,7 +36,7 @@ export function Screen({
       <div className="pf-app__column">
         <div className="pf-app__top">
           <AppBar onBack={onBack} />
-          {step !== undefined && <ProgressBar step={step} total={4} />}
+          {step !== undefined && <ProgressBar step={step} total={4} label="Morning ritual" />}
         </div>
         <main className="pf-app__content">
           <p className="pf-app__eyebrow">{eyebrow}</p>

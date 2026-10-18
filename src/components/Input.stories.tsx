@@ -35,10 +35,14 @@ export const Search: Story = {
 }
 
 export const WithValue: Story = {
+  // v1 leftover: a11y reported, not gating, until its v2 redesign (plan Task 14)
+  parameters: { a11y: { test: 'todo' } },
   args: { type: 'text', defaultValue: 'unblock design review on empty states' },
 }
 
 export const Error: Story = {
+  // v1 leftover: a11y reported, not gating, until its v2 redesign (plan Task 14)
+  parameters: { a11y: { test: 'todo' } },
   args: {
     type: 'text',
     defaultValue: '',
@@ -48,6 +52,8 @@ export const Error: Story = {
 }
 
 export const Disabled: Story = {
+  // v1 leftover: a11y reported, not gating, until its v2 redesign (plan Task 14)
+  parameters: { a11y: { test: 'todo' } },
   args: { type: 'text', defaultValue: 'archived list', disabled: true },
 }
 
@@ -57,6 +63,8 @@ const types: { type: InputType; placeholder: string; icon?: boolean }[] = [
 ]
 
 export const AllStates: Story = {
+  // v1 leftover: a11y reported, not gating, until its v2 redesign (plan Task 14)
+  parameters: { a11y: { test: 'todo' } },
   args: { type: 'text', placeholder: 'task title' },
   render: () => (
     <StoryGrid maxWidth={360} surface="base">

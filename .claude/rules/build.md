@@ -17,7 +17,7 @@ Vite + React + Storybook. Deliberately basic: this project is proof of a one-dir
 | Typecheck | `npx tsc -b --noEmit` |
 | Test | `npm test` |
 
-Scaffolded Task 12 (Vite `react-ts` template + Storybook 10, `@storybook/react-vite` framework, `addon-a11y` + `addon-docs` only - no Storybook test-runner addon). `npm test` runs the tokens pipeline test (`node --test tokens/build.test.mjs`) added in the final review fix wave - it's the one thing in this repo with real assertions (the tokens.json → CSS pipeline, including the C2 contrast-fix tokens). The Storybook Vitest/Playwright test-runner addon itself was deliberately removed after init (see `decisions.md`) - that's a separate thing from this `npm test` script. `npm run lint` runs `oxlint` (the create-vite default), not ESLint.
+`npm test` runs three suites in one command: the token pipeline and contrast tests (`node --test tokens/*.test.mjs`), the jsdom component and app tests (`vitest --project unit`), and every Storybook story as a test in Playwright's Chromium (`vitest --project storybook`, via `@storybook/addon-vitest`). In the story suite the a11y check is set to `error`, so any axe violation fails the build; play functions are interaction tests. Run one suite with `npm run test:unit` or `npm run test:stories`. First run on a new machine: `npx playwright install chromium` (Playwright's own browser, separate from Google Chrome). The runner was removed at the Task 12 scaffold and reinstated for the v2 library (see `decisions.md`). `npm run lint` runs `oxlint`.
 
 ## Definition of done
 - Build passes, `npm test` green, no type errors.

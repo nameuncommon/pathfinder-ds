@@ -10,4 +10,14 @@ describe('ProgressBar', () => {
     expect(bar.getAttribute('aria-valuemax')).toBe('4')
     expect(bar.getAttribute('aria-valuetext')).toBe('Step 3 of 4')
   })
+
+  it('has an accessible name, Progress by default', () => {
+    render(<ProgressBar step={1} total={4} />)
+    expect(screen.getByRole('progressbar', { name: 'Progress' })).toBeTruthy()
+  })
+
+  it('takes a label', () => {
+    render(<ProgressBar step={2} total={4} label="Morning ritual" />)
+    expect(screen.getByRole('progressbar', { name: 'Morning ritual' })).toBeTruthy()
+  })
 })

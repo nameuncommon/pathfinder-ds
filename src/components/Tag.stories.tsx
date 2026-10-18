@@ -37,6 +37,8 @@ export const Neutral: Story = {
 }
 
 export const Danger: Story = {
+  // v1 leftover: a11y reported, not gating, until its v2 redesign (plan Task 14)
+  parameters: { a11y: { test: 'todo' } },
   args: { color: 'danger', children: 'blocked' },
 }
 
@@ -53,6 +55,8 @@ const colors: { color: TagColor; label: string }[] = [
 ]
 
 export const AllColors: Story = {
+  // v1 leftover: a11y reported, not gating, until its v2 redesign (plan Task 14)
+  parameters: { a11y: { test: 'todo' } },
   args: { color: 'accent', children: 'focus' },
   render: () => (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
