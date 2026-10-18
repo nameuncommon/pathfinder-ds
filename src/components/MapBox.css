@@ -1,0 +1,31 @@
+/* Matches Figma `map / box` (487:498). */
+.pf-mapbox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  box-sizing: border-box;
+  padding: 14px var(--space-4);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  background: var(--surface-raised);
+  font-family: var(--font-sans);
+  overflow-wrap: anywhere;
+}
+
+.pf-mapbox__title,
+.pf-mapbox__description {
+  margin: 0;
+}
+
+.pf-mapbox__title {
+  color: var(--text-primary);
+  font-size: var(--type-16-size);
+  line-height: var(--type-16-line);
+  font-weight: 600;
+}
+
+.pf-mapbox__description {
+  color: var(--text-secondary);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+}

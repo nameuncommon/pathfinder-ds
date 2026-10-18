@@ -1,0 +1,39 @@
+/* Matches Figma `calendar / event` (498:212). */
+.pf-calevent {
+  display: flex;
+  gap: 6px;
+  box-sizing: border-box;
+  padding: var(--space-2) 6px;
+  border-radius: var(--radius-md);
+  background: var(--surface-glass);
+  font-family: var(--font-sans);
+}
+
+.pf-calevent__bar {
+  flex-shrink: 0;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--pf-bearing);
+}
+
+.pf-calevent__text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.pf-calevent__time {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--type-13-size);
+  line-height: var(--type-13-line);
+  font-weight: 500;
+}
+
+.pf-calevent__title {
+  color: var(--text-primary);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+  overflow-wrap: anywhere;
+}

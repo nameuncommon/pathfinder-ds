@@ -1,0 +1,63 @@
+/* Desktop sidebar row. Matches Figma `sidebar / nav item` (509:120). */
+.pf-navitem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 10px var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: var(--type-16-size);
+  line-height: var(--type-16-line);
+  text-decoration: none;
+}
+
+.pf-navitem:hover {
+  background: var(--surface-glass);
+}
+
+.pf-navitem[aria-current='page'] {
+  background: var(--accent-nav-active);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+.pf-navitem:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.pf-navitem__label {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.pf-navitem__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--accent-default);
+  color: var(--button-accent-label);
+  font-size: var(--type-12-size);
+  line-height: var(--type-12-line);
+  font-weight: 600;
+}
+
+.pf-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
