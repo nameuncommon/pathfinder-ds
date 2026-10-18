@@ -14,6 +14,7 @@ test('every dial colourway is the dial: ring, four dots, one star', () => {
     assert.match(svg, /viewBox="0 0 200 200"/, f);
     assert.equal((svg.match(/<circle/g) || []).length, 5, `${f} circles`);
     assert.equal((svg.match(/<path/g) || []).length, 1, `${f} paths`);
+    assert.match(svg, /<circle cx="100" cy="100" r="95" fill="none"/, `${f} ring must not fill when inlined as a symbol`);
   }
 });
 

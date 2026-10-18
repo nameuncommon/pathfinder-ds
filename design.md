@@ -152,6 +152,19 @@ gold, cream, green and the five bearing hues.
 | surface/glass-fallback | {navy/800} `#1D2A4A` | dark only |
 | surface/paper | {cream/100} `#F3EEE3` | dark only |
 | text/on-paper | {navy/900} `#16213B` | dark only |
+| bearing/health/fill | `#9BC2A529` (16%) | dark only |
+| bearing/health/edge | `#9BC2A566` (40%) | dark only |
+| bearing/people/fill | `#E3A48C29` (16%) | dark only |
+| bearing/people/edge | `#E3A48C66` (40%) | dark only |
+| bearing/home/fill | `#9DB6DB29` (16%) | dark only |
+| bearing/home/edge | `#9DB6DB66` (40%) | dark only |
+| bearing/work/fill | `#D9C38A29` (16%) | dark only |
+| bearing/work/edge | `#D9C38A66` (40%) | dark only |
+| bearing/craft/fill | `#C3A9DB29` (16%) | dark only |
+| bearing/craft/edge | `#C3A9DB66` (40%) | dark only |
+| accent/nudge-edge | `#C9A35A99` (60%) | dark only |
+| accent/selected-fill | `#C9A35A1A` (10%) | dark only |
+| accent/nav-active | `#C9A35A24` (14%) | dark only |
 
 In Figma the semantic collection has three modes: dark, light, and v1 dark. The four v1 pages are
 pinned to v1 dark (the values from tag `v1.0.0`), so the frozen design never moves when v2 changes.
@@ -171,6 +184,10 @@ below target.
 - **Dots are texture only.** The dot field behind the ambient background fades out over the top
   240px, carries no information, and never sits behind text that has to be read.
 - **Gold is the one accent.** `accent/default` stays under about 10% of any view.
+- **Tints are tokens.** Every translucent tint (bearing pill fill and edge, the selected compass fill,
+  the nudge edge, the active nav fill) is its own alpha token, never an opacity applied by hand. A
+  state edge (the selected compass choice) stays full gold: gold at 60% measures 2.66:1 against the
+  selected fill, under the 3:1 a state indicator needs, so 60% is for the decorative nudge edge only.
 - **Bearings are tags, not themes.** The five bearing hues colour BearingTag and the ambient corner
   glow; they are not used as general accents.
 

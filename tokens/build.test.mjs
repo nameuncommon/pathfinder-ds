@@ -112,6 +112,22 @@ test('tokens.json → CSS pipeline', async (t) => {
     }
   });
 
+  await t.test('tint tokens are alpha hex in the dark block', () => {
+    const darkBlock = css.match(/:root\[data-theme="dark"\]\s*\{([\s\S]*?)\n\}/)[1];
+    const expected = {
+      '--bearing-health-fill': '#9BC2A529', '--bearing-health-edge': '#9BC2A566',
+      '--bearing-people-fill': '#E3A48C29', '--bearing-people-edge': '#E3A48C66',
+      '--bearing-home-fill': '#9DB6DB29', '--bearing-home-edge': '#9DB6DB66',
+      '--bearing-work-fill': '#D9C38A29', '--bearing-work-edge': '#D9C38A66',
+      '--bearing-craft-fill': '#C3A9DB29', '--bearing-craft-edge': '#C3A9DB66',
+      '--accent-nudge-edge': '#C9A35A99', '--accent-selected-fill': '#C9A35A1A',
+      '--accent-nav-active': '#C9A35A24',
+    };
+    for (const [name, val] of Object.entries(expected)) {
+      assert.match(darkBlock, new RegExp(`${name}:\\s*${val}\\s*;`), `${name} should be ${val}`);
+    }
+  });
+
   await t.test('no unresolved braces in CSS', () => {
     // Remove comments and check for unresolved {ref} patterns
     const cssNoComments = css.replace(/\/\*[\s\S]*?\*\//g, '');

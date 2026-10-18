@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
+import { readFileSync } from 'fs';
 import { contrast, composite } from './contrast.mjs';
 
 test('sanity: white on black is 21', () => {
@@ -12,9 +13,15 @@ test('worst case passes', () => {
   assert.ok(contrast('#C9A35A', worst) >= 4.5, 'gold accent on glass');
   assert.ok(contrast('#0A0B0D', '#C9A35A') >= 4.5, 'button label on gold');
   assert.ok(contrast('#16213B', '#F3EEE3') >= 4.5, 'text on paper');
-  for (const c of ['#9BC2A5', '#E3A48C', '#9DB6DB', '#D9C38A', '#C3A9DB']) {
-    assert.ok(contrast(c, composite(c, worst, 0.16)) >= 4.5, `bearing ${c} on its tint`);
+  const tokens = JSON.parse(readFileSync(new URL('./tokens.json', import.meta.url), 'utf-8'));
+  const dark = tokens.semantic.dark;
+  for (const b of ['health', 'people', 'home', 'work', 'craft']) {
+    const c = tokens.primitives.color[`bearing/${b}`];
+    assert.ok(contrast(c, composite(dark[`bearing/${b}/fill`], worst, 1)) >= 4.5, `bearing ${b} on its fill token`);
   }
+  // the selected compass edge is a state indicator: 3:1 against its own selected fill
+  const selected = composite(dark['accent/selected-fill'], worst, 1);
+  assert.ok(contrast('#C9A35A', selected) >= 3, 'selected edge on selected fill');
 });
 
 test('8-digit hex alpha wins', () => {

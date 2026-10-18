@@ -8,7 +8,11 @@ export interface BearingTagProps {
 }
 
 export function BearingTag({ bearing }: BearingTagProps) {
-  const style = { '--pf-bearing': `var(--bearing-${bearing})` } as CSSProperties
+  const style = {
+    '--pf-bearing': `var(--bearing-${bearing})`,
+    '--pf-bearing-fill': `var(--bearing-${bearing}-fill)`,
+    '--pf-bearing-edge': `var(--bearing-${bearing}-edge)`,
+  } as CSSProperties
   return (
     <span className="pf-bearing-tag" style={style}>
       <span className="pf-bearing-tag__dot" aria-hidden="true" />

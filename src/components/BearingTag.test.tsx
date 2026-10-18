@@ -18,6 +18,15 @@ describe('BearingTag', () => {
     expect(el.style.getPropertyValue('--pf-bearing')).toBe('var(--bearing-health)')
   })
 
+  it('takes its fill and edge from the tint tokens, not color-mix', () => {
+    const { container } = render(<BearingTag bearing="people" />)
+    const el = container.firstElementChild as HTMLElement
+    expect(el.style.getPropertyValue('--pf-bearing-fill')).toBe('var(--bearing-people-fill)')
+    expect(el.style.getPropertyValue('--pf-bearing-edge')).toBe('var(--bearing-people-edge)')
+    const css = readFileSync('src/components/BearingTag.css', 'utf-8')
+    expect(css).not.toMatch(/color-mix/)
+  })
+
   it('hides the dot from assistive tech', () => {
     const { container } = render(<BearingTag bearing="work" />)
     expect(container.querySelector('[aria-hidden="true"]')).toBeTruthy()

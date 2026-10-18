@@ -247,3 +247,17 @@ in the wrong tier cannot be fixed by choosing a better value; it had to move.
 maximum opacity the danger tint can carry before the tint's own luminance closes on the
 text, and there is no darker step inside the danger hue family. Keep danger tags off raised
 surfaces; the overdue DateChip is the one deliberate use.
+
+## Tint tokens, 2026-10-17
+
+Measured over the worst case (glass 6% cream over the 10% gold glow on navy/950), by `tokens/contrast.test.mjs`:
+
+| Pair | Ratio | Target |
+|---|---|---|
+| bearing/health on bearing/health/fill | 4.80:1 | 4.5 |
+| bearing/people on bearing/people/fill | 4.54:1 | 4.5 |
+| bearing/home on bearing/home/fill | 4.58:1 | 4.5 |
+| bearing/work on bearing/work/fill | 5.28:1 | 4.5 |
+| bearing/craft on bearing/craft/fill | 4.58:1 | 4.5 |
+| gold/500 edge on accent/selected-fill | 4.63:1 | 3 (state indicator) |
+| gold/500 at 60% on accent/selected-fill | 2.66:1 | fails 3, so never a state edge |
