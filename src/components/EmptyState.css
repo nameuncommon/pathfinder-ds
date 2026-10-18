@@ -1,69 +1,51 @@
+/* Matches Figma `empty state` (536:112). */
 .pf-empty {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   gap: var(--space-2);
-  padding: var(--space-10) var(--space-6);
+  box-sizing: border-box;
+  padding: var(--space-8) var(--space-6);
+  border-radius: 20px;
+  text-align: center;
+  font-family: var(--font-sans);
 }
 
-/* The art is sized in a fixed step rather than a percentage: it is a raster
-   at 400px and scaling it up past its own resolution looks soft, while
-   letting it shrink with the container makes the star field unreadable. */
-.pf-empty__art {
-  width: 200px;
-  height: 200px;
-  margin-bottom: var(--space-2);
-  /* The ink ground is keyed out of the source, so only the star field and the
-     constellation render. That means no plate edge, and the art sits on
-     whatever surface it lands on rather than punching a dark hole in it. */
+.pf-empty--dots {
+  padding-top: 80px;
 }
 
-/* The art is authored to read on a dark ground. On light it would be near
-   invisible, so it inverts to a dark-on-pale reading instead. */
-:root[data-theme='light'] .pf-empty__art {
-  filter: invert(1) hue-rotate(180deg);
-  opacity: 0.7;
+/* The dots live in a clipped strip above the title, never behind the text. */
+.pf-empty__dots {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-6);
+  right: var(--space-6);
+  height: 44px;
+  overflow: hidden;
+  opacity: 0.6;
 }
 
 .pf-empty__title {
   margin: 0;
-  font-family: var(--font-sans);
-  font-size: var(--type-16-size);
-  line-height: var(--type-16-line);
-  font-weight: 500;
   color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: var(--type-24-size);
+  line-height: var(--type-24-line);
+  font-weight: 600;
 }
 
-.pf-empty__description {
+.pf-empty__line {
   margin: 0;
-  max-width: 34ch;
-  font-family: var(--font-sans);
-  font-size: var(--type-13-size);
-  line-height: var(--type-13-line);
-  color: var(--text-muted);
+  color: var(--text-secondary);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+  overflow-wrap: anywhere;
 }
 
 .pf-empty__action {
-  margin-top: var(--space-3);
-  background: none;
-  border: none;
-  padding: 0;
-  font-family: var(--font-sans);
-  font-size: var(--type-13-size);
-  line-height: var(--type-13-line);
-  font-weight: 500;
-  color: var(--accent-text);
-  cursor: pointer;
-  transition: color var(--motion-duration-fast) var(--motion-ease-standard);
-}
-
-.pf-empty__action:hover {
-  color: var(--accent-hover);
-}
-
-.pf-empty__action:focus-visible {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 3px;
-  border-radius: var(--radius-sm);
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
 }

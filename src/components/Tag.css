@@ -1,49 +1,17 @@
+/* Matches Figma `tag` (536:67). */
 .pf-tag {
   display: inline-flex;
   align-items: center;
-  height: 20px;
-  padding: 0 var(--space-2);
+  padding: 3px 10px;
+  border: 1px solid var(--surface-glass-strong-edge);
   border-radius: 999px;
-  border: 1px solid transparent;
-  font-family: var(--font-mono);
-  font-size: var(--type-11-size);
-  line-height: 1;
+  background: var(--surface-glass-strong);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  font-size: var(--type-12-size);
+  line-height: var(--type-12-line);
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
   white-space: nowrap;
-}
-
-/* Recipe: background = hue token at 18% (13% for danger), border = same hue at 32%,
-   text = the theme-swapped tag-text/* semantic token (verified >= 4.5:1 against the
-   tint composited on both surface/base and surface/raised, in both themes - see
-   decisions.md and tokens/tokens.json semantic tier). */
-
-.pf-tag--accent {
-  background: color-mix(in srgb, var(--accent-default) 18%, transparent);
-  border-color: color-mix(in srgb, var(--accent-default) 32%, transparent);
-  color: var(--tag-text-accent);
-}
-
-.pf-tag--success {
-  background: color-mix(in srgb, var(--success) 18%, transparent);
-  border-color: color-mix(in srgb, var(--success) 32%, transparent);
-  color: var(--tag-text-success);
-}
-
-.pf-tag--neutral {
-  background: color-mix(in srgb, var(--slate-400) 18%, transparent);
-  border-color: color-mix(in srgb, var(--slate-400) 32%, transparent);
-  color: var(--tag-text-neutral);
-}
-
-.pf-tag--danger {
-  background: color-mix(in srgb, var(--danger) 13%, transparent);
-  border-color: color-mix(in srgb, var(--danger) 32%, transparent);
-  color: var(--tag-text-danger);
-}
-
-.pf-tag--warning {
-  background: color-mix(in srgb, var(--warning) 18%, transparent);
-  border-color: color-mix(in srgb, var(--warning) 32%, transparent);
-  color: var(--tag-text-warning);
 }

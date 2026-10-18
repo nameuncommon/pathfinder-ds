@@ -211,29 +211,6 @@ img.pf-sheet__snippet {
   height: auto;
 }
 
-.pf-sheet__label {
-  font-size: var(--type-14-size);
-  line-height: var(--type-14-line);
-  color: var(--text-secondary);
-}
-
-.pf-sheet__input {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 44px;
-  padding: var(--space-2) var(--space-3);
-  border: 1px solid var(--text-secondary);
-  border-radius: var(--radius-md);
-  background: transparent;
-  color: var(--text-primary);
-  font: inherit;
-}
-
-.pf-sheet__input:focus-visible {
-  outline: 2px solid var(--gold-400);
-  outline-offset: 2px;
-}
-
 .pf-sheet__actions {
   display: flex;
   flex-direction: column;

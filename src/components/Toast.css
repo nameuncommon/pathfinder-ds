@@ -1,65 +1,42 @@
+/* Matches Figma `toast` (536:89). Glass and its fallback come from .pf-glass. */
 .pf-toast {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  width: 320px;
-  padding: var(--space-3) var(--space-4);
-  background: var(--surface-raised);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--raised);
-  font-family: var(--font-sans);
   box-sizing: border-box;
+  padding: 14px var(--space-4);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
 }
 
-.pf-toast__icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-}
-
-.pf-toast--success .pf-toast__icon {
-  color: var(--success);
-}
-
-.pf-toast--danger .pf-toast__icon {
-  color: var(--danger);
-}
-
-.pf-toast--warning .pf-toast__icon {
-  color: var(--warning);
+.pf-toast[data-action] {
+  padding-right: var(--space-2);
 }
 
 .pf-toast__message {
   flex: 1;
-  font-size: var(--type-13-size);
-  line-height: var(--type-13-line);
-  color: var(--text-primary);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .pf-toast__action {
   flex-shrink: 0;
-  background: none;
-  border: none;
-  padding: 0;
-  font-family: var(--font-sans);
-  font-size: var(--type-13-size);
-  line-height: var(--type-13-line);
-  font-weight: 500;
+  min-height: 44px;
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
   color: var(--accent-text);
+  font: inherit;
+  font-size: var(--type-16-size);
+  font-weight: 600;
   cursor: pointer;
-  transition: color var(--motion-duration-fast) var(--motion-ease-standard);
-}
-
-.pf-toast__action:hover {
-  color: var(--accent-hover);
 }
 
 .pf-toast__action:focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
-  border-radius: var(--radius-sm);
 }

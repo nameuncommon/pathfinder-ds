@@ -1,13 +1,18 @@
 import type { ReactNode } from 'react'
 import './DateChip.css'
 
-export type DateChipState = 'today' | 'scheduled' | 'overdue'
-
 export interface DateChipProps {
-  state: DateChipState
   children: ReactNode
+  selected?: boolean
+  disabled?: boolean
+  onClick?: () => void
 }
 
-export function DateChip({ state, children }: DateChipProps) {
-  return <span className={`pf-date-chip pf-date-chip--${state}`}>{children}</span>
+/** A date you can pick, in type / data. A toggle button: aria-pressed follows `selected` (Figma `date chip`). */
+export function DateChip({ children, selected = false, disabled = false, onClick }: DateChipProps) {
+  return (
+    <button type="button" className="pf-date-chip" aria-pressed={selected} disabled={disabled} onClick={onClick}>
+      {children}
+    </button>
+  )
 }

@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react'
 import { Button } from '../components/Button'
+import { Input } from '../components/Input'
 
 export interface CorrectionSheetProps {
   text: string
@@ -15,7 +16,6 @@ export interface CorrectionSheetProps {
 export function CorrectionSheet({ text, snippetSrc, snippetSize, returnFocusTo, onSave, onCancel }: CorrectionSheetProps) {
   const [value, setValue] = useState(text)
   const titleId = useId()
-  const inputId = useId()
   const sheetRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -66,16 +66,7 @@ export function CorrectionSheet({ text, snippetSrc, snippetSize, returnFocusTo, 
         ) : (
           <p className="pf-sheet__snippet-text">{text}</p>
         )}
-        <label htmlFor={inputId} className="pf-sheet__label">
-          What it says
-        </label>
-        <input
-          id={inputId}
-          ref={inputRef}
-          className="pf-sheet__input"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
+        <Input label="What it says" ref={inputRef} value={value} onChange={(e) => setValue(e.target.value)} />
         <div className="pf-sheet__actions">
           <Button disabled={!value.trim()} onClick={() => onSave(value.trim())}>
             Save

@@ -1,34 +1,43 @@
+/* Matches Figma `date chip` (536:73) and its interaction states. */
 .pf-date-chip {
   display: inline-flex;
   align-items: center;
-  height: 22px;
-  padding: 0 var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--surface-glass-edge);
   border-radius: 999px;
-  border: 1px solid transparent;
+  background: var(--surface-glass);
+  color: var(--text-primary);
   font-family: var(--font-mono);
-  font-size: var(--type-12-size);
-  line-height: 1;
+  font-size: var(--type-13-size);
+  line-height: var(--type-13-line);
+  font-weight: 500;
   white-space: nowrap;
+  cursor: pointer;
 }
 
-/* Same tint recipe as Tag: today = accent, scheduled = slate/neutral, overdue = danger.
-   Text uses the theme-swapped tag-text/* tokens (same ones Tag consumes) so light
-   theme clears 4.5:1 against the composited tint - see decisions.md. */
-
-.pf-date-chip--today {
-  background: color-mix(in srgb, var(--accent-default) 18%, transparent);
-  border-color: color-mix(in srgb, var(--accent-default) 32%, transparent);
-  color: var(--tag-text-accent);
+.pf-date-chip:hover {
+  background: var(--surface-glass-strong);
 }
 
-.pf-date-chip--scheduled {
-  background: color-mix(in srgb, var(--slate-400) 18%, transparent);
-  border-color: color-mix(in srgb, var(--slate-400) 32%, transparent);
-  color: var(--tag-text-neutral);
+.pf-date-chip:active {
+  background: var(--accent-selected-fill);
 }
 
-.pf-date-chip--overdue {
-  background: color-mix(in srgb, var(--danger) 13%, transparent);
-  border-color: color-mix(in srgb, var(--danger) 32%, transparent);
-  color: var(--tag-text-danger);
+.pf-date-chip[aria-pressed='true'] {
+  border-color: var(--accent-default);
+  background: var(--accent-selected-fill);
+  color: var(--accent-text);
+}
+
+.pf-date-chip:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.pf-date-chip:disabled {
+  border-color: var(--border-subtle);
+  background: var(--surface-glass);
+  color: var(--text-muted);
+  cursor: default;
 }

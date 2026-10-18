@@ -51,24 +51,33 @@ spacing:                  # base unit + scale, from primitives.space
 effect:
   blur-glass: "24px"      # backdrop blur on glass surfaces
   glow-peak: 0.1          # glow cap: 10% alpha at the brightest point, never more
-components:               # 17 v2 components, built in code (Storybook) and in Figma; v1 is frozen at tag v1.0.0
+components:               # 26 v2 components, built in code (Storybook) and in Figma; v1 is frozen at tag v1.0.0
+  - app-badge
   - app-bar
   - bearing-tag
   - button
+  - calendar-event
   - checkbox
   - compass-choice
   - date-chip
   - dial
+  - dot-grid
   - empty-state
   - glass-card
+  - glass-panel
+  - icon
   - input
+  - map-box
   - mark
   - progress-bar
   - read-row
   - schedule-row
+  - sidebar-nav-item
+  - tab-bar
   - tag
   - tally
   - toast
+  - viewfinder
 ---
 
 
@@ -238,23 +247,32 @@ or spacing value in `src/components/`.
 
 | Component | What it is for |
 |---|---|
-| app-bar | top bar with the mark and a title; the 52px mark disc overhangs the 44px row |
+| app-badge | the brand slot in the app bar and sidebar: the dial alone, filling its box (52px) |
+| app-bar | top bar with an optional 44px back button and the app badge centred |
 | bearing-tag | pill labelling which part of life an item belongs to, in a bearing hue |
-| button | primary, quiet (glass) and ghost; 52px tall at md |
-| checkbox | native input underneath, styled box on top |
+| button | primary (gold) and quiet (glass); 52px tall at md |
+| calendar-event | one event in a desktop day column: bearing rule, time, title |
+| checkbox | native checkbox with its label; the whole row is the 44px target |
 | compass-choice | one large choice (64px minimum) in the sort step |
-| date-chip | when an item is due; state is derived from the date |
+| date-chip | a date you can pick, as a 44px toggle button |
 | dial | the logo: a solid ring around the compass rose P at 24px and up; the compass rose P alone below 24px |
-| empty-state | art, a line of copy and one action |
-| glass-card | container on the glass surface |
-| input | text field with helper and error text |
+| dot-grid | the notes dot grid as texture, on navy or cream, optionally fading out |
+| empty-state | serif title, one line, at most one action, on glass or the dot strip |
+| glass-card | compact container on the glass surface (phone) |
+| glass-panel | titled desktop glass region |
+| icon | the approved Lucide icons, always beside a label |
+| input | text field with its label above, 52px |
+| map-box | small solid box with a title and a line |
 | mark | status glyph for a line: task, done, moved, dropped, matters, note |
-| progress-bar | thin bar showing step of total |
+| progress-bar | thin bar showing step of total, named for screen readers |
 | read-row | one row of the snap read-back, tappable to correct |
-| schedule-row | a time, a title and a bearing in the week |
-| tag | translucent tinted pill |
+| schedule-row | a time, a title and a bearing in the day |
+| sidebar-nav-item | one desktop sidebar link with icon, label and optional count |
+| tab-bar | the phone tab bar with the capture button |
+| tag | neutral glass label for plain facts |
 | tally | done and moved marks in a row |
-| toast | status message on a floating surface |
+| toast | short status message on glass with an optional gold action |
+| viewfinder | the snap step camera frame: brackets, page, found pill |
 
 ## compass choices
 The compass is a labelled group of buttons (`role="group"` with an `aria-label`), each `aria-pressed`
@@ -267,22 +285,23 @@ for the quiet variant. States: default / hover / active / focus (`focus/ring` ou
 Sizes: sm / md.
 
 ## checkbox
-Tokens: `radius/sm`, `border/subtle`, `accent/default` (checked fill), `button/accent-label`
-(checkmark), `focus/ring`. The real `<input>` stays in the DOM for accessibility; a styled box
-replaces it visually.
+Glass box, `border/strong` edge (3:1), 24px with `radius/sm`; checked: `accent/default` fill and an
+ink (`button/accent-label`) Lucide check. The real `<input>` stays in the DOM. Disabled keeps the label
+at `text/muted` (5.17:1) and drops the edge to `border/subtle`; nothing fades the whole row.
 
 ## input
-Tokens: `radius/sm`, `border/subtle`, `danger` (error border and helper text), `text/primary`,
-`text/muted` (placeholder). The `error` prop is the message string itself.
+Label above in the label style (`text/muted`); 52px glass field, `radius/lg`, `border/strong` edge;
+focus turns the edge 2px `focus/ring`. No error state: the correction sheet disables Save instead.
 
 ## tag and date-chip
-Pill shape; background and border are the hue token at 18% (13% for danger) via `color-mix()`, text is
-the matching `tag-text/*` token. DateChip states: today (accent), scheduled (neutral), overdue
-(danger, forced regardless of the `dateState` prop).
+Tag is a neutral glass label (`surface/glass-strong`, its edge, `text/secondary`), no status colour.
+DateChip is a 44px toggle button in type / data; selected uses `accent/selected-fill`, a full gold
+edge and `accent/text`. The v1 status tints and the `tag-text/*` tokens they read are no longer used
+by any v2 component; the tokens stay in tokens.json, dormant like the light mode.
 
 ## toast
-Tokens: `radius/lg`, `surface/raised`, `shadow/raised`, status icon colour bound to
-`success` / `danger` / `warning` via `currentColor`.
+Glass (`surface/glass`, its edge, blur) with `radius/lg`; message in `text/primary`; the optional
+action is gold text on glass (5.56:1). Announced as `role="status"`. Never red.
 
 # The coded ritual
 
@@ -295,7 +314,7 @@ The morning ritual is also built in code at `/app/` (see the README for the path
 - Route every colour, spacing, radius and type value through `tokens/tokens.json` - update the source
   first, then regenerate CSS, then update Figma variables by hand.
 - Keep `accent/default` under about 10% of any given view and the glow at or below 10% alpha.
-- Use `tag-text/*` (not the solid semantic colour) for text rendered on a translucent tint.
+- Use a tint token (for example `bearing/health/fill`) for any translucent fill; never an opacity applied by hand.
 - Keep tap targets at 44px or larger and compass choices at 64px or larger.
 
 **Don't**

@@ -1,110 +1,70 @@
+/* Matches Figma `checkbox` (536:66) and its interaction states. */
 .pf-checkbox {
-  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-  cursor: pointer;
-  font-family: var(--font-sans);
+  gap: var(--space-3);
+  min-height: 44px;
   color: var(--text-primary);
-  font-size: var(--type-14-size);
-  line-height: var(--type-14-line);
+  font-family: var(--font-sans);
+  font-size: var(--type-16-size);
+  line-height: var(--type-16-line);
+  cursor: pointer;
 }
 
-.pf-checkbox[data-disabled] {
-  cursor: not-allowed;
-  opacity: 0.5;
-}
-
-/* Real input stays in the DOM for a11y (focus, keyboard, screen readers)
-   but is visually replaced by the styled box below. */
 .pf-checkbox__input {
   position: absolute;
-  width: 18px;
-  height: 18px;
+  width: 1px;
+  height: 1px;
   margin: 0;
   opacity: 0;
-  cursor: inherit;
 }
 
 .pf-checkbox__box {
-  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  border-radius: var(--radius-sm);
+  box-sizing: border-box;
+  width: 24px;
+  height: 24px;
   border: 1.5px solid var(--border-strong);
-  background: transparent;
-  transition:
-    background-color var(--motion-duration-fast) var(--motion-ease-standard),
-    border-color var(--motion-duration-fast) var(--motion-ease-standard);
-}
-
-.pf-checkbox__box.is-checked,
-.pf-checkbox__box.is-indeterminate {
-  background: var(--accent-default);
-  border-color: var(--accent-default);
-}
-
-.pf-checkbox__input:focus-visible ~ .pf-checkbox__box {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 2px;
-}
-
-/* Motion gate: 120ms scale 0.8 -> 1 on the glyph, plus a stroke-dashoffset draw
-   on the path, both using the fast duration + standard easing tokens. */
-.pf-checkbox__glyph {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  border-radius: var(--radius-sm);
+  background: var(--surface-glass);
   color: var(--button-accent-label);
-  opacity: 0;
-  transform: scale(0.8);
-  transition:
-    opacity var(--motion-duration-fast) var(--motion-ease-standard),
-    transform var(--motion-duration-fast) var(--motion-ease-standard);
 }
 
-.pf-checkbox__glyph path {
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: stroke-dashoffset var(--motion-duration-fast) var(--motion-ease-standard);
+.pf-checkbox:hover .pf-checkbox__box {
+  background: var(--surface-glass-strong);
 }
 
-.pf-checkbox__glyph--check path {
-  stroke-dasharray: 10;
-  stroke-dashoffset: 10;
+.pf-checkbox:active .pf-checkbox__box {
+  background: var(--accent-selected-fill);
 }
 
-.pf-checkbox__glyph--dash path {
-  stroke-dasharray: 6;
-  stroke-dashoffset: 6;
+.pf-checkbox__input:checked + .pf-checkbox__box {
+  border-color: var(--accent-default);
+  background: var(--accent-default);
 }
 
-.pf-checkbox__box.is-checked .pf-checkbox__glyph--check {
-  opacity: 1;
-  transform: scale(1);
+.pf-checkbox__input:focus-visible + .pf-checkbox__box {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
 }
 
-.pf-checkbox__box.is-checked .pf-checkbox__glyph--check path {
-  stroke-dashoffset: 0;
+/* Disabled: muted label (5.17:1) and a subtle edge; nothing fades the whole row. */
+.pf-checkbox[data-disabled] {
+  color: var(--text-muted);
+  cursor: default;
 }
 
-.pf-checkbox__box.is-indeterminate .pf-checkbox__glyph--dash {
-  opacity: 1;
-  transform: scale(1);
+.pf-checkbox[data-disabled] .pf-checkbox__box,
+.pf-checkbox[data-disabled]:hover .pf-checkbox__box {
+  border-color: var(--border-subtle);
+  background: var(--surface-glass);
 }
 
-.pf-checkbox__box.is-indeterminate .pf-checkbox__glyph--dash path {
-  stroke-dashoffset: 0;
-}
-
-.pf-checkbox__label {
-  user-select: none;
+.pf-checkbox[data-disabled] .pf-checkbox__input:checked + .pf-checkbox__box {
+  border-color: var(--border-subtle);
+  background: var(--surface-glass-strong);
+  color: var(--text-muted);
 }

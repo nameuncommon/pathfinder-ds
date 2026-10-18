@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { DateChip, type DateChipState } from './DateChip'
-import { StoryGrid } from '../stories/storyGrid'
+import { fn } from 'storybook/test'
+import { DateChip } from './DateChip'
 
 const meta = {
   title: 'Components/DateChip',
@@ -10,54 +10,23 @@ const meta = {
     docs: {
       description: {
         component:
-          'Date chips answer when, and their state is derived from the date rather than set by hand. Today is the accent state, scheduled is neutral, overdue is danger. Overdue is the one place danger deliberately appears on a raised surface: inside a list row on a card the red is the signal, and the documented contrast exception is accepted there rather than losing the warning. Do not use the overdue state decoratively; it should always mean the date has passed.',
+          'A date you can pick, in type / data ("Fri 22 Oct"). It is a toggle button, 44px tall: selected shows a gold edge on the soft gold fill, gold text and aria-pressed.',
       },
     },
   },
-  argTypes: {
-    state: {
-      control: 'select',
-      options: ['today', 'scheduled', 'overdue'],
-    },
-  },
+  args: { onClick: fn(), children: 'Fri 22 Oct' },
+  decorators: [
+    (Story) => (
+      <div className="pf-ambient" style={{ padding: '24px', borderRadius: '14px', width: 360 }}>
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof DateChip>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Today: Story = {
-  args: { state: 'today', children: 'today' },
-}
-
-export const Scheduled: Story = {
-  args: { state: 'scheduled', children: 'sep 12' },
-}
-
-export const Overdue: Story = {
-  // v1 leftover: a11y reported, not gating, until its v2 redesign (plan Task 14)
-  parameters: { a11y: { test: 'todo' } },
-  args: { state: 'overdue', children: 'sep 2' },
-}
-
-const states: { state: DateChipState; label: string }[] = [
-  { state: 'today', label: 'today' },
-  { state: 'scheduled', label: 'sep 12' },
-  { state: 'overdue', label: 'sep 2' },
-]
-
-export const AllStates: Story = {
-  // v1 leftover: a11y reported, not gating, until its v2 redesign (plan Task 14)
-  parameters: { a11y: { test: 'todo' } },
-  args: { state: 'today', children: 'today' },
-  render: () => (
-    <StoryGrid maxWidth={360}>
-      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-        {states.map(({ state, label }) => (
-          <DateChip key={state} state={state}>
-            {label}
-          </DateChip>
-        ))}
-      </div>
-    </StoryGrid>
-  ),
-}
+export const Default: Story = { args: { selected: false } }
+export const Selected: Story = { args: { selected: true } }
+export const Disabled: Story = { args: { disabled: true } }
