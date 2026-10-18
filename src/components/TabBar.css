@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-1);
   box-sizing: border-box;
   width: 100%;
   padding: var(--space-2);
@@ -15,8 +16,12 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-1);
-  width: 60px;
+  /* tabs share the bar, so labels have room under large text */
+  flex: 1 1 0;
+  min-width: 0;
   min-height: 44px;
+  text-align: center;
+  overflow-wrap: anywhere;
   padding: 0;
   border: 0;
   border-radius: var(--radius-md);

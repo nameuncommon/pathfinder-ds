@@ -1,4 +1,5 @@
 import { Icon, type IconName } from './Icon'
+import '../styles/utilities.css'
 import './SidebarNavItem.css'
 
 export interface SidebarNavItemProps {

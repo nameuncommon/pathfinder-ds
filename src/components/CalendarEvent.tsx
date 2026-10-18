@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import type { Bearing } from './BearingTag'
+import '../styles/utilities.css'
 import './CalendarEvent.css'
 
 export interface CalendarEventProps {

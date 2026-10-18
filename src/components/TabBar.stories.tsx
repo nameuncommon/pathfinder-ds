@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { expect, within } from 'storybook/test'
 import { TabBar } from './TabBar'
 import { componentDocs } from '../stories/componentDocs'
 import { StatesGrid, statesParameters } from '../stories/StatesGrid'
@@ -42,4 +43,24 @@ export const States: Story = {
     a11y: { config: { rules: [{ id: 'landmark-unique', enabled: false }] } },
   },
   render: (args) => <StatesGrid states={['default', 'focus']} width={342} render={() => <TabBar {...args} />} />,
+}
+
+export const LargeText: Story = {
+  name: 'large text (2x)',
+  args: { active: 'library' },
+  decorators: [
+    (Story) => (
+      <div style={{ ['--type-14-size' as string]: '28px', ['--type-14-line' as string]: '34px' }}>
+        <Story />
+      </div>
+    ),
+  ],
+  play: async ({ canvasElement }) => {
+    const tabs = within(canvasElement).getAllByRole('button').filter((b) => b.getAttribute('aria-label') !== 'Capture')
+    const boxes = tabs.map((t) => t.getBoundingClientRect())
+    for (let i = 1; i < boxes.length; i++) {
+      // each tab starts after the previous one ends: no label runs into its neighbour
+      await expect(boxes[i].left).toBeGreaterThanOrEqual(boxes[i - 1].right - 0.5)
+    }
+  },
 }

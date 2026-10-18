@@ -7,7 +7,7 @@ Lives in `pathfinder-ds` (syncs via GitHub private `nameuncommon/pathfinder-ds`)
 ## Versions
 | Version | What | Where |
 |---|---|---|
-| v2 (current) | Phone-first, dark-first design system with glass surfaces, 17 components, and a coded morning ritual | Storybook at `/`, the coded ritual at `/app/` (both on the `pathfinder-ds` Vercel project; the production URL is not promoted yet) |
+| v2 (current) | Phone-first, dark-first design system with glass surfaces, 26 components, and a coded morning ritual | Storybook at `/`, the coded ritual at `/app/` (both on the `pathfinder-ds` Vercel project; the production URL is not promoted yet) |
 | v1 (frozen) | Desktop, keyboard-first design system, tag `v1.0.0` | https://pathfinder-ds-v1.vercel.app (own Vercel project `pathfinder-ds-v1`) |
 
 ## v2 at a glance

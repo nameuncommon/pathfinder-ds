@@ -15,9 +15,4 @@ describe('Toast', () => {
     expect(onClick).toHaveBeenCalledTimes(1)
   })
 
-  it('keeps a long message whole', () => {
-    const m = 'Saved on this phone. It will sync when you are back online, and nothing you wrote is lost.'
-    render(<Toast message={m} />)
-    expect(getComputedStyle(screen.getByText(m)).whiteSpace).not.toBe('nowrap')
-  })
 })

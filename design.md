@@ -240,7 +240,7 @@ Nothing in the system uses a sharp (0px) corner.
 
 # Components
 
-17 v2 components are built in code and in Figma (the Figma file also holds the frozen v1 pages). v1 is
+26 v2 components are built in code and in Figma (the Figma file also holds the frozen v1 pages). v1 is
 frozen at tag `v1.0.0`. Code is Vite + React + Storybook. Every coded component consumes
 `tokens/tokens.json` values via generated CSS custom properties - never a hardcoded colour, type size
 or spacing value in `src/components/`.

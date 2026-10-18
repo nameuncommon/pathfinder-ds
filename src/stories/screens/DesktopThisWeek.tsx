@@ -46,7 +46,7 @@ function LooseEnd({ title }: { title: string }) {
       <p className="pf-desk__body">{title}</p>
       <div className="pf-desk__chips" role="group" aria-label={`Which way does ${title} go?`}>
         {(['N', 'E', 'S', 'W'] as const).map((d) => (
-          <button key={d} type="button" className="pf-desk__chip" aria-label={{ N: 'Now', E: 'Later', S: 'Share', W: 'Drop' }[d]}>
+          <button key={d} type="button" className="pf-desk__chip" aria-label={`${d}, ${{ N: 'Now', E: 'Later', S: 'Share', W: 'Drop' }[d]}`}>
             {d}
           </button>
         ))}

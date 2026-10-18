@@ -84,7 +84,11 @@ img.pf-viewfinder__page {
   color: var(--text-secondary);
   font-size: var(--type-14-size);
   line-height: var(--type-14-line);
-  white-space: nowrap;
+  /* wraps under large text instead of spilling out of the frame */
+  max-width: calc(100% - 2 * var(--space-4));
+  box-sizing: border-box;
+  width: max-content;
+  text-align: center;
 }
 
 .pf-viewfinder__dot {

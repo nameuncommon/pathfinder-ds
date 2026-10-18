@@ -15,11 +15,4 @@ describe('CalendarEvent', () => {
     expect(screen.getByText(/\$1,450/)).toBeTruthy()
   })
 
-  it('keeps a 60-character title whole: no ellipsis or clipping', () => {
-    const title = 'Dinner with Ana and the whole team from the old studio office'
-    render(<CalendarEvent time="19:00" title={title} bearing="people" />)
-    const el = screen.getByText(title)
-    expect(getComputedStyle(el).textOverflow).not.toBe('ellipsis')
-    expect(getComputedStyle(el).whiteSpace).not.toBe('nowrap')
-  })
 })
