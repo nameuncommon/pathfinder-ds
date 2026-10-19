@@ -25,7 +25,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div className="pf-ambient" style={{ padding: '24px', borderRadius: '14px', maxWidth: 420 }}>
+      <div className="pf-story-frame" style={{ padding: '24px', borderRadius: '14px', maxWidth: 420 }}>
         <Story />
       </div>
     ),
@@ -55,6 +55,22 @@ export const Group: Story = {
       <div role="group" aria-label="Which way does it go?" style={{ display: 'grid', gap: '12px' }}>
         {options.map((o) => (
           <CompassChoice key={o.direction} {...o} selected={value === o.direction} onSelect={() => setValue(o.direction)} />
+        ))}
+      </div>
+    )
+  },
+}
+
+/** The Sort layout: four compact tiles in a 2x2 grid, so all four stay in view above the action bar. */
+export const TileGrid: Story = {
+  name: 'tile grid',
+  args: Default.args,
+  render: function Render() {
+    const [value, setValue] = useState<Direction>('N')
+    return (
+      <div role="group" aria-label="Which way does it go?" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '12px' }}>
+        {options.map((o) => (
+          <CompassChoice key={o.direction} {...o} tile selected={value === o.direction} onSelect={() => setValue(o.direction)} />
         ))}
       </div>
     )

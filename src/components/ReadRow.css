@@ -36,6 +36,18 @@
   overflow-wrap: anywhere;
 }
 
+.pf-read-row__fix {
+  display: inline-flex;
+  margin-left: auto;
+  padding-left: var(--space-2);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.pf-read-row:hover .pf-read-row__fix {
+  color: var(--text-primary);
+}
+
 .pf-read-row__snippet {
   flex: 0 1 auto;
   min-width: 0;

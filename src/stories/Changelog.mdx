@@ -1,0 +1,60 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { ThemeSync } from './foundations/ThemeSync'
+import { cell, h1Style, h2Style, headCell, page, pStyle } from './foundations/docStyles'
+
+<Meta title="Changelog" />
+
+<ThemeSync />
+
+export const components = Object.keys(import.meta.glob(['../components/*.tsx', '!../components/*.test.tsx', '!../components/*.stories.tsx']))
+  .map((p) => p.split('/').pop().replace('.tsx', ''))
+  .sort()
+export const added = { Sheet: 'v2.1' }
+export const slug = (n) => n.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()
+
+export const releases = [
+  ['v2.1', '2026-10-18', 'Polish', [
+    'One action-bar rule: the gold forward action pinned in thumb reach, any way out as a quiet escape above it. Snap has a visible shutter.',
+    'Gold is rare again: about three gold things on a phone screen, five on desktop.',
+    'App type: the large serif only for the greeting and the ending, one serif per screen, sentence-case section labels.',
+    'Undo after every sort choice; a Done screen that restates the one thing and lets you change any decision.',
+    'Plain copy: no ranking of days, labels that name their source, a pencil on every line it read.',
+    'A reading state after the photo and a Not sure flag on low-confidence lines.',
+    'New Sheet component; Input gains a calm error state.',
+    'Storybook: a product introduction, v2 colour and type pages, these Patterns pages and this changelog.',
+  ]],
+  ['v2.0', '2026-10-17', 'Phone-first library', [
+    'Dark navy, gold and cream, glass with a solid fallback, the dial logo.',
+    'The morning ritual coded end to end, with every story run as a browser test and an accessibility check that fails the build.',
+  ]],
+  ['v1.0.0', '2026-10-14', 'Desktop, frozen', ['The keyboard-first desktop system, kept live at its own address.']],
+]
+
+<Unstyled>
+  <div style={page}>
+    <h1 style={h1Style}>Changelog</h1>
+    <p style={pStyle}>What changed in each release, and where every component stands.</p>
+
+    {releases.map(([v, date, name, notes]) => (
+      <section key={v}>
+        <h2 style={h2Style}>{`${v} · ${name}`} <span style={{ fontWeight: 400, color: 'var(--text-secondary)', fontSize: 'var(--type-14-size)' }}>{date}</span></h2>
+        <ul style={{ ...pStyle, paddingLeft: 20 }}>{notes.map((n) => <li key={n}>{n}</li>)}</ul>
+      </section>
+    ))}
+
+    <h2 style={h2Style}>Component status</h2>
+    <p style={pStyle}>{`${components.length} components, read from the code. Stable means built in code and Figma, documented, and tested in the browser with an accessibility check.`}</p>
+    <table style={{ borderCollapse: 'collapse', maxWidth: 560, width: '100%' }}>
+      <thead><tr><th style={headCell}>Component</th><th style={headCell}>Status</th><th style={headCell}>Since</th></tr></thead>
+      <tbody>
+        {components.map((c) => (
+          <tr key={c}>
+            <td style={cell}><a style={{ color: 'var(--text-primary)' }} href={`/?path=/docs/components-${slug(c)}--docs`} target="_top">{c}</a></td>
+            <td style={cell}>stable</td>
+            <td style={{ ...cell, color: 'var(--text-secondary)' }}>{added[c] ?? 'v2.0'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</Unstyled>

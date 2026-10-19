@@ -28,7 +28,7 @@ export function StatesGrid({
   width?: number
 }) {
   return (
-    <div className="pf-ambient" style={{ display: 'flex', gap: 24, padding: 24, borderRadius: 14, width: 'max-content' }}>
+    <div className="pf-states">
       {states.map((s) => (
         <div key={s} style={{ display: 'flex', flexDirection: 'column', gap: 8, width }}>
           <div className={`pf-state--${s}`}>{render(s)}</div>

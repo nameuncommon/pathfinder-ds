@@ -31,6 +31,10 @@
   font-weight: 500;
 }
 
+.pf-calevent__time--word {
+  font-family: var(--font-sans);
+}
+
 .pf-calevent__title {
   color: var(--text-primary);
   font-size: var(--type-14-size);

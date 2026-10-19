@@ -32,12 +32,17 @@
 
 .pf-app__eyebrow {
   margin: 0;
-  color: var(--accent-text);
+  color: var(--text-secondary);
   font-weight: 500;
   font-size: var(--type-12-size);
   line-height: var(--type-12-line);
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+/* The greeting date is the one gold eyebrow: it is today, the anchor of the ritual. */
+.pf-app__eyebrow--date {
+  color: var(--accent-text);
 }
 
 .pf-app__title {
@@ -47,6 +52,11 @@
   font-size: var(--type-32-size);
   line-height: var(--type-32-line);
   overflow-wrap: anywhere;
+}
+
+.pf-app__title--step {
+  font-size: var(--type-24-size);
+  line-height: var(--type-24-line);
 }
 
 .pf-app__title:focus {
@@ -74,14 +84,13 @@
   font-weight: 600;
 }
 
+/* Section labels: sentence case, closer to their content than to the group above. */
 .pf-app__label {
-  margin: var(--space-2) 0 0;
+  margin: var(--space-2) 0 calc(var(--space-2) * -1);
   color: var(--text-secondary);
-  font-size: var(--type-12-size);
-  line-height: var(--type-12-line);
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+  font-weight: 600;
 }
 
 .pf-app__paper {
@@ -97,14 +106,31 @@
   height: auto;
 }
 
+.pf-app {
+  overflow-x: clip;
+}
+
 .pf-app__action {
   position: sticky;
   bottom: 0;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  padding: var(--space-4) 0 max(var(--space-4), env(safe-area-inset-bottom));
-  background: linear-gradient(to bottom, transparent, var(--surface-base) 28%);
+  gap: var(--space-2);
+  padding: var(--space-6) 0 max(var(--space-4), env(safe-area-inset-bottom));
+}
+
+/* The fade runs edge to edge, not just across the column, so no hard line sits over the glow. */
+.pf-app__action::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset-block: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, transparent, var(--surface-base) var(--space-5));
+  pointer-events: none;
 }
 
 .pf-app__action > .pf-button,
@@ -112,19 +138,24 @@
   width: 100%;
 }
 
-/* check */
-.pf-app__yesterday {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin-bottom: var(--space-3);
+/* At large text a label wraps inside its button rather than spilling past the column. */
+.pf-app__action > .pf-button {
+  white-space: normal;
+  text-wrap: balance;
+  padding-block: var(--space-2);
 }
 
-.pf-app__numeral {
-  font-family: var(--font-display);
-  font-size: var(--type-56-size);
-  line-height: var(--type-56-line);
-  color: var(--accent-text);
+/* check */
+.pf-app__placeholder {
+  display: block;
+  height: 12px;
+  margin: 16px var(--space-2);
+  border-radius: 999px;
+  background: var(--surface-glass-strong);
+}
+
+.pf-app__yesterday {
+  margin-bottom: var(--space-3);
 }
 
 .pf-app__rows {
@@ -136,9 +167,10 @@
 /* sort */
 .pf-app__item-title {
   margin: 0 0 var(--space-1);
-  font-family: var(--font-display);
-  font-size: var(--type-24-size);
-  line-height: var(--type-24-line);
+  font-family: var(--font-sans);
+  font-size: var(--type-20-size);
+  line-height: var(--type-20-line);
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 
@@ -149,53 +181,91 @@
 }
 
 .pf-app__choices {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-3);
 }
 
 /* done */
-.pf-app__summary {
+.pf-done__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.pf-done__group > .pf-app__label {
   margin: 0;
-  padding-left: var(--space-5);
+}
+
+.pf-done__heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.pf-done__dir {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--type-11-size);
+  line-height: 1;
+  font-weight: 500;
+}
+
+.pf-done__rows {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.pf-done__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 52px;
+  padding: var(--space-3) 0;
+  border: 0;
+  border-bottom: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-primary);
+  font: inherit;
+  font-size: var(--type-16-size);
+  line-height: var(--type-16-line);
+  text-align: left;
+  cursor: pointer;
+}
+
+.pf-done__title {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.pf-done__change {
+  flex-shrink: 0;
   color: var(--text-secondary);
   font-size: var(--type-14-size);
   line-height: var(--type-14-line);
 }
 
+.pf-done__row:hover .pf-done__change {
+  color: var(--text-primary);
+}
+
+.pf-done__row:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
 /* correction sheet */
-.pf-sheet__scrim {
-  position: fixed;
-  inset: 0;
-  z-index: 10;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  background: color-mix(in srgb, var(--navy-950) 70%, transparent);
-}
-
-.pf-sheet {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 390px;
-  max-height: 90dvh;
-  overflow-y: auto;
-  padding: var(--space-6) var(--space-6) max(var(--space-6), env(safe-area-inset-bottom));
-  border-radius: 20px 20px 0 0;
-  background-color: var(--surface-glass-fallback);
-}
-
-.pf-sheet__title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: var(--type-24-size);
-  line-height: var(--type-24-line);
-}
-
 .pf-sheet__snippet,
 .pf-sheet__snippet-text {
   margin: 0;
@@ -214,12 +284,6 @@ img.pf-sheet__snippet {
   display: block;
   max-width: 100%;
   height: auto;
-}
-
-.pf-sheet__actions {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
 }
 
 .pf-app__muted {

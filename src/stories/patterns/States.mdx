@@ -1,0 +1,52 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { ThemeSync } from '../foundations/ThemeSync'
+import { cell, h1Style, h2Style, headCell, page, pStyle } from '../foundations/docStyles'
+import { Phone, Phones } from '../PhoneThumb'
+import { Check } from '../../app/screens/Check'
+import { Open } from '../../app/screens/Open'
+import { Snap } from '../../app/screens/Snap'
+import { Sort } from '../../app/screens/Sort'
+import { reads, topThree } from '../../app/data'
+
+<Meta title="Patterns/States" />
+
+<ThemeSync />
+
+export const noop = () => {}
+export const actions = { focusTitle: false, onNext: noop, onBack: noop, onSkip: noop }
+export const s = (id) => `/?path=/story/screens-morning-ritual--${id}`
+export const states = [
+  ['Reading', 'Right after the photo', '“Reading your spread…” as a status over placeholder lines; no action until the lines arrive. Instant with reduced motion.', 'state-check-reading'],
+  ['Not sure', 'A line it could not read with confidence', 'A neutral “Not sure” tag, listed first, said in the row’s name.', 'step-3-check'],
+  ['Blurry', 'The photo is unusable', 'Say so plainly and offer another try; Skip today stays.', 'state-snap-blurry'],
+  ['Skipped', 'No snap today', 'Show what it already knows and when it last synced. No nag, no gold.', 'state-snap-skipped'],
+  ['Offline', 'No connection', 'A status toast: saved on this phone, syncs later. Nothing else changes.', 'state-offline'],
+  ['Empty', 'Nothing to check or sort', 'Say why in one line and offer the way on: Continue, Back to today.', 'state-sort-empty'],
+  ['Missing text', 'Save with an empty field', 'A gold edge and one plain line: “Write what the line says”. Never red.', 'state-fix-empty'],
+]
+
+<Unstyled>
+  <div style={page}>
+    <h1 style={h1Style}>States</h1>
+    <p style={pStyle}>Every screen has a plan for when things are slow, empty, unclear or offline. Each state says what is happening and how to carry on, and none of them scold.</p>
+
+    <h2 style={h2Style}>When to use</h2>
+    <p style={pStyle}>Design these before the happy path ships. A state is a sentence and a way on, built from the same parts as the screen: a status line, a Toast, an EmptyState or a Tag. Never a new colour.</p>
+
+    <table style={{ borderCollapse: 'collapse', maxWidth: 900, width: '100%' }}>
+      <thead><tr><th style={headCell}>State</th><th style={headCell}>When</th><th style={headCell}>What it does</th><th style={headCell}>Story</th></tr></thead>
+      <tbody>
+        {states.map(([name, when, what, id]) => (
+          <tr key={name}><td style={{ ...cell, fontWeight: 600 }}>{name}</td><td style={cell}>{when}</td><td style={cell}>{what}</td><td style={cell}><a style={{ color: 'var(--accent-text)' }} href={s(id)} target="_top">open</a></td></tr>
+        ))}
+      </tbody>
+    </table>
+
+    <Phones>
+      <Phone label="reading" story="screens-morning-ritual--state-check-reading"><Check {...actions} reads={[...reads, ...topThree]} onFix={noop} reading /></Phone>
+      <Phone label="blurry" story="screens-morning-ritual--state-snap-blurry"><Snap {...actions} photo="blurry" onRetry={noop} /></Phone>
+      <Phone label="offline" story="screens-morning-ritual--state-offline"><Open {...actions} offline /></Phone>
+      <Phone label="empty" story="screens-morning-ritual--state-sort-empty"><Sort {...actions} items={[]} index={0} onChoose={noop} onLeave={noop} /></Phone>
+    </Phones>
+  </div>
+</Unstyled>

@@ -106,4 +106,16 @@
     background: var(--surface-base);
     border: 1px solid var(--border-subtle);
   }
+  /* Do/don't and other markdown tables in docs descriptions: Storybook zebra-stripes
+     every second row white, which hid its text on the dark docs. Every row sits on
+     the raised navy with primary text instead. */
+  :root[data-theme='dark'] .sbdocs table tr,
+  :root[data-theme='dark'] .sbdocs table tr:nth-of-type(2n) {
+    background: var(--surface-raised);
+    color: var(--text-primary);
+  }
+  :root[data-theme='dark'] .sbdocs table td,
+  :root[data-theme='dark'] .sbdocs table th {
+    border-color: var(--border-subtle);
+  }
 </style>

@@ -7,6 +7,7 @@ import { MorningRitual } from '../../app/MorningRitual'
 const meta = {
   title: 'Screens/Morning ritual (interactive)',
   component: MorningRitual,
+  args: { readingMs: 700 },
   parameters: { layout: 'fullscreen' },
   decorators: [
     (Story) => (
@@ -42,7 +43,7 @@ export const FixARead: Story = {
     await userEvent.click(await c.findByRole('button', { name: 'Take the photo' }))
     const row = await c.findByRole('button', { name: 'Fix: call the dentist, moved' })
     await userEvent.click(row)
-    const sheet = await c.findByRole('dialog', { name: 'Fix what I read' })
+    const sheet = await c.findByRole('dialog', { name: 'Fix what it read' })
     const field = within(sheet).getByLabelText('What it says')
     await userEvent.clear(field)
     await userEvent.type(field, 'call the vet')
@@ -50,7 +51,7 @@ export const FixARead: Story = {
     const fixed = await c.findByRole('button', { name: 'Fix: call the vet, moved' })
     await waitFor(() => expect(fixed).toHaveFocus())
     await userEvent.click(fixed)
-    await c.findByRole('dialog', { name: 'Fix what I read' })
+    await c.findByRole('dialog', { name: 'Fix what it read' })
     await userEvent.keyboard('{Escape}')
     await waitFor(() => expect(c.queryByRole('dialog')).not.toBeInTheDocument())
     await waitFor(() => expect(fixed).toHaveFocus())

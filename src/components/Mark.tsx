@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 export type MarkType = 'task' | 'done' | 'moved' | 'dropped' | 'matters' | 'note'
-export type MarkTone = 'gold' | 'navy'
+export type MarkTone = 'gold' | 'navy' | 'quiet'
 
 export interface MarkProps {
   type: MarkType
@@ -29,6 +29,7 @@ const glyphs: Record<MarkType, ReactNode> = {
 const toneColor: Record<MarkTone, string> = {
   gold: 'var(--gold-500)',
   navy: 'var(--navy-900)',
+  quiet: 'var(--text-secondary)',
 }
 
 export function Mark({ type, tone = 'gold', size = 20, decorative = false }: MarkProps) {

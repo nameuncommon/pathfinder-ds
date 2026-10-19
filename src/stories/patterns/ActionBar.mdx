@@ -1,0 +1,68 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { ThemeSync } from '../foundations/ThemeSync'
+import { cell, h1Style, h2Style, headCell, page, pStyle } from '../foundations/docStyles'
+import { Phone, Phones, linkStyle } from '../PhoneThumb'
+import { Open } from '../../app/screens/Open'
+import { Snap } from '../../app/screens/Snap'
+import { Sort } from '../../app/screens/Sort'
+
+<Meta title="Patterns/Action bar" />
+
+<ThemeSync />
+
+export const noop = () => {}
+export const actions = { focusTitle: false, onNext: noop, onBack: noop, onSkip: noop }
+export const screens = [
+  ['Open', 'Snap this week’s spread', 'Inbox · 3 to sort'],
+  ['Snap', 'Take the photo', 'Skip today'],
+  ['Check', 'Looks right', 'none'],
+  ['Sort', 'none (the four choices are the action)', 'Leave the rest for Sunday'],
+  ['Done', 'Back to today', 'none'],
+]
+
+<Unstyled>
+  <div style={page}>
+    <h1 style={h1Style}>Action bar</h1>
+    <p style={pStyle}>The bottom of every ritual screen works the same way, so your thumb always knows where the next step is.</p>
+
+    <h2 style={h2Style}>When to use</h2>
+    <p style={pStyle}>On every step of a flow that moves forward one screen at a time. Use the Screen component’s <code>action</code> and <code>escape</code> slots; never place a primary button in the scrolling content.</p>
+
+    <h2 style={h2Style}>The rule</h2>
+    <ol style={{ ...pStyle, paddingLeft: 20 }}>
+      <li><strong>Action</strong>: the step’s one gold forward action, pinned at the bottom in thumb reach.</li>
+      <li><strong>Escape</strong>: any way out (skip, the inbox, leave for later) as a quiet text button just above it.</li>
+      <li><strong>Notice</strong>: a toast, such as Undo or Fixed, sits above both and leaves with the next move.</li>
+    </ol>
+    <p style={pStyle}>The fade behind the bar runs edge to edge and goes solid within 20px, so scrolling content never shows through the escape.</p>
+
+    <table style={{ borderCollapse: 'collapse', maxWidth: 720, width: '100%' }}>
+      <thead><tr><th style={headCell}>Screen</th><th style={headCell}>Action (gold)</th><th style={headCell}>Escape (quiet)</th></tr></thead>
+      <tbody>
+        {screens.map(([s, a, e]) => (
+          <tr key={s}><td style={cell}>{s}</td><td style={cell}>{a}</td><td style={cell}>{e}</td></tr>
+        ))}
+      </tbody>
+    </table>
+
+    <Phones>
+      <Phone label="open: snap is the action" story="screens-morning-ritual--step-1-open"><Open {...actions} /></Phone>
+      <Phone label="snap: a visible shutter" story="screens-morning-ritual--step-2-snap"><Snap {...actions} /></Phone>
+      <Phone label="sort: escape only" story="screens-morning-ritual--step-4-sort-1"><Sort {...actions} index={0} onChoose={noop} onLeave={noop} /></Phone>
+    </Phones>
+
+    <h2 style={h2Style}>Large text</h2>
+    <p style={pStyle}>
+      At double text size the escape and the action stack and never overlap; both stay at least 44px tall. Tested in{' '}
+      <a style={linkStyle} href="/?path=/story/screens-morning-ritual--action-bar-2-x-open" target="_top">action bar at 2x text / open</a> and{' '}
+      <a style={linkStyle} href="/?path=/story/screens-morning-ritual--action-bar-2-x-snap" target="_top">/ snap</a>.
+    </p>
+
+    <h2 style={h2Style}>Do and don’t</h2>
+    <ul style={{ ...pStyle, paddingLeft: 20 }}>
+      <li>Do name the action with the verb of the step: Take the photo, Looks right.</li>
+      <li>Do keep one gold button per screen. Don’t make the escape gold, or add a second primary in the content.</li>
+      <li>Don’t move the action’s meaning: the pinned slot always goes forward.</li>
+    </ul>
+  </div>
+</Unstyled>

@@ -1,0 +1,50 @@
+import { Meta, Unstyled } from '@storybook/addon-docs/blocks'
+import { ThemeSync } from '../foundations/ThemeSync'
+import { h1Style, h2Style, page, pStyle } from '../foundations/docStyles'
+import { Phone, Phones } from '../PhoneThumb'
+import { Toast } from '../../components/Toast'
+import { Check } from '../../app/screens/Check'
+import { Done } from '../../app/screens/Done'
+import { Sort } from '../../app/screens/Sort'
+import { inbox, reads, topThree } from '../../app/data'
+
+<Meta title="Patterns/Undo and acknowledgement" />
+
+<ThemeSync />
+
+export const noop = () => {}
+export const actions = { focusTitle: false, onNext: noop, onBack: noop, onSkip: noop }
+
+<Unstyled>
+  <div style={page}>
+    <h1 style={h1Style}>Undo and acknowledgement</h1>
+    <p style={pStyle}>Every decision is said back in one line and can be taken back with one tap. Nothing is asked twice.</p>
+
+    <h2 style={h2Style}>When to use</h2>
+    <p style={pStyle}>After any choice or edit the person might want back: sorting an item, saving a fix. Use a Toast in the Screen’s <code>notice</code> slot. Don’t use a confirm dialog; it slows every choice to protect against a rare mistake.</p>
+
+    <h2 style={h2Style}>How it behaves</h2>
+    <ul style={{ ...pStyle, paddingLeft: 20 }}>
+      <li>A choice shows “item · choice” with a gold Undo. The next item is already up.</li>
+      <li>The next choice replaces the toast; any other move clears it. One acknowledgement at a time.</li>
+      <li>Undo reverts only the latest choice and returns focus to that item. From Done it goes back to the last item.</li>
+      <li>On Done, every decision is a row with Change, which sorts that one item again and comes back to Done.</li>
+      <li>A saved fix says “Fixed: new text”, with no Undo: the fix is already the undo of a misread.</li>
+    </ul>
+
+    <Phones>
+      <Phone label="sort after a choice" story="screens-morning-ritual--state-sort-after-choice">
+        <Sort {...actions} index={1} onChoose={noop} onLeave={noop} notice={<Toast message={`${inbox[0].title} · Later`} action={{ label: 'Undo', onClick: noop }} />} />
+      </Phone>
+      <Phone label="done, undo the last choice" story="screens-morning-ritual--state-done-undo">
+        <Done focusTitle={false} decisions={{ [inbox[0].id]: 'E', [inbox[1].id]: 'N', [inbox[2].id]: 'S' }} onRestart={noop} onRevisit={noop} notice={<Toast message={`${inbox[2].title} · Share`} action={{ label: 'Undo', onClick: noop }} />} />
+      </Phone>
+      <Phone label="check after a fix" story="screens-morning-ritual--state-check-fixed">
+        <Check {...actions} reads={[...reads, ...topThree].map((r) => (r.id === 'read-2' ? { ...r, text: 'run 10k', unsure: false } : r))} onFix={noop} notice={<Toast message="Fixed: run 10k" />} />
+      </Phone>
+    </Phones>
+
+    <h2 style={h2Style}>Words</h2>
+    <p style={pStyle}>Say what happened in the product’s words, no exclamation marks: “Book flights for March · Later”, “Fixed: run 10k”. The toast is announced as a status, so screen readers hear it without losing their place.</p>
+  </div>
+</Unstyled>

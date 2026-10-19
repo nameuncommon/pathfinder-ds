@@ -19,7 +19,7 @@ const meta = {
   args: { onClick: fn(), children: 'Fri 22 Oct' },
   decorators: [
     (Story) => (
-      <div className="pf-ambient" style={{ padding: '24px', borderRadius: '14px', width: 360 }}>
+      <div className="pf-story-frame" style={{ padding: '24px', borderRadius: '14px', width: 360 }}>
         <Story />
       </div>
     ),

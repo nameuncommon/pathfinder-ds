@@ -16,7 +16,7 @@ export interface SortProps extends ScreenActions {
   onLeave: () => void
 }
 
-export function Sort({ focusTitle, onBack, items = inbox, index, onChoose, onLeave }: SortProps) {
+export function Sort({ focusTitle, onBack, items = inbox, index, onChoose, onLeave, notice }: SortProps) {
   const item = items[index] ?? items[0]
   const itemRef = useRef<HTMLParagraphElement>(null)
   const prevIndex = useRef(index)
@@ -32,14 +32,12 @@ export function Sort({ focusTitle, onBack, items = inbox, index, onChoose, onLea
         eyebrow="Morning · 4 of 4"
         title="Sort the inbox"
         support="Nothing waiting"
+        titleSize="step"
         step={4}
         onBack={onBack}
         focusTitle={focusTitle}
-        action={
-          <Button variant="ghost" onClick={onLeave}>
-            Back to today
-          </Button>
-        }
+        notice={notice}
+        action={<Button onClick={onLeave}>Back to today</Button>}
       >
         <EmptyState surface="dots" title="All sorted" line="Nothing is waiting. New captures land here." />
       </Screen>
@@ -50,10 +48,12 @@ export function Sort({ focusTitle, onBack, items = inbox, index, onChoose, onLea
       eyebrow="Morning · 4 of 4"
       title="Sort the inbox"
       support={`${index + 1} of ${items.length}`}
+      titleSize="step"
       step={4}
       onBack={onBack}
       focusTitle={focusTitle}
-      action={
+      notice={notice}
+      escape={
         <Button variant="ghost" onClick={onLeave}>
           Leave the rest for Sunday
         </Button>
@@ -79,6 +79,7 @@ export function Sort({ focusTitle, onBack, items = inbox, index, onChoose, onLea
             direction={c.direction}
             title={c.title}
             detail={c.detail}
+            tile
             onSelect={() => onChoose(c.direction)}
           />
         ))}

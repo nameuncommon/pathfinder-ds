@@ -25,4 +25,16 @@ describe('Viewfinder', () => {
     const css = readFileSync('src/components/Viewfinder.css', 'utf-8')
     expect(css).toMatch(/\.pf-viewfinder__pill\s*\{[^}]*border:\s*1px solid var\(--accent-nudge-edge\)/)
   })
+
+  it('pointer only: out of the tab order and hidden, the status keeps the given id for an outside shutter', () => {
+    const onTake = vi.fn()
+    const { container } = render(<Viewfinder found weekCode="W42" corners={4} onTake={onTake} pointerOnly statusId="vf-status" />)
+    expect(screen.queryByRole('button')).toBeNull()
+    const vf = container.querySelector<HTMLButtonElement>('.pf-viewfinder')!
+    expect(vf.tabIndex).toBe(-1)
+    expect(vf.getAttribute('aria-hidden')).toBe('true')
+    expect(container.querySelector('#vf-status')?.textContent).toBe('Found W42 · 4 corners')
+    vf.click()
+    expect(onTake).toHaveBeenCalledTimes(1)
+  })
 })

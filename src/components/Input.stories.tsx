@@ -19,7 +19,7 @@ const meta = {
   args: { label: 'What it says', onChange: fn() },
   decorators: [
     (Story) => (
-      <div className="pf-ambient" style={{ padding: '24px', borderRadius: '14px', width: 390 }}>
+      <div className="pf-story-frame" style={{ padding: '24px', borderRadius: '14px', width: 390 }}>
         <Story />
       </div>
     ),
@@ -32,6 +32,7 @@ type Story = StoryObj<typeof meta>
 export const Empty: Story = { args: { placeholder: 'Type what you wrote' } }
 export const Filled: Story = { args: { defaultValue: 'call the dentist' } }
 export const Disabled: Story = { args: { defaultValue: 'call the dentist', disabled: true } }
+export const Error: Story = { args: { defaultValue: '', error: 'Write what the line says' } }
 
 export const States: Story = {
   parameters: { ...statesParameters, layout: 'padded' },

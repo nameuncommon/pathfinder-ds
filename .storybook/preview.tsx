@@ -3,22 +3,10 @@ import '../src/styles/tokens.css'
 import '../src/styles/fonts.css'
 import '../src/styles/surfaces.css'
 import '../src/styles/motion.css'
+import '../src/stories/stories.css'
 
 const preview: Preview = {
   globalTypes: {
-    theme: {
-      name: 'Theme',
-      description: 'Global theme for components',
-      defaultValue: 'dark',
-      toolbar: {
-        icon: 'circlehollow',
-        items: [
-          { value: 'dark', icon: 'moon', title: 'Dark' },
-          { value: 'light', icon: 'sun', title: 'Light' },
-        ],
-        showName: true,
-      },
-    },
     transparency: {
       name: 'Transparency',
       description: 'Reduce Transparency: glass becomes solid navy with no blur',
@@ -49,9 +37,9 @@ const preview: Preview = {
 
   decorators: [
     (Story, context) => {
-      const theme = context.globals.theme || 'dark'
       if (typeof document !== 'undefined') {
-        document.documentElement.setAttribute('data-theme', theme)
+        // dark only for now: light is a later pass, so there is no theme switch
+        document.documentElement.setAttribute('data-theme', 'dark')
         document.documentElement.setAttribute('data-transparency', context.globals.transparency || 'full')
         document.documentElement.setAttribute('data-motion', context.globals.motion || 'full')
         document.body.style.background = 'var(--surface-base)'
@@ -97,10 +85,11 @@ const preview: Preview = {
       storySort: {
         order: [
           'Introduction',
-          'Foundations', ['Color', 'Typography', 'Spacing', 'Glass', 'Ambient', 'Paper', 'Bearings', 'Logo', 'Icons', 'Motion', 'Voice and content', 'Accessibility'],
-          'Components',
           'Screens',
-          'Composed',
+          'Foundations', ['Colour', 'Typography', 'Spacing', 'Glass', 'Ambient', 'Paper', 'Bearings', 'Logo', 'Icons', 'Motion', 'Voice and content', 'Accessibility'],
+          'Patterns', ['Action bar', 'Undo and acknowledgement', 'States'],
+          'Components',
+          'Changelog',
         ],
       },
     },

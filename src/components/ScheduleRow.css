@@ -16,6 +16,13 @@
   padding-top: 1px;
 }
 
+.pf-schedule-row__time--word {
+  font-family: var(--font-sans);
+  font-size: var(--type-14-size);
+  line-height: var(--type-14-line);
+  padding-top: 0;
+}
+
 .pf-schedule-row__title {
   font-family: var(--font-sans);
   font-size: var(--type-16-size);

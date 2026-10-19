@@ -34,10 +34,12 @@
 }
 
 .pf-checkbox:hover .pf-checkbox__box {
+  border-color: var(--text-secondary);
   background: var(--surface-glass-strong);
 }
 
 .pf-checkbox:active .pf-checkbox__box {
+  border-color: var(--accent-default);
   background: var(--accent-selected-fill);
 }
 

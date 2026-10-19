@@ -11,17 +11,24 @@ export interface ViewfinderProps {
   onTake: () => void
   /** The page in view: the snapped image or a drawn page. */
   children?: ReactNode
+  /** A visible shutter button elsewhere carries the name; the frame stays a pointer target only. */
+  pointerOnly?: boolean
+  /** Id for the status pill, so an outside shutter can point at it with aria-describedby. */
+  statusId?: string
 }
 
-export function Viewfinder({ found, weekCode, corners = 4, blurry = false, onTake, children }: ViewfinderProps) {
-  const pillId = useId()
+export function Viewfinder({ found, weekCode, corners = 4, blurry = false, onTake, children, pointerOnly = false, statusId }: ViewfinderProps) {
+  const autoId = useId()
+  const pillId = statusId ?? autoId
   const showPill = found || blurry
   return (
     <button
       type="button"
       className="pf-viewfinder"
-      aria-label="Take the photo"
-      aria-describedby={showPill ? pillId : undefined}
+      aria-label={pointerOnly ? undefined : 'Take the photo'}
+      aria-describedby={showPill && !pointerOnly ? pillId : undefined}
+      aria-hidden={pointerOnly || undefined}
+      tabIndex={pointerOnly ? -1 : undefined}
       onClick={onTake}
     >
       {showPill &&

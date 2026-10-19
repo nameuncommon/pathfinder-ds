@@ -25,11 +25,12 @@ describe('final review fixes', () => {
     }
   })
 
-  it('tabs share the bar width and labels can wrap under large text', () => {
+  it('tabs share the bar width; labels wrap between words and are capped so a word always fits', () => {
     const tab = rule('src/components/TabBar.css', '.pf-tabbar__tab')
     expect(tab).not.toMatch(/(^|\s)width:\s*60px/)
     expect(tab).toMatch(/flex:\s*1 1 0/)
-    expect(tab).toMatch(/overflow-wrap:\s*anywhere/)
+    expect(tab).toMatch(/overflow-wrap:\s*normal/)
+    expect(tab).toMatch(/font-size:\s*min\(/)
   })
 
   it('the viewfinder pill can wrap and stays inside the frame', () => {

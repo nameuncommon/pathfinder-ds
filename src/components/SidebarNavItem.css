@@ -43,8 +43,8 @@
   height: 20px;
   padding: 0 6px;
   border-radius: 999px;
-  background: var(--accent-default);
-  color: var(--button-accent-label);
+  background: var(--surface-glass-strong);
+  color: var(--text-primary);
   font-size: var(--type-12-size);
   line-height: var(--type-12-line);
   font-weight: 600;

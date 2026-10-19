@@ -90,6 +90,21 @@ subtle hint rather than costume theming. Light is a mirror at the semantic tier 
 principle: every visual decision routes through `tokens/tokens.json`, never invented ad hoc. The
 desktop, keyboard-first v1 is frozen at tag `v1.0.0` and stays live at its own URL.
 
+**Gold is rare.** Per view, gold marks only: the logo, the one primary action, the current place (progress
+fill, active nav item, today's date) and a chosen state. Controls at rest use `border/strong` with
+`text/primary`; gold arrives on hover or once chosen. Labels, eyebrows, counts and data glyphs are neutral.
+Target: three gold things on a phone screen, five on desktop.
+
+**App type.** Large title (display 32/40) only for the greeting and the ending; steps inside the flow use
+title 24/32. One serif element per screen: the item in focus is sans 20/28 semibold. One capital eyebrow
+per screen (12/18, tracked); section labels are sentence case 14/22 semibold, 24px below the group above
+and 8px above their content. Body 16/24, secondary 14/22, data mono 13/20.
+
+**Errors ask, never scold.** A field with a problem gets a 2px `accent/default` edge, `aria-invalid`, and one
+plain line below in `text/primary` that says what to write ("Write what the line says"), led by the note mark.
+No red, no alarm icon, no blame. Actions stay enabled so the line can appear. **Sheet** is the one dialog
+shell: a bottom sheet on strong glass, labelled by its title, Tab kept inside, Escape closes, focus returns.
+
 # Colors
 
 ## Primitives (theme-invariant)

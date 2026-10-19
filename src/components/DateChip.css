@@ -17,10 +17,12 @@
 }
 
 .pf-date-chip:hover {
+  border-color: var(--text-secondary);
   background: var(--surface-glass-strong);
 }
 
 .pf-date-chip:active {
+  border-color: var(--accent-default);
   background: var(--accent-selected-fill);
 }
 
