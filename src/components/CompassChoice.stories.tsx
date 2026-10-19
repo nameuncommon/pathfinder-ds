@@ -61,6 +61,22 @@ export const Group: Story = {
   },
 }
 
+/** The Sort layout: four compact tiles in a 2x2 grid, so all four stay in view above the action bar. */
+export const TileGrid: Story = {
+  name: 'tile grid',
+  args: Default.args,
+  render: function Render() {
+    const [value, setValue] = useState<Direction>('N')
+    return (
+      <div role="group" aria-label="Which way does it go?" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '12px' }}>
+        {options.map((o) => (
+          <CompassChoice key={o.direction} {...o} tile selected={value === o.direction} onSelect={() => setValue(o.direction)} />
+        ))}
+      </div>
+    )
+  },
+}
+
 export const States: Story = {
   args: { ...Default.args },
   parameters: { ...statesParameters, layout: 'padded' },

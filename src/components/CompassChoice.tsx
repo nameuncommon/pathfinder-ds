@@ -7,6 +7,8 @@ export interface CompassChoiceProps {
   title: string
   detail: string
   selected?: boolean
+  /** Compact tile for a 2x2 grid: letter and title on one line, the detail below. */
+  tile?: boolean
   onSelect: () => void
 }
 
@@ -16,6 +18,7 @@ export function CompassChoice({
   title,
   detail,
   selected,
+  tile = false,
   onSelect,
 }: CompassChoiceProps) {
   return (
@@ -23,7 +26,7 @@ export function CompassChoice({
       type="button"
       aria-label={`${direction}, ${title}. ${detail}`}
       aria-pressed={selected}
-      className="pf-glass pf-compass"
+      className={tile ? 'pf-glass pf-compass pf-compass--tile' : 'pf-glass pf-compass'}
       onClick={onSelect}
     >
       <span className="pf-compass__dir" aria-hidden="true">

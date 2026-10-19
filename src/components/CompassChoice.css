@@ -71,3 +71,38 @@
   color: var(--text-secondary);
   overflow-wrap: anywhere;
 }
+
+/* Tile: for the 2x2 grid on Sort, so all four choices stay in view above the action bar. */
+.pf-compass--tile {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  grid-template-areas:
+    'dir title'
+    'detail detail';
+  align-items: center;
+  column-gap: var(--space-2);
+  row-gap: var(--space-2);
+  min-height: 0;
+  padding: var(--space-3);
+}
+
+.pf-compass--tile .pf-compass__dir {
+  grid-area: dir;
+  width: 32px;
+  height: 32px;
+}
+
+.pf-compass--tile .pf-compass__body {
+  display: contents;
+}
+
+.pf-compass--tile .pf-compass__title {
+  grid-area: title;
+}
+
+.pf-compass--tile .pf-compass__detail {
+  grid-area: detail;
+  align-self: start;
+  font-size: var(--type-13-size);
+  line-height: var(--type-13-line);
+}

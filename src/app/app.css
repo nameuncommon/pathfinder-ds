@@ -181,12 +181,11 @@
 }
 
 .pf-app__choices {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-3);
 }
 
-/* done */
 /* done */
 .pf-done__group {
   display: flex;

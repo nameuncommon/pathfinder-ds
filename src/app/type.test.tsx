@@ -57,4 +57,10 @@ describe('app type', () => {
   it('action bar labels may wrap to a second line instead of overflowing at large text', () => {
     expect(rule('.pf-app__action > .pf-button')).toMatch(/white-space:\s*normal/)
   })
+
+  it('the sort choices sit in a 2x2 grid of compact tiles', () => {
+    expect(rule('.pf-app__choices')).toMatch(/grid-template-columns:\s*repeat\(2, minmax\(0, 1fr\)\)/)
+    const r = render(<Sort {...actions} index={0} onChoose={noop} onLeave={noop} />)
+    expect(r.container.querySelectorAll('.pf-app__choices .pf-compass--tile')).toHaveLength(4)
+  })
 })

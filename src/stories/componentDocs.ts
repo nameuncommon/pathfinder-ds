@@ -94,7 +94,10 @@ const docs: Record<string, Doc> = {
     what: 'One of the four sort directions: Now, Later, Share, Drop. One tap decides and moves to the next item.',
     use: 'sorting an inbox item.',
     avoid: 'the choice is not one of the four directions.',
-    dos: [['Keep all four, in N, E, S, W order.', 'Hide Drop or rename the directions.']],
+    dos: [
+      ['Keep all four, in N, E, S, W order.', 'Hide Drop or rename the directions.'],
+      ['On a phone, use the tile layout in a 2x2 grid so all four clear the action bar.', 'Stack four full rows that push Drop under the Undo toast.'],
+    ],
     a11y: 'A labelled group of buttons, 64px or taller; aria-pressed only when one is shown as chosen.',
     tokens: ['surface/glass', 'accent/default', 'accent/selected-fill', 'focus/ring'],
     node: '509:39',

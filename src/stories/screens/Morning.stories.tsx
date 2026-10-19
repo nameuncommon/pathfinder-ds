@@ -194,6 +194,17 @@ export const StateSortAfterChoice: Story = {
     <Sort {...actions} index={1} onChoose={fn()} onLeave={fn()}
       notice={<Toast message={`${inbox[0].title} · Later`} action={{ label: 'Undo', onClick: fn() }} />} />
   ),
+  // All four choices stay in view above the Undo toast on a 390x844 phone.
+  // Measured against an 844px phone: the pinned bar sits on the screen's bottom edge, whatever the runner's viewport.
+  play: async ({ canvasElement }) => {
+    const top = canvasElement.querySelector('.pf-app')!.getBoundingClientRect().top
+    const bar = canvasElement.querySelector('.pf-app__action')!.getBoundingClientRect()
+    const toast = canvasElement.querySelector('.pf-toast')!.getBoundingClientRect()
+    const toastTopOnPhone = 844 - (bar.bottom - toast.top)
+    const choices = [...canvasElement.querySelectorAll('.pf-compass')]
+    await expect(choices).toHaveLength(4)
+    for (const c of choices) await expect(c.getBoundingClientRect().bottom - top, c.getAttribute('aria-label') ?? '').toBeLessThanOrEqual(toastTopOnPhone)
+  },
 }
 
 export const StateDoneUndo: Story = {

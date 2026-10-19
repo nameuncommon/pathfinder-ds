@@ -79,6 +79,7 @@ export function Sort({ focusTitle, onBack, items = inbox, index, onChoose, onLea
             direction={c.direction}
             title={c.title}
             detail={c.detail}
+            tile
             onSelect={() => onChoose(c.direction)}
           />
         ))}
